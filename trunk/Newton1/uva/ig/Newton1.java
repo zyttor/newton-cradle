@@ -55,6 +55,8 @@ public class Newton1 extends JFrame {
                 }).start();
             }
         });
+
+        animator.start();
     }
 
     @Override
