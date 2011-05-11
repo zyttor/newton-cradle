@@ -68,6 +68,27 @@ public class Limon implements IObjetoGL{
         escalado[2]=z;
     }
 
+    public float getPosicionX (){
+        return traslacion[0];
+    }
 
+    public float getPosicionY (){
+        return traslacion[1];
+    }
 
+    public float getPosicionZ (){
+        return traslacion[2];
+    }
+
+    public void setPosicionX (float x){
+        traslacion[0]=x;
+    }
+
+    public void setPosicionY (float y){
+        traslacion[1]=y;
+    }
+
+    public void setPosicionZ (float z){
+        traslacion[2]=z;
+    }
 }

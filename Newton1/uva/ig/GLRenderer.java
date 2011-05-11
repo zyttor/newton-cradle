@@ -22,6 +22,7 @@ public class GLRenderer implements GLEventListener {
     Limon limones[];
 
     Material material;
+    Movimiento movimiento;
 
 
     public void init(GLAutoDrawable drawable) {
@@ -53,6 +54,9 @@ public class GLRenderer implements GLEventListener {
         }
 
         material= new Material();
+        movimiento= new Movimiento(limones);
+
+        movimiento.setMovimiento(Movimiento.MOVIMIENTO_VERTICAL);
     }
 
     public void reshape(GLAutoDrawable drawable, int x, int y, int width, int height) {
@@ -74,6 +78,7 @@ public class GLRenderer implements GLEventListener {
     public void display(GLAutoDrawable drawable) {
         GL gl = drawable.getGL();
 
+        movimiento.mover();
         // Clear the drawing area
         gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
         // Reset the current matrix to the "identity"
