@@ -23,6 +23,7 @@ public class GLRenderer implements GLEventListener {
 
     Material material;
     Movimiento movimiento;
+    TexturaBola texturaBola;
 
 
     public void init(GLAutoDrawable drawable) {
@@ -57,6 +58,9 @@ public class GLRenderer implements GLEventListener {
         movimiento= new Movimiento(limones);
 
         movimiento.setMovimiento(Movimiento.MOVIMIENTO_VERTICAL);
+
+        texturaBola=new TexturaBola();
+        texturaBola.cambiarTextura(gl, 2);
     }
 
     public void reshape(GLAutoDrawable drawable, int x, int y, int width, int height) {
@@ -91,6 +95,8 @@ public class GLRenderer implements GLEventListener {
         gl.glColor3d(1.0, 0.0, 0.0);
 
         gl.glDisable(GL.GL_BLEND);
+
+        texturaBola.setTextura(gl);
 
         for (int i=0;i<4;i++){
             if (i==0){
