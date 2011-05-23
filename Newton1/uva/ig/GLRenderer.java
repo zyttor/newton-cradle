@@ -14,12 +14,20 @@ import javax.media.opengl.glu.GLU;
  */
 public class GLRenderer implements GLEventListener {
 
+    public static final int MODO_SIN_TEXTURA=0;
+    public static final int MODO_VACA=1;
+    public static final int MODO_QUARZO=2;
+
     GLU glu;
+    GL gl;
+    private int modoActual=0;
 
     Iluminacion iluminacion;
     Camara camara;
 
-    Limon limones[];
+    Bola bolasInicio[];
+    Bola bolasDemas[];
+
 
     Material material;
     Movimiento movimiento;
@@ -30,7 +38,7 @@ public class GLRenderer implements GLEventListener {
         // Use debug pipeline
         // drawable.setGL(new DebugGL(drawable.getGL()));
 
-        GL gl = drawable.getGL();
+        gl = drawable.getGL();
         glu = new GLU();
 
         // Enable VSync
@@ -48,24 +56,41 @@ public class GLRenderer implements GLEventListener {
         camara= new Camara();
         camara.cambiarPuntoOjo(0.0, 0.0, -20.0);
 
-        limones=new Limon[4];
-        for (int i=0;i<4;i++){
-            limones[i]=new Limon(1.0, 25, 20);
-            limones[i].cambiarPosicion(i*3.0f, 0.0f, -2.0f);
+
+        bolasInicio=new Bola[2 ];
+        for (int i=0;i<bolasInicio.length;i++){
+            bolasInicio[i]=new Bola(0.5f, 20, 20);
+            bolasInicio[i].cambiarPosicion(i*3.0f, 0.0f, -2.0f);
+        }
+        bolasDemas=new Bola[4];
+        for (int i=0;i<bolasDemas.length;i++){
+            bolasDemas[i]=new Bola(0.5f, 20, 20);
+            bolasDemas[i].cambiarPosicion(-(i+1)*3.0f, 0.0f, -2.0f);
         }
 
         material= new Material();
-        movimiento= new Movimiento(limones);
+        movimiento= new Movimiento(bolasInicio,bolasDemas);
 
         movimiento.setMovimiento(Movimiento.MOVIMIENTO_VERTICAL);
 
         texturaBola=new TexturaBola();
-        texturaBola.cambiarTextura(gl, 2);
+        texturaBola.cambiarTextura(gl, TexturaBola.TEXTURA_SIN_TEXTURA);
+    }
+
+    public void cambiarModo(GLAutoDrawable panel,int modo){
+        gl = panel.getGL();
+        if (modo==MODO_VACA){
+            texturaBola.cambiarTextura(gl, TexturaBola.TEXTURA_VACA);
+        }else if (modo==MODO_QUARZO){
+            texturaBola.cambiarTextura(gl, TexturaBola.TEXTURA_PRUEBA);
+        }else if (modo==MODO_SIN_TEXTURA){
+            texturaBola.cambiarTextura(gl, TexturaBola.TEXTURA_SIN_TEXTURA);
+        }
     }
 
     public void reshape(GLAutoDrawable drawable, int x, int y, int width, int height) {
-        GL gl = drawable.getGL();
 
+        gl=drawable.getGL();
         if (height <= 0) { // avoid a divide by zero error!
         
             height = 1;
@@ -75,13 +100,13 @@ public class GLRenderer implements GLEventListener {
         gl.glMatrixMode(GL.GL_PROJECTION);
         gl.glLoadIdentity();
         glu.gluPerspective(45.0f, h, 1.0, 20.0);
+        cambiarModo(drawable, modoActual);
 //        gl.glMatrixMode(GL.GL_MODELVIEW);
 //        gl.glLoadIdentity();
     }
 
     public void display(GLAutoDrawable drawable) {
-        GL gl = drawable.getGL();
-
+        gl = drawable.getGL();
         movimiento.mover();
         // Clear the drawing area
         gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
@@ -98,15 +123,15 @@ public class GLRenderer implements GLEventListener {
 
         texturaBola.setTextura(gl);
 
-        for (int i=0;i<4;i++){
-            if (i==0){
-                material.setMaterial(Material.SUAVE);
-                material.ponerMaterial(gl);
-            }else if (i==3){
-                material.setMaterial(Material.VIVO);
-                material.ponerMaterial(gl);
-            }
-            limones[i].dibujar(gl);
+        for (int i=0;i<bolasDemas.length;i++){
+            material.setMaterial(Material.SUAVE);
+            material.ponerMaterial(gl);
+            bolasDemas[i].dibujar(gl);
+        }
+        for (int i=0;i<bolasInicio.length;i++){
+            material.setMaterial(Material.VIVO);
+            material.ponerMaterial(gl);
+            bolasInicio[i].dibujar(gl);
         }
 
         gl.glEnable(GL.GL_BLEND);
