@@ -8,16 +8,23 @@ package uva.ig;
 
 import com.sun.opengl.util.Animator;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.media.opengl.GLCapabilities;
+import javax.media.opengl.GLContext;
 import javax.media.opengl.GLJPanel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu.Separator;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.UIManager;
 import javax.swing.WindowConstants;
@@ -30,13 +37,15 @@ import javax.swing.WindowConstants;
 public class Newton1 extends JFrame {
 
     private Animator animator;
+    private GLRenderer renderer;
 
     /** Creates new form MainFrame */
     public Newton1() {
         initComponents();
         setTitle("Simple JOGL Application");
 
-        panel.addGLEventListener(new GLRenderer());
+        renderer=new GLRenderer();
+        panel.addGLEventListener(renderer);
         animator = new Animator(panel);
 
         this.addWindowListener(new WindowAdapter() {
@@ -78,6 +87,18 @@ public class Newton1 extends JFrame {
     private void initComponents() {
         JLabel label = new JLabel();
         panel = new GLJPanel(createGLCapabilites());
+        jMenuBar1 = new JMenuBar();
+        jMenu1 = new JMenu();
+        jMenuItem1 = new JMenuItem();
+        jMenuItem2 = new JMenuItem();
+        jSeparator1 = new Separator();
+        jMenuItem3 = new JMenuItem();
+        jMenu2 = new JMenu();
+        jMenuItem4 = new JMenuItem();
+        jMenuItem5 = new JMenuItem();
+        jMenu3 = new JMenu();
+        jMenuItem6 = new JMenuItem();
+        jMenuItem7 = new JMenuItem();
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
@@ -88,13 +109,60 @@ public class Newton1 extends JFrame {
         panelLayout.setHorizontalGroup(
             panelLayout.createParallelGroup(Alignment.LEADING)
             .addGap(0, 380, Short.MAX_VALUE)
-        
         );
         panelLayout.setVerticalGroup(
             panelLayout.createParallelGroup(Alignment.LEADING)
-            .addGap(0, 258, Short.MAX_VALUE)
-        
+            .addGap(0, 231, Short.MAX_VALUE)
         );
+
+        jMenu1.setText("Cradle");
+
+        jMenuItem1.setText("Restart animation");
+        jMenu1.add(jMenuItem1);
+
+        jMenuItem2.setText("Restart Camera");
+        jMenu1.add(jMenuItem2);
+        jMenu1.add(jSeparator1);
+
+        jMenuItem3.setText("Exit");
+        jMenuItem3.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem3);
+
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Mode");
+
+        jMenuItem4.setText("Cow");
+        jMenuItem4.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem4);
+
+        jMenuItem5.setText("Quarz");
+        jMenuItem5.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem5);
+
+        jMenuBar1.add(jMenu2);
+
+        jMenuItem6.setText("4");
+        jMenu3.add(jMenuItem6);
+
+        jMenuItem7.setText("5");
+        jMenu3.add(jMenuItem7);
+
+        jMenuBar1.add(jMenu3);
+
+        setJMenuBar(jMenuBar1);
 
         GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -106,7 +174,6 @@ public class Newton1 extends JFrame {
                     .addComponent(panel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(label))
                 .addContainerGap())
-        
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(Alignment.LEADING)
@@ -116,11 +183,29 @@ public class Newton1 extends JFrame {
                 .addPreferredGap(ComponentPlacement.RELATED)
                 .addComponent(panel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
-        
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jMenuItem3ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem4ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        // TODO add your handling code here:
+        panel.getContext().makeCurrent();
+        renderer.cambiarModo(panel,GLRenderer.MODO_VACA);
+        panel.getContext().release();
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem5ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        // TODO add your handling code here:
+        panel.getContext().makeCurrent();
+        renderer.cambiarModo(panel,GLRenderer.MODO_QUARZO);
+        panel.getContext().release();
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     /**
      * Called from within initComponents().
@@ -162,6 +247,18 @@ public class Newton1 extends JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private JMenu jMenu1;
+    private JMenu jMenu2;
+    private JMenu jMenu3;
+    private JMenuBar jMenuBar1;
+    private JMenuItem jMenuItem1;
+    private JMenuItem jMenuItem2;
+    private JMenuItem jMenuItem3;
+    private JMenuItem jMenuItem4;
+    private JMenuItem jMenuItem5;
+    private JMenuItem jMenuItem6;
+    private JMenuItem jMenuItem7;
+    private Separator jSeparator1;
     private GLJPanel panel;
     // End of variables declaration//GEN-END:variables
 

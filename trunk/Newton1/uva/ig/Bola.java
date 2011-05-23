@@ -13,39 +13,43 @@ package uva.ig;
 import javax.media.opengl.GL;
 import com.sun.opengl.util.GLUT;
 
-public class Limon implements IObjetoGL{
+public class Bola implements IObjetoGL{
 
-    private float traslacion[]={0.0f,0.0f,0.0f};
-    private float giro[]={0.0f,0.0f,0.0f};
-    private float escalado[]={1.0f,1.0f,1.0f};
+    public float diametro=1.0f;
 
-    private double radio=1.0;
+    public float traslacion[]={0.0f,0.0f,0.0f};
+    public float giro[]={0.0f,0.0f,0.0f};
+    public float escalado[]={1.0f,1.0f,1.0f};
+
+    private float radio=0.5f;
     private int slices=10;
     private int stacks=10;
 
     private GLUT glut;
 
 
-    public Limon() {
+    public Bola() {
         glut = new GLUT();
     }
 
-    public Limon(double radio, int slices, int stacks) {
+    public Bola(float radio, int slices, int stacks) {
         glut = new GLUT();
         this.radio=radio;
+        this.diametro=radio*2;
         this.slices=slices;
         this.stacks=stacks;
     }
 
     public void dibujar (GL gl){
         gl.glPushMatrix();
+        gl.glRotatef(giro[2], 0.0f, 0.0f, 1.0f);
         gl.glTranslatef(traslacion[0], traslacion[1], traslacion[2]);
-        gl.glRotatef(giro[0], 1.0f, 0.0f, 0.0f);
-        gl.glRotatef(giro[1], 1.0f, 0.0f, 0.0f);
-        gl.glRotatef(giro[2], 1.0f, 0.0f, 0.0f);
-        gl.glScalef(escalado[0], escalado[1], escalado[2]);
 
+        gl.glPushMatrix();
         glut.glutSolidSphere(radio,slices,stacks);
+        gl.glPopMatrix();
+
+        //pintar hilos
 
         gl.glPopMatrix();
     }
@@ -68,27 +72,4 @@ public class Limon implements IObjetoGL{
         escalado[2]=z;
     }
 
-    public float getPosicionX (){
-        return traslacion[0];
-    }
-
-    public float getPosicionY (){
-        return traslacion[1];
-    }
-
-    public float getPosicionZ (){
-        return traslacion[2];
-    }
-
-    public void setPosicionX (float x){
-        traslacion[0]=x;
-    }
-
-    public void setPosicionY (float y){
-        traslacion[1]=y;
-    }
-
-    public void setPosicionZ (float z){
-        traslacion[2]=z;
-    }
 }
