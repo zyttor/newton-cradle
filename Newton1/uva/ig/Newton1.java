@@ -10,6 +10,8 @@ import com.sun.opengl.util.Animator;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.logging.Level;
@@ -20,12 +22,10 @@ import javax.media.opengl.GLJPanel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu.Separator;
-import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.UIManager;
 import javax.swing.WindowConstants;
 
@@ -65,6 +65,27 @@ public class Newton1 extends JFrame {
             }
         });
 
+        this.addKeyListener(new KeyAdapter() {
+
+            @Override
+            public void keyTyped(KeyEvent evt) {
+                //System.out.println(evt.getKeyChar());
+                if (evt.getKeyChar()=='a'){
+                    renderer.moverCamara(1);
+                }else if (evt.getKeyChar()=='s'){
+                    renderer.moverCamara(2);
+                }else if (evt.getKeyChar()=='w'){
+                    renderer.moverCamara(3);
+                }else if (evt.getKeyChar()=='x'){
+                    renderer.moverCamara(4);
+                }else if (evt.getKeyChar()=='+'){
+                    renderer.moverCamara(5);
+                }else if (evt.getKeyChar()=='-'){
+                    renderer.moverCamara(6);
+                }
+            }
+        });
+
         animator.start();
     }
 
@@ -85,7 +106,7 @@ public class Newton1 extends JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        JLabel label = new JLabel();
+
         panel = new GLJPanel(createGLCapabilites());
         jMenuBar1 = new JMenuBar();
         jMenu1 = new JMenu();
@@ -102,17 +123,15 @@ public class Newton1 extends JFrame {
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-        label.setText("Below you see a GLJPanel");
-
         GroupLayout panelLayout = new GroupLayout(panel);
         panel.setLayout(panelLayout);
         panelLayout.setHorizontalGroup(
             panelLayout.createParallelGroup(Alignment.LEADING)
-            .addGap(0, 380, Short.MAX_VALUE)
+            .addGap(0, 404, Short.MAX_VALUE)
         );
         panelLayout.setVerticalGroup(
             panelLayout.createParallelGroup(Alignment.LEADING)
-            .addGap(0, 231, Short.MAX_VALUE)
+            .addGap(0, 279, Short.MAX_VALUE)
         );
 
         jMenu1.setText("Cradle");
@@ -154,6 +173,8 @@ public class Newton1 extends JFrame {
 
         jMenuBar1.add(jMenu2);
 
+        jMenu3.setText("Balls");
+
         jMenuItem6.setText("4");
         jMenu3.add(jMenuItem6);
 
@@ -168,21 +189,11 @@ public class Newton1 extends JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(Alignment.LEADING)
-                    .addComponent(panel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(label))
-                .addContainerGap())
+            .addComponent(panel, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(label)
-                .addPreferredGap(ComponentPlacement.RELATED)
-                .addComponent(panel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(panel, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();

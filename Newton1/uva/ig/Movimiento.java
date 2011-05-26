@@ -17,16 +17,19 @@ public class Movimiento {
     public static final int MOVIMIENTO_DIAGONAL = 2;
     private Bola bolasInicio[];
     private Bola bolasDemas[];
+    private int numMovimiento;
 
-    public Movimiento(Bola inicio[], Bola demas[]) {
+    //public Movimiento(Bola inicio[], Bola demas[]) {
+    public Movimiento(Bola inicio[], int movimiento) {
         bolasInicio = inicio;
-        bolasDemas = demas;
+        numMovimiento=movimiento;
+        //bolasDemas = demas;
     }
     private IMovimientoListener movimiento;
 
     public void setMovimiento(int mov) {
         if (mov == MOVIMIENTO_VERTICAL) {
-            movimiento = new MovimientoVerticalListener(bolasInicio, bolasDemas);
+            movimiento = new MovimientoVerticalListener(bolasInicio, numMovimiento);
         }
     }
 
@@ -43,23 +46,35 @@ public class Movimiento {
 
         private Bola bolasInicio[];
         private Bola bolasDemas[];
+        private float ro=0.017453292519943295f;
+        private float largoHilo=2.8125f;
         private int numBolasTotal;
         private int numBolasMovimiento;
         private int numBolasDemas;
+        private float incremento;
         private int i;
-        private int direccion;
 
-        public MovimientoVerticalListener(Bola inicio[], Bola demas[]) {
+        //public MovimientoVerticalListener(Bola inicio[], Bola demas[]) {
+        public MovimientoVerticalListener(Bola inicio[],int movimiento) {
             bolasInicio = inicio;
-            bolasDemas = demas;
-            numBolasMovimiento = inicio.length;
-            numBolasDemas = demas.length;
-            numBolasTotal = numBolasMovimiento + numBolasDemas;
-            direccion = 1;
+            //bolasDemas = demas;
+            numBolasMovimiento = movimiento;
+            //numBolasDemas = demas.length;
+            //numBolasTotal = numBolasMovimiento + numBolasDemas;
+            numBolasTotal=inicio.length;
+
+//            for (i=0;i<bolasInicio.length;i++){
+//              //  bolasInicio[i].hilo[0]=-numBolasTotal/2.0f-bolasInicio[i].diametro/2.0f+i*bolasInicio[i].diametro;
+//              //  bolasInicio[i].hilo[1]=largoHilo;
+//            }
+
+            angulo=angulomax;
+
+            
         }
 
         public void manejarEventoMovimiento() {
-            float incremento = Double.valueOf(incrementomax - Math.abs(angulo) / angulomax * incrementomax * 0.85).floatValue();
+            incremento = Double.valueOf(incrementomax - Math.abs(angulo) / angulomax * incrementomax * 0.85).floatValue();
             if (clockwise && angulo <= -angulomax) {
                 clockwise = false;
             } else if (!clockwise && angulo >= angulomax) {
@@ -72,26 +87,32 @@ public class Movimiento {
                 angulo += incremento;
             }
 
-//            if(i<=semueven && angulo<0)
-//                esferaAmarrada(angulo);
-//            else if(i>esferas-semueven && angulo>0)
-//                esferaAmarrada(angulo);
-//            else
-//                esferaAmarrada(0);
-
-            for (i=0;i<bolasInicio.length;i++){
-                bolasInicio[i].traslacion[0]=-numBolasTotal/2.0f-bolasInicio[i].diametro/2.0f+i*bolasInicio[i].diametro;
-                bolasInicio[i].traslacion[1]=-2.8125f;
-                bolasInicio[i].giro[2]=(angulo<0)?angulo:0.0f;
+            for (i=0;i<numBolasTotal;i++){
+                bolasInicio[i].traslacion[0]=-numBolasTotal/2.0f-bolasInicio[i].diametro/2.0f+(i+1)*bolasInicio[i].diametro;
+                bolasInicio[i].traslacion[1]=-largoHilo;
+                if (i<numMovimiento && angulo<0){
+                    bolasInicio[i].giro[2]=angulo;
+                }else if (i>=numBolasTotal-numMovimiento && angulo>0){
+                    bolasInicio[i].giro[2]=angulo;
+                }else{
+                    bolasInicio[i].giro[2]=0.0f;
+                }
+                //=(angulo<0 && (i>=numBolasDemas && angulo>0))?angulo:0.0f;
+                //bolasInicio[i].giro[2]=0.0f;
+                bolasInicio[i].hilo[0]= Double.valueOf(Math.sin(angulo*ro)*largoHilo).floatValue();
+                bolasInicio[i].hilo[1]= Double.valueOf(Math.cos(angulo*ro)*largoHilo).floatValue();
             }
 
-            for (i=0;i<bolasDemas.length;i++){
-                bolasDemas[i].traslacion[0]=-numBolasTotal/2.0f-bolasDemas[i].diametro/2.0f+(i+numBolasMovimiento)*bolasDemas[i].diametro;
-                bolasDemas[i].traslacion[1]=-2.8125f;
-                //System.out.println(i+numBolasMovimiento+ " " + ((i+numBolasMovimiento)>numBolasDemas && angulo>0));
-                bolasDemas[i].giro[2]=((i+1+numBolasMovimiento)>numBolasDemas && angulo>0)?angulo:0.0f;
-            }
-
+//            for (i=0;i<numBolasDemas;i++){
+//                bolasDemas[i].traslacion[0]=-numBolasTotal/2.0f-bolasDemas[i].diametro/2.0f+(i+numBolasMovimiento)*bolasDemas[i].diametro;
+//                bolasDemas[i].traslacion[1]=-largoHilo;
+//                bolasDemas[i].giro[2]=((i+numBolasMovimiento)>=numBolasDemas && angulo>0)?angulo:0.0f;
+//                //bolasDemas[i].giro[2]=0.0f;
+//                bolasDemas[i].hilo[0]= Double.valueOf(Math.sin(angulo*ro)*largoHilo).floatValue();
+//                bolasDemas[i].hilo[1]= Double.valueOf(Math.cos(angulo*ro)*largoHilo).floatValue();
+//            }
         }
     }
 }
+
+

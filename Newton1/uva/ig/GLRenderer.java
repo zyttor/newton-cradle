@@ -54,27 +54,46 @@ public class GLRenderer implements GLEventListener {
         iluminacion.setIluminacion(gl);
 
         camara= new Camara();
-        camara.cambiarPuntoOjo(0.0, 0.0, -20.0);
+        camara.cambiarPuntoOjo(0.0, 0.0, -13.0);
 
 
-        bolasInicio=new Bola[2 ];
+        bolasInicio=new Bola[5];
         for (int i=0;i<bolasInicio.length;i++){
             bolasInicio[i]=new Bola(0.5f, 20, 20);
             bolasInicio[i].cambiarPosicion(i*3.0f, 0.0f, -2.0f);
         }
-        bolasDemas=new Bola[4];
-        for (int i=0;i<bolasDemas.length;i++){
-            bolasDemas[i]=new Bola(0.5f, 20, 20);
-            bolasDemas[i].cambiarPosicion(-(i+1)*3.0f, 0.0f, -2.0f);
-        }
+//        bolasDemas=new Bola[4];
+//        for (int i=0;i<bolasDemas.length;i++){
+//            bolasDemas[i]=new Bola(0.5f, 20, 20);
+//            bolasDemas[i].cambiarPosicion(-(i+1)*3.0f, 0.0f, -2.0f);
+//        }
 
         material= new Material();
-        movimiento= new Movimiento(bolasInicio,bolasDemas);
+        //movimiento= new Movimiento(bolasInicio,bolasDemas);
+        movimiento= new Movimiento(bolasInicio,2);
 
         movimiento.setMovimiento(Movimiento.MOVIMIENTO_VERTICAL);
 
         texturaBola=new TexturaBola();
         texturaBola.cambiarTextura(gl, TexturaBola.TEXTURA_SIN_TEXTURA);
+
+    }
+
+    public void moverCamara (int donde){
+        //1 iz
+        if (donde==1){
+            camara.moverGiroH(2.0f);
+        }else if (donde==2){
+            camara.moverGiroH(-2.0f);
+        }else if (donde==3){
+            camara.moverGiroV(2.0f);
+        }else if (donde==4){
+            camara.moverGiroV(-2.0f);
+        }else if (donde==5){
+            camara.cambiarZoom(-0.5f);
+        }else if (donde==6){
+            camara.cambiarZoom(0.5f);
+        }
     }
 
     public void cambiarModo(GLAutoDrawable panel,int modo){
@@ -116,23 +135,29 @@ public class GLRenderer implements GLEventListener {
         gl.glMatrixMode(GL.GL_MODELVIEW);
         gl.glLoadIdentity();
 
-        camara.setCamara(glu);
+        camara.setCamara(glu,gl);
         gl.glColor3d(1.0, 0.0, 0.0);
 
         gl.glDisable(GL.GL_BLEND);
 
         texturaBola.setTextura(gl);
 
-        for (int i=0;i<bolasDemas.length;i++){
-            material.setMaterial(Material.SUAVE);
-            material.ponerMaterial(gl);
-            bolasDemas[i].dibujar(gl);
-        }
+        gl.glPushMatrix();
+
+        gl.glTranslatef(0.0f, 3.375f, 0.0f);
+        
+//        for (int i=0;i<bolasDemas.length;i++){
+//            material.setMaterial(Material.SUAVE);
+//            material.ponerMaterial(gl);
+//            bolasDemas[i].dibujar(gl);
+//        }
+        material.setMaterial(Material.VIVO);
+        material.ponerMaterial(gl);
         for (int i=0;i<bolasInicio.length;i++){
-            material.setMaterial(Material.VIVO);
-            material.ponerMaterial(gl);
             bolasInicio[i].dibujar(gl);
         }
+
+        gl.glPopMatrix();
 
         gl.glEnable(GL.GL_BLEND);
         // Flush all drawing operations to the graphics card
