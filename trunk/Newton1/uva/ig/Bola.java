@@ -20,6 +20,9 @@ public class Bola implements IObjetoGL{
     public float traslacion[]={0.0f,0.0f,0.0f};
     public float giro[]={0.0f,0.0f,0.0f};
     public float escalado[]={1.0f,1.0f,1.0f};
+    public float hilo[]={1.0f,1.0f,2.125f};
+
+    private float anchoCubo = 0.125f;
 
     private float radio=0.5f;
     private int slices=10;
@@ -27,6 +30,8 @@ public class Bola implements IObjetoGL{
 
     private GLUT glut;
 
+
+    private float largoHilo=2.8125f;
 
     public Bola() {
         glut = new GLUT();
@@ -42,14 +47,42 @@ public class Bola implements IObjetoGL{
 
     public void dibujar (GL gl){
         gl.glPushMatrix();
+        gl.glTranslatef(traslacion[0], 0.0f, 0.0f);
+        gl.glPushMatrix();
+
         gl.glRotatef(giro[2], 0.0f, 0.0f, 1.0f);
-        gl.glTranslatef(traslacion[0], traslacion[1], traslacion[2]);
+        gl.glTranslatef(0.0f, traslacion[1], 0.0f);
+
+        glut.glutSolidCube(anchoCubo);
 
         gl.glPushMatrix();
+        gl.glTranslatef(0.0f, -radio, 0.0f);
         glut.glutSolidSphere(radio,slices,stacks);
         gl.glPopMatrix();
 
-        //pintar hilos
+        gl.glRotatef(-giro[2], 0.0f, 0.0f, 1.0f);
+
+        gl.glColor3f(0.72f, 0.54f, 0.0f);
+        gl.glBegin(GL.GL_LINES);
+        //Hacia tubo posterior
+        gl.glVertex3f(0.0f, 0.0f, 0.0f);
+        if (giro[2]==0.0f){
+            gl.glVertex3f(0.0f, largoHilo, -hilo[2]);
+        }else{
+            gl.glVertex3f(-hilo[0], hilo[1], -hilo[2]);
+        }
+        
+
+        //Hacia tubo frontal
+        gl.glVertex3f(0.0f, 0.0f, 0.0f);
+        if (giro[2]==0.0f){
+            gl.glVertex3f(0.0f, largoHilo, hilo[2]);
+        }else{
+            gl.glVertex3f(-hilo[0], hilo[1], hilo[2]);
+        }
+        gl.glEnd();
+
+        gl.glPopMatrix();
 
         gl.glPopMatrix();
     }
