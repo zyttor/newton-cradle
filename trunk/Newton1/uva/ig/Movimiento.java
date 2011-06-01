@@ -6,13 +6,11 @@ package uva.ig;
 
 public class Movimiento {
 
-    private static Double PI = Math.atan(1.0) * 4;
-    //private GLUquadricObj quadratic;   //Necesario para dibujar cilindros con glu
-    private int milisegundos = 20;      //Tiempo entre cada actualizaciÃ³n de pantalla
-    private float angulomax = 50;       //Valor mï¿½ximo para el ï¿½ngulo
-    private float incrementomax = 6.5f;  //Valor mï¿½ximo para los incrementos de ï¿½ngulo
-    private float angulo = -angulomax;  //La esfera izquierda iniciarï¿½ suspendida con el mayor ï¿½ngulo vï¿½lido
-    private boolean clockwise = false;     //y se trasladarï¿½ en sentido counter-clockwise
+     
+    private float angulomax = 50;       //Angulo maximo
+    private float incrementoAngulo = 3.0f;  //Incremento del angulo en cada pasada.Marca velocidad.
+    private float angulo;  //Angulo de la bola
+    private boolean sentidoHorario = false;     //para controlar el sentido en que se mueven las bolas
     public static final int MOVIMIENTO_VERTICAL = 1;
     public static final int MOVIMIENTO_DIAGONAL = 2;
     private Bola bolasInicio[];
@@ -51,7 +49,6 @@ public class Movimiento {
         private int numBolasTotal;
         private int numBolasMovimiento;
         private int numBolasDemas;
-        private float incremento;
         private int i;
 
         //public MovimientoVerticalListener(Bola inicio[], Bola demas[]) {
@@ -67,25 +64,12 @@ public class Movimiento {
 //              //  bolasInicio[i].hilo[0]=-numBolasTotal/2.0f-bolasInicio[i].diametro/2.0f+i*bolasInicio[i].diametro;
 //              //  bolasInicio[i].hilo[1]=largoHilo;
 //            }
-
-            angulo=angulomax;
-
-            
+            angulo=angulomax;  
         }
 
         public void manejarEventoMovimiento() {
-            incremento = Double.valueOf(incrementomax - Math.abs(angulo) / angulomax * incrementomax * 0.85).floatValue();
-            if (clockwise && angulo <= -angulomax) {
-                clockwise = false;
-            } else if (!clockwise && angulo >= angulomax) {
-                clockwise = true;
-            }
-
-            if (clockwise) {
-                angulo -= incremento;
-            } else {
-                angulo += incremento;
-            }
+            
+            calcularAnguloActual();
 
             for (i=0;i<numBolasTotal;i++){
                 bolasInicio[i].traslacion[0]=-numBolasTotal/2.0f-bolasInicio[i].diametro/2.0f+(i+1)*bolasInicio[i].diametro;
@@ -111,6 +95,23 @@ public class Movimiento {
 //                bolasDemas[i].hilo[0]= Double.valueOf(Math.sin(angulo*ro)*largoHilo).floatValue();
 //                bolasDemas[i].hilo[1]= Double.valueOf(Math.cos(angulo*ro)*largoHilo).floatValue();
 //            }
+        }
+        /**
+         * Calculamos el angulo actual teniendo en cuenta el sentido de la bola,y el angulo que tiene
+         * con respecto al angulo máximo.
+         */
+        private void calcularAnguloActual() {
+            //TODO:introducir un coeficiente de fricción para que vaya parando la bola.
+            if (sentidoHorario && angulo <= -angulomax) {
+                sentidoHorario = false;
+            } else if (!sentidoHorario && angulo >= angulomax) {
+                sentidoHorario = true;
+            }
+            if (sentidoHorario) {
+                angulo -= incrementoAngulo;
+            } else {
+                angulo += incrementoAngulo;
+            }
         }
     }
 }
