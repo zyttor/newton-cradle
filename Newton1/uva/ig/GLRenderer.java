@@ -70,12 +70,13 @@ public class GLRenderer implements GLEventListener {
 
         material= new Material();
         //movimiento= new Movimiento(bolasInicio,bolasDemas);
-        movimiento= new Movimiento(bolasInicio,2);
+        movimiento= new Movimiento(bolasInicio,1);
 
         movimiento.setMovimiento(Movimiento.MOVIMIENTO_VERTICAL);
 
         texturaBola=new TexturaBola();
         texturaBola.cambiarTextura(gl, TexturaBola.TEXTURA_SIN_TEXTURA);
+
 
     }
 
