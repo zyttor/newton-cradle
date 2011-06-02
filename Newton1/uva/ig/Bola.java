@@ -62,7 +62,7 @@ public class Bola implements IObjetoGL{
 
         gl.glRotatef(-giro[2], 0.0f, 0.0f, 1.0f);
 
-        gl.glColor3f(0.72f, 0.54f, 0.0f);
+        gl.glColor3f(0.0f, 0.0f, 0.0f);
         gl.glBegin(GL.GL_LINES);
         //Hacia tubo posterior
         gl.glVertex3f(0.0f, 0.0f, 0.0f);

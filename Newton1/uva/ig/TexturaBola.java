@@ -21,6 +21,8 @@ public class TexturaBola {
     public static final int TEXTURA_PRUEBA=1;
     public static final int TEXTURA_VACA=2;
 
+    private int modo;
+
     public TexturaBola (){}
 
     private ITexturaListener textura;
@@ -33,6 +35,11 @@ public class TexturaBola {
         }else if (t==TEXTURA_VACA){
             textura=new TexturaVacaListener(gl);
         }
+        modo=t;
+    }
+
+    public int getModo(){
+        return modo;
     }
 
     public void setTextura(GL gl){

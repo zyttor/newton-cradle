@@ -1,5 +1,6 @@
 package uva.ig;
 
+import com.sun.opengl.util.GLUT;
 import javax.media.opengl.GL;
 import javax.media.opengl.GLAutoDrawable;
 import javax.media.opengl.GLEventListener;
@@ -18,6 +19,7 @@ public class GLRenderer implements GLEventListener {
     public static final int MODO_VACA=1;
     public static final int MODO_QUARZO=2;
 
+    GLUT glut;
     GLU glu;
     GL gl;
     private int modoActual=0;
@@ -40,7 +42,7 @@ public class GLRenderer implements GLEventListener {
 
         gl = drawable.getGL();
         glu = new GLU();
-
+        glut=new GLUT();
         // Enable VSync
         gl.setSwapInterval(1);
 
@@ -54,7 +56,6 @@ public class GLRenderer implements GLEventListener {
         iluminacion.setIluminacion(gl);
 
         camara= new Camara();
-        camara.cambiarPuntoOjo(0.0, 0.0, -13.0);
 
 
         bolasInicio=new Bola[5];
@@ -72,12 +73,30 @@ public class GLRenderer implements GLEventListener {
         //movimiento= new Movimiento(bolasInicio,bolasDemas);
         movimiento= new Movimiento(bolasInicio,1);
 
-        movimiento.setMovimiento(Movimiento.MOVIMIENTO_VERTICAL);
+        movimiento.setMovimiento(Movimiento.MOVIMIENTO_CUADRATICO);
 
         texturaBola=new TexturaBola();
         texturaBola.cambiarTextura(gl, TexturaBola.TEXTURA_SIN_TEXTURA);
 
+    }
 
+    public void setTodasMovimiento(){
+        int modo=movimiento.getModo();
+        int mueven=bolasInicio.length;
+        movimiento=new Movimiento(bolasInicio, mueven);
+        movimiento.setMovimiento(modo);
+    }
+
+    public void cambiarAnguloMax(int a){
+        movimiento.setMaxAngulo(a);
+    }
+
+    public void cambiarMovimiento(int cual){
+        if (cual==1){
+            movimiento.setMovimiento(Movimiento.MOVIMIENTO_VERTICAL);
+        }else if (cual==2){
+            movimiento.setMovimiento(Movimiento.MOVIMIENTO_CUADRATICO);
+        }
     }
 
     public void moverCamara (int donde){
@@ -91,14 +110,42 @@ public class GLRenderer implements GLEventListener {
         }else if (donde==4){
             camara.moverGiroV(-2.0f);
         }else if (donde==5){
-            camara.cambiarZoom(-0.5f);
-        }else if (donde==6){
             camara.cambiarZoom(0.5f);
+        }else if (donde==6){
+            camara.cambiarZoom(-0.5f);
         }
     }
 
+    public void restartCamara (){
+        camara=new Camara();
+    }
+
+    public void pararMovimiento() {
+        restartCamara();
+        movimiento.setMovimiento(Movimiento.QUIETO);
+    }
+
+    public void cambiarNumeroBolas (int bolas){
+        //TODO: Por ahora pone en movimiento auto con un cierto numero de bolas
+        //pero deberia parar y entrar en modo "drag"
+        restartCamara();
+        bolasInicio=new Bola[bolas];
+        for (int i=0;i<bolasInicio.length;i++){
+            bolasInicio[i]=new Bola(0.5f, 20, 20);
+            bolasInicio[i].cambiarPosicion(i*3.0f, 0.0f, -2.0f);
+        }
+        int modo=movimiento.getModo();
+        int mueven=0;
+        if (bolas%2==0){
+            mueven=((int)Math.floor(bolas/2))-1;
+        }else{
+            mueven=(int)Math.floor(bolas/2);
+        }
+        movimiento=new Movimiento(bolasInicio, mueven);
+        movimiento.setMovimiento(modo);
+    }
+
     public void cambiarModo(GLAutoDrawable panel,int modo){
-        gl = panel.getGL();
         if (modo==MODO_VACA){
             texturaBola.cambiarTextura(gl, TexturaBola.TEXTURA_VACA);
         }else if (modo==MODO_QUARZO){
@@ -110,9 +157,8 @@ public class GLRenderer implements GLEventListener {
 
     public void reshape(GLAutoDrawable drawable, int x, int y, int width, int height) {
 
-        gl=drawable.getGL();
+        //gl=drawable.getGL();
         if (height <= 0) { // avoid a divide by zero error!
-        
             height = 1;
         }
         final float h = (float) width / (float) height;
@@ -120,7 +166,10 @@ public class GLRenderer implements GLEventListener {
         gl.glMatrixMode(GL.GL_PROJECTION);
         gl.glLoadIdentity();
         glu.gluPerspective(45.0f, h, 1.0, 20.0);
-        cambiarModo(drawable, modoActual);
+
+        texturaBola=new TexturaBola();
+        int modo=texturaBola.getModo();
+        texturaBola.cambiarTextura(gl, modo);
 //        gl.glMatrixMode(GL.GL_MODELVIEW);
 //        gl.glLoadIdentity();
     }
@@ -131,7 +180,6 @@ public class GLRenderer implements GLEventListener {
         // Clear the drawing area
         gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
         // Reset the current matrix to the "identity"
-
 
         gl.glMatrixMode(GL.GL_MODELVIEW);
         gl.glLoadIdentity();
@@ -167,5 +215,7 @@ public class GLRenderer implements GLEventListener {
 
     public void displayChanged(GLAutoDrawable drawable, boolean modeChanged, boolean deviceChanged) {
     }
+
+
 }
 

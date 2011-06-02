@@ -7,6 +7,7 @@
 package uva.ig;
 
 import com.sun.opengl.util.Animator;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -68,19 +69,19 @@ public class Newton1 extends JFrame {
         this.addKeyListener(new KeyAdapter() {
 
             @Override
-            public void keyTyped(KeyEvent evt) {
-                //System.out.println(evt.getKeyChar());
-                if (evt.getKeyChar()=='a'){
+            public void keyPressed(KeyEvent evt) {
+                
+                if (evt.getKeyCode()==KeyEvent.VK_LEFT){
                     renderer.moverCamara(1);
-                }else if (evt.getKeyChar()=='s'){
+                }else if (evt.getKeyCode()==KeyEvent.VK_RIGHT){
                     renderer.moverCamara(2);
-                }else if (evt.getKeyChar()=='w'){
+                }else if (evt.getKeyCode()==KeyEvent.VK_UP){
                     renderer.moverCamara(3);
-                }else if (evt.getKeyChar()=='x'){
+                }else if (evt.getKeyCode()==KeyEvent.VK_DOWN){
                     renderer.moverCamara(4);
-                }else if (evt.getKeyChar()=='+'){
+                }else if (evt.getKeyCode()==KeyEvent.VK_PLUS){
                     renderer.moverCamara(5);
-                }else if (evt.getKeyChar()=='-'){
+                }else if (evt.getKeyCode()==KeyEvent.VK_MINUS){
                     renderer.moverCamara(6);
                 }
             }
@@ -117,29 +118,52 @@ public class Newton1 extends JFrame {
         jMenu2 = new JMenu();
         jMenuItem4 = new JMenuItem();
         jMenuItem5 = new JMenuItem();
+        jSeparator2 = new Separator();
+        jSeparator3 = new Separator();
+        jMenuItem11 = new JMenuItem();
+        jSeparator4 = new Separator();
+        jMenuItem12 = new JMenuItem();
         jMenu3 = new JMenu();
         jMenuItem6 = new JMenuItem();
         jMenuItem7 = new JMenuItem();
+        jMenuItem8 = new JMenuItem();
+        jMenuItem9 = new JMenuItem();
+        jMenuItem10 = new JMenuItem();
+        jMenu4 = new JMenu();
+        jMenuItem13 = new JMenuItem();
+        jMenuItem14 = new JMenuItem();
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
+        panel.setPreferredSize(new Dimension(600, 400));
 
         GroupLayout panelLayout = new GroupLayout(panel);
         panel.setLayout(panelLayout);
         panelLayout.setHorizontalGroup(
             panelLayout.createParallelGroup(Alignment.LEADING)
-            .addGap(0, 544, Short.MAX_VALUE)
+            .addGap(0, 600, Short.MAX_VALUE)
         );
         panelLayout.setVerticalGroup(
             panelLayout.createParallelGroup(Alignment.LEADING)
-            .addGap(0, 279, Short.MAX_VALUE)
+            .addGap(0, 473, Short.MAX_VALUE)
         );
 
         jMenu1.setText("Cradle");
 
         jMenuItem1.setText("Restart animation");
+        jMenuItem1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem1);
 
         jMenuItem2.setText("Restart Camera");
+        jMenuItem2.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem2);
         jMenu1.add(jSeparator1);
 
@@ -170,18 +194,91 @@ public class Newton1 extends JFrame {
             }
         });
         jMenu2.add(jMenuItem5);
+        jMenu2.add(jSeparator2);
+        jMenu2.add(jSeparator3);
+
+        jMenuItem11.setText("Can Can (prueba)");
+        jMenuItem11.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jMenuItem11ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem11);
+        jMenu2.add(jSeparator4);
+
+        jMenuItem12.setText("Suicida (prueba)");
+        jMenuItem12.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jMenuItem12ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem12);
 
         jMenuBar1.add(jMenu2);
 
         jMenu3.setText("Balls");
 
-        jMenuItem6.setText("4");
+        jMenuItem6.setText("3");
+        jMenuItem6.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem6);
 
-        jMenuItem7.setText("5");
+        jMenuItem7.setText("4");
+        jMenuItem7.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem7);
 
+        jMenuItem8.setText("5");
+        jMenuItem8.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem8);
+
+        jMenuItem9.setText("6");
+        jMenuItem9.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem9);
+
+        jMenuItem10.setText("7");
+        jMenuItem10.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jMenuItem10ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem10);
+
         jMenuBar1.add(jMenu3);
+
+        jMenu4.setText("Movimiento");
+
+        jMenuItem13.setText("Lineal");
+        jMenuItem13.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jMenuItem13ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem13);
+
+        jMenuItem14.setText("Cuadrático");
+        jMenuItem14.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jMenuItem14ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem14);
+
+        jMenuBar1.add(jMenu4);
 
         setJMenuBar(jMenuBar1);
 
@@ -189,11 +286,11 @@ public class Newton1 extends JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(Alignment.LEADING)
-            .addComponent(panel, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(Alignment.LEADING)
-            .addComponent(panel, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panel, GroupLayout.DEFAULT_SIZE, 473, Short.MAX_VALUE)
         );
 
         pack();
@@ -217,6 +314,50 @@ public class Newton1 extends JFrame {
         renderer.cambiarModo(panel,GLRenderer.MODO_QUARZO);
         panel.getContext().release();
     }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        renderer.restartCamara();
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem1ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        renderer.pararMovimiento();
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        renderer.cambiarNumeroBolas(3);
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jMenuItem7ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+        renderer.cambiarNumeroBolas(4);
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void jMenuItem8ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        renderer.cambiarNumeroBolas(5);
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
+
+    private void jMenuItem9ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+        renderer.cambiarNumeroBolas(6);
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
+
+    private void jMenuItem10ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
+        renderer.cambiarNumeroBolas(7);
+    }//GEN-LAST:event_jMenuItem10ActionPerformed
+
+    private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
+        renderer.setTodasMovimiento();
+    }//GEN-LAST:event_jMenuItem11ActionPerformed
+
+    private void jMenuItem12ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
+        renderer.cambiarAnguloMax(180);
+    }//GEN-LAST:event_jMenuItem12ActionPerformed
+
+    private void jMenuItem13ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
+        renderer.cambiarMovimiento(1);
+    }//GEN-LAST:event_jMenuItem13ActionPerformed
+
+    private void jMenuItem14ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
+        renderer.cambiarMovimiento(2);
+    }//GEN-LAST:event_jMenuItem14ActionPerformed
 
     /**
      * Called from within initComponents().
@@ -261,15 +402,26 @@ public class Newton1 extends JFrame {
     private JMenu jMenu1;
     private JMenu jMenu2;
     private JMenu jMenu3;
+    private JMenu jMenu4;
     private JMenuBar jMenuBar1;
     private JMenuItem jMenuItem1;
+    private JMenuItem jMenuItem10;
+    private JMenuItem jMenuItem11;
+    private JMenuItem jMenuItem12;
+    private JMenuItem jMenuItem13;
+    private JMenuItem jMenuItem14;
     private JMenuItem jMenuItem2;
     private JMenuItem jMenuItem3;
     private JMenuItem jMenuItem4;
     private JMenuItem jMenuItem5;
     private JMenuItem jMenuItem6;
     private JMenuItem jMenuItem7;
+    private JMenuItem jMenuItem8;
+    private JMenuItem jMenuItem9;
     private Separator jSeparator1;
+    private Separator jSeparator2;
+    private Separator jSeparator3;
+    private Separator jSeparator4;
     private GLJPanel panel;
     // End of variables declaration//GEN-END:variables
 
