@@ -18,10 +18,10 @@ import java.awt.event.WindowEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.media.opengl.GLCapabilities;
-import javax.media.opengl.GLContext;
 import javax.media.opengl.GLJPanel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -79,9 +79,9 @@ public class Newton1 extends JFrame {
                     renderer.moverCamara(3);
                 }else if (evt.getKeyCode()==KeyEvent.VK_DOWN){
                     renderer.moverCamara(4);
-                }else if (evt.getKeyCode()==KeyEvent.VK_PLUS){
+                }else if (evt.getKeyCode()==KeyEvent.VK_PLUS || evt.getKeyCode()==KeyEvent.VK_ADD){
                     renderer.moverCamara(5);
-                }else if (evt.getKeyCode()==KeyEvent.VK_MINUS){
+                }else if (evt.getKeyCode()==KeyEvent.VK_MINUS || evt.getKeyCode()==KeyEvent.VK_SUBTRACT){
                     renderer.moverCamara(6);
                 }
             }
@@ -116,10 +116,12 @@ public class Newton1 extends JFrame {
         jSeparator1 = new Separator();
         jMenuItem3 = new JMenuItem();
         jMenu2 = new JMenu();
+        jMenuItem16 = new JMenuItem();
         jMenuItem4 = new JMenuItem();
         jMenuItem5 = new JMenuItem();
         jSeparator2 = new Separator();
         jSeparator3 = new Separator();
+        jMenuItem15 = new JMenuItem();
         jMenuItem11 = new JMenuItem();
         jSeparator4 = new Separator();
         jMenuItem12 = new JMenuItem();
@@ -132,6 +134,7 @@ public class Newton1 extends JFrame {
         jMenu4 = new JMenu();
         jMenuItem13 = new JMenuItem();
         jMenuItem14 = new JMenuItem();
+        jCheckBoxMenuItem1 = new JCheckBoxMenuItem();
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
@@ -179,6 +182,14 @@ public class Newton1 extends JFrame {
 
         jMenu2.setText("Mode");
 
+        jMenuItem16.setText("Material");
+        jMenuItem16.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jMenuItem16ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem16);
+
         jMenuItem4.setText("Cow");
         jMenuItem4.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
@@ -187,7 +198,7 @@ public class Newton1 extends JFrame {
         });
         jMenu2.add(jMenuItem4);
 
-        jMenuItem5.setText("Quarz");
+        jMenuItem5.setText("Metal");
         jMenuItem5.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 jMenuItem5ActionPerformed(evt);
@@ -197,6 +208,14 @@ public class Newton1 extends JFrame {
         jMenu2.add(jSeparator2);
         jMenu2.add(jSeparator3);
 
+        jMenuItem15.setText("Toon (shader)");
+        jMenuItem15.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jMenuItem15ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem15);
+
         jMenuItem11.setText("Can Can (prueba)");
         jMenuItem11.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
@@ -204,6 +223,8 @@ public class Newton1 extends JFrame {
             }
         });
         jMenu2.add(jMenuItem11);
+
+        jSeparator4.setOpaque(true);
         jMenu2.add(jSeparator4);
 
         jMenuItem12.setText("Suicida (prueba)");
@@ -278,6 +299,14 @@ public class Newton1 extends JFrame {
         });
         jMenu4.add(jMenuItem14);
 
+        jCheckBoxMenuItem1.setText("Rozamiento");
+        jCheckBoxMenuItem1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jCheckBoxMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jCheckBoxMenuItem1);
+
         jMenuBar1.add(jMenu4);
 
         setJMenuBar(jMenuBar1);
@@ -311,7 +340,7 @@ public class Newton1 extends JFrame {
     private void jMenuItem5ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         // TODO add your handling code here:
         panel.getContext().makeCurrent();
-        renderer.cambiarModo(panel,GLRenderer.MODO_QUARZO);
+        renderer.cambiarModo(panel,GLRenderer.MODO_METAL);
         panel.getContext().release();
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
@@ -359,6 +388,24 @@ public class Newton1 extends JFrame {
         renderer.cambiarMovimiento(2);
     }//GEN-LAST:event_jMenuItem14ActionPerformed
 
+    private void jCheckBoxMenuItem1ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItem1ActionPerformed
+        renderer.cambiarRozamiento(jCheckBoxMenuItem1.getState());
+    }//GEN-LAST:event_jCheckBoxMenuItem1ActionPerformed
+
+    private void jMenuItem15ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem15ActionPerformed
+        // TODO add your handling code here:
+        panel.getContext().makeCurrent();
+        renderer.cambiarModo(panel,GLRenderer.MODO_TOON);
+        panel.getContext().release();
+    }//GEN-LAST:event_jMenuItem15ActionPerformed
+
+    private void jMenuItem16ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem16ActionPerformed
+        // TODO add your handling code here:
+        panel.getContext().makeCurrent();
+        renderer.cambiarModo(panel,GLRenderer.MODO_SIN_TEXTURA);
+        panel.getContext().release();
+    }//GEN-LAST:event_jMenuItem16ActionPerformed
+
     /**
      * Called from within initComponents().
      * hint: to customize the generated code choose 'Customize Code' in the contextmenu
@@ -399,6 +446,7 @@ public class Newton1 extends JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private JCheckBoxMenuItem jCheckBoxMenuItem1;
     private JMenu jMenu1;
     private JMenu jMenu2;
     private JMenu jMenu3;
@@ -410,6 +458,8 @@ public class Newton1 extends JFrame {
     private JMenuItem jMenuItem12;
     private JMenuItem jMenuItem13;
     private JMenuItem jMenuItem14;
+    private JMenuItem jMenuItem15;
+    private JMenuItem jMenuItem16;
     private JMenuItem jMenuItem2;
     private JMenuItem jMenuItem3;
     private JMenuItem jMenuItem4;

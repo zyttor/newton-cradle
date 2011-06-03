@@ -8,12 +8,15 @@ public class Movimiento {
 
      
     private float angulomax = 70;       //Angulo maximo
+    private float rozamiento=0f;
     private float incrementoAngulo = 3.0f;  //Incremento del angulo en cada pasada.Marca velocidad.
     private float angulo;  //Angulo de la bola
     private boolean sentidoHorario = false;     //para controlar el sentido en que se mueven las bolas
     public static final int QUIETO =0;
-    public static final int MOVIMIENTO_VERTICAL = 1;
+    public static final int MOVIMIENTO_LINEAL = 1;
     public static final int MOVIMIENTO_CUADRATICO = 2;
+    public static final int MOVIMIENTO_LINEAL_ROZAMIENTO = 3;
+    public static final int MOVIMIENTO_CUADRATICO_ROZAMIENTO = 4;
     private Bola bolasInicio[];
     private Bola bolasDemas[];
     private int numMovimiento;
@@ -28,8 +31,8 @@ public class Movimiento {
     private IMovimientoListener movimiento;
 
     public void setMovimiento(int mov) {
-        if (mov == MOVIMIENTO_VERTICAL) {
-            movimiento = new MovimientoVerticalListener(bolasInicio, numMovimiento);
+        if (mov == MOVIMIENTO_LINEAL) {
+            movimiento = new MovimientoLineal(bolasInicio, numMovimiento);
         }else if (mov==QUIETO){
             movimiento = new MovimientoQuieto(bolasInicio);
         }else if (mov==MOVIMIENTO_CUADRATICO){
@@ -46,6 +49,10 @@ public class Movimiento {
         angulomax=a;
     }
 
+    public void setRozamiento(float r){
+        rozamiento=r;
+    }
+
     public void mover() {
         movimiento.manejarEventoMovimiento();
     }
@@ -54,32 +61,24 @@ public class Movimiento {
 
         public void manejarEventoMovimiento();
     }
-
-    private class MovimientoVerticalListener implements IMovimientoListener {
+    
+    private class MovimientoLineal implements IMovimientoListener {
 
         private Bola bolasInicio[];
-        private Bola bolasDemas[];
         private float ro=0.017453292519943295f;
         private float largoHilo=2.8125f;
         private int numBolasTotal;
         private int numBolasMovimiento;
-        private int numBolasDemas;
+
+
         private int i;
 
         //public MovimientoVerticalListener(Bola inicio[], Bola demas[]) {
-        public MovimientoVerticalListener(Bola inicio[],int movimiento) {
+        public MovimientoLineal (Bola inicio[],int movimiento) {
             bolasInicio = inicio;
-            //bolasDemas = demas;
             numBolasMovimiento = movimiento;
-            //numBolasDemas = demas.length;
-            //numBolasTotal = numBolasMovimiento + numBolasDemas;
             numBolasTotal=inicio.length;
-
-//            for (i=0;i<bolasInicio.length;i++){
-//              //  bolasInicio[i].hilo[0]=-numBolasTotal/2.0f-bolasInicio[i].diametro/2.0f+i*bolasInicio[i].diametro;
-//              //  bolasInicio[i].hilo[1]=largoHilo;
-//            }
-            angulo=angulomax;  
+            angulo=angulomax;
         }
 
         public void manejarEventoMovimiento() {
@@ -96,31 +95,25 @@ public class Movimiento {
                 }else{
                     bolasInicio[i].giro[2]=0.0f;
                 }
-                //=(angulo<0 && (i>=numBolasDemas && angulo>0))?angulo:0.0f;
-                //bolasInicio[i].giro[2]=0.0f;
                 bolasInicio[i].hilo[0]= Double.valueOf(Math.sin(angulo*ro)*largoHilo).floatValue();
                 bolasInicio[i].hilo[1]= Double.valueOf(Math.cos(angulo*ro)*largoHilo).floatValue();
             }
-
-//            for (i=0;i<numBolasDemas;i++){
-//                bolasDemas[i].traslacion[0]=-numBolasTotal/2.0f-bolasDemas[i].diametro/2.0f+(i+numBolasMovimiento)*bolasDemas[i].diametro;
-//                bolasDemas[i].traslacion[1]=-largoHilo;
-//                bolasDemas[i].giro[2]=((i+numBolasMovimiento)>=numBolasDemas && angulo>0)?angulo:0.0f;
-//                //bolasDemas[i].giro[2]=0.0f;
-//                bolasDemas[i].hilo[0]= Double.valueOf(Math.sin(angulo*ro)*largoHilo).floatValue();
-//                bolasDemas[i].hilo[1]= Double.valueOf(Math.cos(angulo*ro)*largoHilo).floatValue();
-//            }
         }
         /**
          * Calculamos el angulo actual teniendo en cuenta el sentido de la bola,y el angulo que tiene
          * con respecto al angulo m�ximo.
          */
         private void calcularAnguloActual() {
-            //TODO:introducir un coeficiente de fricci�n para que vaya parando la bola.
+            if (angulomax<=0){
+                angulo=0.0f;
+                return;
+            }
             if (sentidoHorario && angulo <= -angulomax) {
                 sentidoHorario = false;
+                angulomax-=rozamiento;
             } else if (!sentidoHorario && angulo >= angulomax) {
                 sentidoHorario = true;
+                angulomax-=rozamiento;
             }
             if (sentidoHorario) {
                 angulo -= incrementoAngulo;
@@ -129,6 +122,8 @@ public class Movimiento {
             }
         }
     }
+    
+    
     private class MovimientoQuieto implements IMovimientoListener {
 
         private Bola bolasInicio[];
@@ -140,7 +135,6 @@ public class Movimiento {
         public MovimientoQuieto(Bola inicio[]) {
             bolasInicio = inicio;
             numBolasTotal=inicio.length;
-            angulo=angulomax;
         }
 
         public void manejarEventoMovimiento() {
@@ -174,7 +168,6 @@ public class Movimiento {
             bolasInicio = inicio;
             numBolasMovimiento = movimiento;
             numBolasTotal=inicio.length;
-
             angulo=angulomax;
         }
 
@@ -206,10 +199,16 @@ public class Movimiento {
 
         private void calcularAnguloActual() {
             //TODO:introducir un coeficiente de fricci�n para que vaya parando la bola.
+            if (angulomax<=0){
+                angulo=0.0f;
+                return;
+            }
             if (sentidoHorario && angulo <= -angulomax) {
                 sentidoHorario = false;
+                angulomax-=rozamiento;
             } else if (!sentidoHorario && angulo >= angulomax) {
                 sentidoHorario = true;
+                angulomax-=rozamiento;
             }
             if (angulo>=0){
                 if (Math.abs(angulomax-angulo)>0.2){
@@ -231,6 +230,7 @@ public class Movimiento {
             }
         }
     }
+
 }
 
 

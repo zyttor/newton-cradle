@@ -22,10 +22,10 @@ public class Material {
     private static float especular1[] = {0.5f,0.5f,0.5f,1.0f};
     private static float brillo1 = 100.0f;
 
-    private static float ambiente2[] = {0.8f,0.8f,0.8f,1.0f};
-    private static float difusa2[] = {0.8f,0.8f,0.8f,1.0f};
-    private static float especular2[] = {0.8f,0.8f,0.8f,1.0f};
-    private static float brillo2 = 120.0f;
+    private static float ambiente2[] = {0.9f,0.9f,0.8f,1.0f};
+    private static float difusa2[] = {0.85f,0.85f,0.85f,1.0f};
+    private static float especular2[] = {0.96f,0.96f,0.85f,1.0f};
+    private static float brillo2 = 20.0f;
 
     IMaterialListener materialListener;
 

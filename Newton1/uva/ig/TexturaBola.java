@@ -42,7 +42,11 @@ public class TexturaBola {
         return modo;
     }
 
-    public void setTextura(GL gl){
+    public void desactivarTextura(GL gl){
+        gl.glDisable(GL.GL_TEXTURE_2D);
+    }
+
+    public void renderTextura(GL gl){
         textura.manejarEventoTextura(gl);
     }
 
@@ -58,7 +62,7 @@ public class TexturaBola {
         public TexturaPruebaListener (GL gl){
             gl.glEnable(GL.GL_TEXTURE_2D);      // Enable 2D Texture Mapping
             try {
-                InputStream stream = getClass().getResourceAsStream("quarzo.jpg");
+                InputStream stream = getClass().getResourceAsStream("metal.jpg");
                 TextureData data = TextureIO.newTextureData(stream, false, "jpg");
                 textura = TextureIO.newTexture(data);
             }catch (IOException exc) {
@@ -73,10 +77,8 @@ public class TexturaBola {
         public void manejarEventoTextura(GL gl) {
 
 
-            gl.glTexGeni(gl.GL_S, gl.GL_TEXTURE_GEN_MODE, gl.GL_EYE_PLANE);
-            gl.glTexGeni(gl.GL_T, gl.GL_TEXTURE_GEN_MODE, gl.GL_EYE_PLANE);
-            gl.glTexGenfv(gl.GL_S, gl.GL_OBJECT_PLANE, zPlane,0);
-            gl.glTexGenfv(gl.GL_T, gl.GL_OBJECT_PLANE, zPlane,0);
+            gl.glTexGeni(gl.GL_S, gl.GL_TEXTURE_GEN_MODE, gl.GL_SPHERE_MAP);
+            gl.glTexGeni(gl.GL_T, gl.GL_TEXTURE_GEN_MODE, gl.GL_SPHERE_MAP);
 
 
             gl.glEnable(gl.GL_TEXTURE_GEN_S);

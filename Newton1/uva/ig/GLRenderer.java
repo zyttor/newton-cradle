@@ -17,7 +17,8 @@ public class GLRenderer implements GLEventListener {
 
     public static final int MODO_SIN_TEXTURA=0;
     public static final int MODO_VACA=1;
-    public static final int MODO_QUARZO=2;
+    public static final int MODO_METAL=2;
+    public static final int MODO_TOON=3;
 
     GLUT glut;
     GLU glu;
@@ -34,6 +35,8 @@ public class GLRenderer implements GLEventListener {
     Material material;
     Movimiento movimiento;
     TexturaBola texturaBola;
+
+    Shader shader;
 
 
     public void init(GLAutoDrawable drawable) {
@@ -63,13 +66,9 @@ public class GLRenderer implements GLEventListener {
             bolasInicio[i]=new Bola(0.5f, 20, 20);
             bolasInicio[i].cambiarPosicion(i*3.0f, 0.0f, -2.0f);
         }
-//        bolasDemas=new Bola[4];
-//        for (int i=0;i<bolasDemas.length;i++){
-//            bolasDemas[i]=new Bola(0.5f, 20, 20);
-//            bolasDemas[i].cambiarPosicion(-(i+1)*3.0f, 0.0f, -2.0f);
-//        }
 
         material= new Material();
+        material.setMaterial(Material.VIVO);
         //movimiento= new Movimiento(bolasInicio,bolasDemas);
         movimiento= new Movimiento(bolasInicio,1);
 
@@ -77,7 +76,11 @@ public class GLRenderer implements GLEventListener {
 
         texturaBola=new TexturaBola();
         texturaBola.cambiarTextura(gl, TexturaBola.TEXTURA_SIN_TEXTURA);
+        Bola.setTextura(texturaBola);
 
+        shader = new Shader();
+        shader.cambiarShader(Shader.SIN_SHADER, gl);
+        Bola.setShader(shader);
     }
 
     public void setTodasMovimiento(){
@@ -93,9 +96,17 @@ public class GLRenderer implements GLEventListener {
 
     public void cambiarMovimiento(int cual){
         if (cual==1){
-            movimiento.setMovimiento(Movimiento.MOVIMIENTO_VERTICAL);
+            movimiento.setMovimiento(Movimiento.MOVIMIENTO_LINEAL);
         }else if (cual==2){
             movimiento.setMovimiento(Movimiento.MOVIMIENTO_CUADRATICO);
+        }
+    }
+
+    public void cambiarRozamiento(boolean activado){
+        if (activado){
+            movimiento.setRozamiento(1.0f);
+        }else{
+            movimiento.setRozamiento(0.0f);
         }
     }
 
@@ -147,11 +158,25 @@ public class GLRenderer implements GLEventListener {
 
     public void cambiarModo(GLAutoDrawable panel,int modo){
         if (modo==MODO_VACA){
+            shader.cambiarShader(Shader.SIN_SHADER, gl);
             texturaBola.cambiarTextura(gl, TexturaBola.TEXTURA_VACA);
-        }else if (modo==MODO_QUARZO){
+            Bola.setTextura(texturaBola);
+            Bola.setShader(shader);
+        }else if (modo==MODO_METAL){
+            shader.cambiarShader(Shader.SIN_SHADER, gl);
             texturaBola.cambiarTextura(gl, TexturaBola.TEXTURA_PRUEBA);
+            Bola.setTextura(texturaBola);
+            Bola.setShader(shader);
         }else if (modo==MODO_SIN_TEXTURA){
+            shader.cambiarShader(Shader.SIN_SHADER, gl);
             texturaBola.cambiarTextura(gl, TexturaBola.TEXTURA_SIN_TEXTURA);
+            Bola.setTextura(texturaBola);
+            Bola.setShader(shader);
+        }else if (modo==MODO_TOON){
+            shader.cambiarShader(Shader.SHADER_NUBES, gl);
+            texturaBola.cambiarTextura(gl, TexturaBola.TEXTURA_SIN_TEXTURA);
+            Bola.setTextura(texturaBola);
+            Bola.setShader(shader);
         }
     }
 
@@ -189,18 +214,12 @@ public class GLRenderer implements GLEventListener {
 
         gl.glDisable(GL.GL_BLEND);
 
-        texturaBola.setTextura(gl);
+        
 
         gl.glPushMatrix();
 
         gl.glTranslatef(0.0f, 3.375f, 0.0f);
-        
-//        for (int i=0;i<bolasDemas.length;i++){
-//            material.setMaterial(Material.SUAVE);
-//            material.ponerMaterial(gl);
-//            bolasDemas[i].dibujar(gl);
-//        }
-        material.setMaterial(Material.VIVO);
+
         material.ponerMaterial(gl);
         for (int i=0;i<bolasInicio.length;i++){
             bolasInicio[i].dibujar(gl);
