@@ -56,7 +56,6 @@ public class Camara {
 
      public void cambiarZoom (float z){
          zoom+=z;
-         System.out.println(zoom);
          if (zoom>MIN_ZOOM){
              zoom=MIN_ZOOM;
          }

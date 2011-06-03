@@ -30,6 +30,9 @@ public class Bola implements IObjetoGL{
 
     private GLUT glut;
 
+    private static Shader shader;
+    private static TexturaBola textura;
+
 
     private float largoHilo=2.8125f;
 
@@ -45,6 +48,14 @@ public class Bola implements IObjetoGL{
         this.stacks=stacks;
     }
 
+    public static void setShader (Shader s){
+        shader=s;
+    }
+
+    public static void setTextura (TexturaBola t){
+        textura=t;
+    }
+
     public void dibujar (GL gl){
         gl.glPushMatrix();
         gl.glTranslatef(traslacion[0], 0.0f, 0.0f);
@@ -57,7 +68,11 @@ public class Bola implements IObjetoGL{
 
         gl.glPushMatrix();
         gl.glTranslatef(0.0f, -radio, 0.0f);
+        textura.renderTextura(gl);
+        shader.iniciarShaders(gl);
         glut.glutSolidSphere(radio,slices,stacks);
+        shader.pararShaders(gl);
+        textura.desactivarTextura(gl);
         gl.glPopMatrix();
 
         gl.glRotatef(-giro[2], 0.0f, 0.0f, 1.0f);
