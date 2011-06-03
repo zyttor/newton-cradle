@@ -76,7 +76,10 @@ public class Newton1 extends JFrame {
                 }else if (evt.getKeyCode()==KeyEvent.VK_RIGHT){
                     renderer.moverCamara(2);
                 }else if (evt.getKeyCode()==KeyEvent.VK_UP){
-                    renderer.moverCamara(3);
+                    if ((evt.getModifiers()&KeyEvent.CTRL_DOWN_MASK)==KeyEvent.CTRL_DOWN_MASK)
+                        renderer.subirVelocidad();
+                    else
+                        renderer.moverCamara(3);
                 }else if (evt.getKeyCode()==KeyEvent.VK_DOWN){
                     renderer.moverCamara(4);
                 }else if (evt.getKeyCode()==KeyEvent.VK_PLUS || evt.getKeyCode()==KeyEvent.VK_ADD){

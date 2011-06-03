@@ -156,6 +156,14 @@ public class GLRenderer implements GLEventListener {
         movimiento.setMovimiento(modo);
     }
 
+    public void subirVelocidad (){
+        movimiento.cambiarIncremento(-5f);
+    }
+
+    public void bajarVelocidad (){
+        movimiento.cambiarIncremento(5f);
+    }
+
     public void cambiarModo(GLAutoDrawable panel,int modo){
         if (modo==MODO_VACA){
             shader.cambiarShader(Shader.SIN_SHADER, gl);
@@ -215,6 +223,18 @@ public class GLRenderer implements GLEventListener {
         gl.glDisable(GL.GL_BLEND);
 
         
+
+        
+
+        gl.glPushMatrix();
+        gl.glTranslatef(0.0f, -4f, 0.0f);
+        gl.glBegin(gl.GL_QUADS);
+        gl.glVertex3f(-6.0f, 0.0f, -6.0f);
+        gl.glVertex3f(6.0f, 0.0f, -6.0f);
+        gl.glVertex3f(6.0f, 0.0f, 6.0f);
+        gl.glVertex3f(-6.0f, 0.0f, 6.0f);
+        gl.glEnd();
+        gl.glPopMatrix();
 
         gl.glPushMatrix();
 
