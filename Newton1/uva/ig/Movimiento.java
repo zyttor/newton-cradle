@@ -53,6 +53,11 @@ public class Movimiento {
         rozamiento=r;
     }
 
+    public void cambiarIncremento (float m){
+        incrementoAngulo*=(100-m)/100;
+        System.out.println(incrementoAngulo);
+    }
+
     public void mover() {
         movimiento.manejarEventoMovimiento();
     }
