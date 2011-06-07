@@ -38,6 +38,8 @@ public class GLRenderer implements GLEventListener {
 
     Shader shader;
 
+    private ModelLoaderOBJ obj_file = new ModelLoaderOBJ();
+
 
     public void init(GLAutoDrawable drawable) {
         // Use debug pipeline
@@ -81,6 +83,8 @@ public class GLRenderer implements GLEventListener {
         shader = new Shader();
         shader.cambiarShader(Shader.SIN_SHADER, gl);
         Bola.setShader(shader);
+
+	obj_file.init(gl, "cradle", "table2", "cylinder");
     }
 
     public void setTodasMovimiento(){
@@ -199,6 +203,8 @@ public class GLRenderer implements GLEventListener {
         gl.glMatrixMode(GL.GL_PROJECTION);
         gl.glLoadIdentity();
         glu.gluPerspective(45.0f, h, 1.0, 20.0);
+	// Para poner perspectiva ortho (eliminar el gluperspective), si quereis que se vea mas o menos pantalla, cambiad las 4 primeras coordenadas
+	//gl.glOrtho(-20, 20, -20, 20, -50, 50);
 
         texturaBola=new TexturaBola();
         int modo=texturaBola.getModo();
@@ -222,9 +228,10 @@ public class GLRenderer implements GLEventListener {
 
         gl.glDisable(GL.GL_BLEND);
 
-        
+        gl.glPushMatrix();
+        obj_file.draw(gl);
+        gl.glPopMatrix();    
 
-        
 
         gl.glPushMatrix();
         gl.glTranslatef(0.0f, -4f, 0.0f);
