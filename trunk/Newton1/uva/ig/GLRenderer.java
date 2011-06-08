@@ -6,7 +6,6 @@ import javax.media.opengl.GLAutoDrawable;
 import javax.media.opengl.GLEventListener;
 import javax.media.opengl.glu.GLU;
 
-
 /**
  * GLRenderer.java <BR>
  * author: Brian Paul (converted to Java by Ron Cemer and Sven Goethel) <P>
@@ -35,6 +34,8 @@ public class GLRenderer implements GLEventListener {
     Material material;
     Movimiento movimiento;
     TexturaBola texturaBola;
+
+    Sonido sonido;
 
     Shader shader;
 
@@ -80,6 +81,9 @@ public class GLRenderer implements GLEventListener {
         texturaBola.cambiarTextura(gl, TexturaBola.TEXTURA_SIN_TEXTURA);
         Bola.setTextura(texturaBola);
 
+        sonido = Sonido.getInstancia();
+        sonido.cambiarSonido(Sonido.SONIDO_DEFECTO);
+
         shader = new Shader();
         shader.cambiarShader(Shader.SIN_SHADER, gl);
         Bola.setShader(shader);
@@ -99,6 +103,8 @@ public class GLRenderer implements GLEventListener {
     }
 
     public void cambiarMovimiento(int cual){
+//        ReproducirWav reproducir=ReproducirWav.getInstancia();
+//        reproducir.ReproducirFicheroWav(sonidoVaca);
         if (cual==1){
             movimiento.setMovimiento(Movimiento.MOVIMIENTO_LINEAL);
         }else if (cual==2){
@@ -174,21 +180,26 @@ public class GLRenderer implements GLEventListener {
             texturaBola.cambiarTextura(gl, TexturaBola.TEXTURA_VACA);
             Bola.setTextura(texturaBola);
             Bola.setShader(shader);
+            sonido.cambiarSonido(Sonido.SONIDO_VACA);
         }else if (modo==MODO_METAL){
             shader.cambiarShader(Shader.SIN_SHADER, gl);
             texturaBola.cambiarTextura(gl, TexturaBola.TEXTURA_PRUEBA);
             Bola.setTextura(texturaBola);
             Bola.setShader(shader);
+            sonido.cambiarSonido(Sonido.SONIDO_METAL);
         }else if (modo==MODO_SIN_TEXTURA){
             shader.cambiarShader(Shader.SIN_SHADER, gl);
             texturaBola.cambiarTextura(gl, TexturaBola.TEXTURA_SIN_TEXTURA);
             Bola.setTextura(texturaBola);
             Bola.setShader(shader);
+            sonido.cambiarSonido(Sonido.SONIDO_DEFECTO);
         }else if (modo==MODO_TOON){
             shader.cambiarShader(Shader.SHADER_NUBES, gl);
             texturaBola.cambiarTextura(gl, TexturaBola.TEXTURA_SIN_TEXTURA);
             Bola.setTextura(texturaBola);
             Bola.setShader(shader);
+            sonido.cambiarSonido(Sonido.SONIDO_DEFECTO);
+
         }
     }
 
