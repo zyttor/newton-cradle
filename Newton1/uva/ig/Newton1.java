@@ -123,10 +123,9 @@ public class Newton1 extends JFrame {
         jMenuItem4 = new JMenuItem();
         jMenuItem5 = new JMenuItem();
         jSeparator2 = new Separator();
-        jSeparator3 = new Separator();
         jMenuItem15 = new JMenuItem();
+        jSeparator3 = new Separator();
         jMenuItem11 = new JMenuItem();
-        jSeparator4 = new Separator();
         jMenuItem12 = new JMenuItem();
         jMenu3 = new JMenu();
         jMenuItem6 = new JMenuItem();
@@ -137,6 +136,7 @@ public class Newton1 extends JFrame {
         jMenu4 = new JMenu();
         jMenuItem13 = new JMenuItem();
         jMenuItem14 = new JMenuItem();
+        jSeparator4 = new Separator();
         jCheckBoxMenuItem1 = new JCheckBoxMenuItem();
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -164,7 +164,7 @@ public class Newton1 extends JFrame {
         });
         jMenu1.add(jMenuItem1);
 
-        jMenuItem2.setText("Restart Camera");
+        jMenuItem2.setText("Restart camera");
         jMenuItem2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 jMenuItem2ActionPerformed(evt);
@@ -209,7 +209,6 @@ public class Newton1 extends JFrame {
         });
         jMenu2.add(jMenuItem5);
         jMenu2.add(jSeparator2);
-        jMenu2.add(jSeparator3);
 
         jMenuItem15.setText("Toon (shader)");
         jMenuItem15.addActionListener(new ActionListener() {
@@ -218,6 +217,7 @@ public class Newton1 extends JFrame {
             }
         });
         jMenu2.add(jMenuItem15);
+        jMenu2.add(jSeparator3);
 
         jMenuItem11.setText("Can Can (prueba)");
         jMenuItem11.addActionListener(new ActionListener() {
@@ -226,9 +226,6 @@ public class Newton1 extends JFrame {
             }
         });
         jMenu2.add(jMenuItem11);
-
-        jSeparator4.setOpaque(true);
-        jMenu2.add(jSeparator4);
 
         jMenuItem12.setText("Suicida (prueba)");
         jMenuItem12.addActionListener(new ActionListener() {
@@ -284,9 +281,9 @@ public class Newton1 extends JFrame {
 
         jMenuBar1.add(jMenu3);
 
-        jMenu4.setText("Movimiento");
+        jMenu4.setText("Movement");
 
-        jMenuItem13.setText("Lineal");
+        jMenuItem13.setText("Linear");
         jMenuItem13.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 jMenuItem13ActionPerformed(evt);
@@ -294,15 +291,16 @@ public class Newton1 extends JFrame {
         });
         jMenu4.add(jMenuItem13);
 
-        jMenuItem14.setText("Cuadrático");
+        jMenuItem14.setText("Quadratic");
         jMenuItem14.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 jMenuItem14ActionPerformed(evt);
             }
         });
         jMenu4.add(jMenuItem14);
+        jMenu4.add(jSeparator4);
 
-        jCheckBoxMenuItem1.setText("Rozamiento");
+        jCheckBoxMenuItem1.setText("Friction");
         jCheckBoxMenuItem1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 jCheckBoxMenuItem1ActionPerformed(evt);
@@ -333,20 +331,6 @@ public class Newton1 extends JFrame {
         System.exit(0);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
-    private void jMenuItem4ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        // TODO add your handling code here:
-        panel.getContext().makeCurrent();
-        renderer.cambiarModo(panel,GLRenderer.MODO_VACA);
-        panel.getContext().release();
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
-
-    private void jMenuItem5ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        // TODO add your handling code here:
-        panel.getContext().makeCurrent();
-        renderer.cambiarModo(panel,GLRenderer.MODO_METAL);
-        panel.getContext().release();
-    }//GEN-LAST:event_jMenuItem5ActionPerformed
-
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         renderer.restartCamara();
     }//GEN-LAST:event_jMenuItem2ActionPerformed
@@ -375,14 +359,6 @@ public class Newton1 extends JFrame {
         renderer.cambiarNumeroBolas(7);
     }//GEN-LAST:event_jMenuItem10ActionPerformed
 
-    private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
-        renderer.setTodasMovimiento();
-    }//GEN-LAST:event_jMenuItem11ActionPerformed
-
-    private void jMenuItem12ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
-        renderer.cambiarAnguloMax(180);
-    }//GEN-LAST:event_jMenuItem12ActionPerformed
-
     private void jMenuItem13ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
         renderer.cambiarMovimiento(1);
     }//GEN-LAST:event_jMenuItem13ActionPerformed
@@ -395,19 +371,41 @@ public class Newton1 extends JFrame {
         renderer.cambiarRozamiento(jCheckBoxMenuItem1.getState());
     }//GEN-LAST:event_jCheckBoxMenuItem1ActionPerformed
 
+    private void jMenuItem12ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
+        renderer.cambiarAnguloMax(180);
+}//GEN-LAST:event_jMenuItem12ActionPerformed
+
+    private void jMenuItem11ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
+        renderer.setTodasMovimiento();
+}//GEN-LAST:event_jMenuItem11ActionPerformed
+
     private void jMenuItem15ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem15ActionPerformed
         // TODO add your handling code here:
         panel.getContext().makeCurrent();
         renderer.cambiarModo(panel,GLRenderer.MODO_TOON);
         panel.getContext().release();
-    }//GEN-LAST:event_jMenuItem15ActionPerformed
+}//GEN-LAST:event_jMenuItem15ActionPerformed
+
+    private void jMenuItem5ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        // TODO add your handling code here:
+        panel.getContext().makeCurrent();
+        renderer.cambiarModo(panel,GLRenderer.MODO_METAL);
+        panel.getContext().release();
+}//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem4ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        // TODO add your handling code here:
+        panel.getContext().makeCurrent();
+        renderer.cambiarModo(panel,GLRenderer.MODO_VACA);
+        panel.getContext().release();
+}//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem16ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem16ActionPerformed
         // TODO add your handling code here:
         panel.getContext().makeCurrent();
         renderer.cambiarModo(panel,GLRenderer.MODO_SIN_TEXTURA);
         panel.getContext().release();
-    }//GEN-LAST:event_jMenuItem16ActionPerformed
+}//GEN-LAST:event_jMenuItem16ActionPerformed
 
     /**
      * Called from within initComponents().
