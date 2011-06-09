@@ -1,0 +1,37 @@
+-que no puedas moverte en el arrastre de las bolas. LUIS
+
+-que no se pueda arrastrar cuando las bolas estan en movimiento. LUIS
+
+-poner en el renderer el modo actual bien,y al cambiar de modo que cambie
+bien texturas,sonido... y que vuelva a empezar. LUIS
+
+-poner algun shader que quede bien. LUIS
+
+-el modo transparente que no se pase de transparente y añadir al menú. PATRI
+
+-subir y bajar velocidad y ponerle unos máximos y mínimos,y mostrar por pantalla la velocidad. MANU
+
+-si la velocidad no es 1 (o probar márgenes de velocidad) que no suene. PATRI
+
+-mirar que gire la vaca. MIRAR POR TODOS
+
+-repasar luces. PATRI
+
+-documentación y presentación. 
+
+-Colocar texturas para skybox. MANU.
+
+-----------------------------------------
+
+-modo luciérnaga. JAVI
+
+-la luz solar en movimiento. JAVI
+
+
+
+
+----------------------------------------
+
+-dibujar las bolas de otra manera para que exploten.
+
+-mas mundos.
