@@ -15,8 +15,8 @@ import javax.media.opengl.GL;
 
 public class Camara {
 
-    private static final double MAX_ZOOM=-160.0;
-    private static final double MIN_ZOOM=0.0;
+    private static final double MAX_ZOOM=-70.0;
+    private static final double MIN_ZOOM=-6.0;
 
     private double zoom=-13.0;
     private float giroH = 0.0f;
@@ -49,8 +49,14 @@ public class Camara {
          if (giroV>90){
             giroV=90;
          }
-         if (giroV<-90){
-             giroV=-90;
+         if (zoom<-20){
+            if (giroV<-10){
+                giroV=-10;
+            }
+         }else{
+            if (giroV<-90){
+                giroV=-90;
+            }
          }
      }
 
@@ -59,8 +65,15 @@ public class Camara {
          if (zoom>MIN_ZOOM){
              zoom=MIN_ZOOM;
          }
-         if (zoom<MAX_ZOOM){
-             zoom=MAX_ZOOM;
+         if (giroV<-20){
+            if (zoom<-20){
+                zoom=-20;
+            }
+         }else{
+            if (zoom<MAX_ZOOM){
+                zoom=MAX_ZOOM;
+            }
          }
+         System.out.println(zoom);
      }
 }
