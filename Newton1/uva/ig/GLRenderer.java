@@ -30,6 +30,8 @@ public class GLRenderer implements GLEventListener {
     Bola bolasInicio[];
     Bola bolasDemas[];
 
+    SkyBox skyBox;
+
 
     Material material;
     Movimiento movimiento;
@@ -62,6 +64,8 @@ public class GLRenderer implements GLEventListener {
         iluminacion.setIluminacion(gl);
 
         camara= new Camara();
+
+        skyBox=new SkyBox();
 
 
         bolasInicio=new Bola[5];
@@ -233,14 +237,14 @@ public class GLRenderer implements GLEventListener {
         gl.glViewport(0, 0, width, height);
         gl.glMatrixMode(GL.GL_PROJECTION);
         gl.glLoadIdentity();
-        glu.gluPerspective(45.0f, h, 1.0, 20.0);
+        glu.gluPerspective(45.0f, h, 1.0, 200.0);
 	// Para poner perspectiva ortho (eliminar el gluperspective), si quereis que se vea mas o menos pantalla, cambiad las 4 primeras coordenadas
-	//gl.glOrtho(-20, 20, -20, 20, -50, 50);
-
+	//gl.glOrtho(-20, 20, -20, 20, 0, 50);
+        //gl.glFrustum(-10, 10, -10, 10, -10, 10);
         texturaBola=new TexturaBola();
         int modo=texturaBola.getModo();
         texturaBola.cambiarTextura(gl, modo);
-//        gl.glMatrixMode(GL.GL_MODELVIEW);
+//        gl.glMatrixMode(GL.GL_MODELV-------IEW);
 //        gl.glLoadIdentity();
     }
 
@@ -258,6 +262,11 @@ public class GLRenderer implements GLEventListener {
         gl.glColor3d(1.0, 0.0, 0.0);
 
         gl.glDisable(GL.GL_BLEND);
+
+
+        gl.glPushMatrix();
+        skyBox.dibujar(gl);
+        gl.glPopMatrix();
 
         gl.glPushMatrix();
         obj_file.draw(gl);
