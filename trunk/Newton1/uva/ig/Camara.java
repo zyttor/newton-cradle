@@ -15,8 +15,8 @@ import javax.media.opengl.GL;
 
 public class Camara {
 
-    private static final double MAX_ZOOM=-16.0;
-    private static final double MIN_ZOOM=-6.0;
+    private static final double MAX_ZOOM=-160.0;
+    private static final double MIN_ZOOM=0.0;
 
     private double zoom=-13.0;
     private float giroH = 0.0f;
