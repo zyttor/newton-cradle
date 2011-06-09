@@ -145,6 +145,7 @@ public class Newton1 extends JFrame {
         jCheckBoxMenuItem1 = new JCheckBoxMenuItem();
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         panel.setPreferredSize(new Dimension(600, 400));
         panel.addMouseListener(new MouseAdapter() {
