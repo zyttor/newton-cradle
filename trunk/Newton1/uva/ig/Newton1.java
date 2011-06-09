@@ -3,7 +3,6 @@
  *
  * Created on 30. Juli 2008, 16:18
  */
-
 package uva.ig;
 
 import com.sun.opengl.util.Animator;
@@ -13,6 +12,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.logging.Level;
@@ -45,7 +47,7 @@ public class Newton1 extends JFrame {
         initComponents();
         setTitle("Simple JOGL Application");
 
-        renderer=new GLRenderer();
+        renderer = new GLRenderer();
         panel.addGLEventListener(renderer);
         animator = new Animator(panel);
 
@@ -70,21 +72,22 @@ public class Newton1 extends JFrame {
 
             @Override
             public void keyPressed(KeyEvent evt) {
-                
-                if (evt.getKeyCode()==KeyEvent.VK_LEFT){
+
+                if (evt.getKeyCode() == KeyEvent.VK_LEFT) {
                     renderer.moverCamara(1);
-                }else if (evt.getKeyCode()==KeyEvent.VK_RIGHT){
+                } else if (evt.getKeyCode() == KeyEvent.VK_RIGHT) {
                     renderer.moverCamara(2);
-                }else if (evt.getKeyCode()==KeyEvent.VK_UP){
-                    if ((evt.getModifiers()&KeyEvent.CTRL_DOWN_MASK)==KeyEvent.CTRL_DOWN_MASK)
+                } else if (evt.getKeyCode() == KeyEvent.VK_UP) {
+                    if ((evt.getModifiers() & KeyEvent.CTRL_DOWN_MASK) == KeyEvent.CTRL_DOWN_MASK) {
                         renderer.subirVelocidad();
-                    else
+                    } else {
                         renderer.moverCamara(3);
-                }else if (evt.getKeyCode()==KeyEvent.VK_DOWN){
+                    }
+                } else if (evt.getKeyCode() == KeyEvent.VK_DOWN) {
                     renderer.moverCamara(4);
-                }else if (evt.getKeyCode()==KeyEvent.VK_PLUS || evt.getKeyCode()==KeyEvent.VK_ADD){
+                } else if (evt.getKeyCode() == KeyEvent.VK_PLUS || evt.getKeyCode() == KeyEvent.VK_ADD) {
                     renderer.moverCamara(5);
-                }else if (evt.getKeyCode()==KeyEvent.VK_MINUS || evt.getKeyCode()==KeyEvent.VK_SUBTRACT){
+                } else if (evt.getKeyCode() == KeyEvent.VK_MINUS || evt.getKeyCode() == KeyEvent.VK_SUBTRACT) {
                     renderer.moverCamara(6);
                 }
             }
@@ -94,12 +97,14 @@ public class Newton1 extends JFrame {
     }
 
     @Override
-    public void setVisible(boolean show){
-        if(!show)
+    public void setVisible(boolean show) {
+        if (!show) {
             animator.stop();
+        }
         super.setVisible(show);
-        if(!show)
+        if (!show) {
             animator.start();
+        }
     }
 
     /** This method is called from within the constructor to
@@ -142,6 +147,19 @@ public class Newton1 extends JFrame {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         panel.setPreferredSize(new Dimension(600, 400));
+        panel.addMouseListener(new MouseAdapter() {
+            public void mousePressed(MouseEvent evt) {
+                panelMousePressed(evt);
+            }
+            public void mouseReleased(MouseEvent evt) {
+                panelMouseReleased(evt);
+            }
+        });
+        panel.addMouseMotionListener(new MouseMotionAdapter() {
+            public void mouseDragged(MouseEvent evt) {
+                panelMouseDragged(evt);
+            }
+        });
 
         GroupLayout panelLayout = new GroupLayout(panel);
         panel.setLayout(panelLayout);
@@ -382,30 +400,128 @@ public class Newton1 extends JFrame {
     private void jMenuItem15ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem15ActionPerformed
         // TODO add your handling code here:
         panel.getContext().makeCurrent();
-        renderer.cambiarModo(panel,GLRenderer.MODO_TOON);
+        renderer.cambiarModo(panel, GLRenderer.MODO_TOON);
         panel.getContext().release();
 }//GEN-LAST:event_jMenuItem15ActionPerformed
 
     private void jMenuItem5ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         // TODO add your handling code here:
         panel.getContext().makeCurrent();
-        renderer.cambiarModo(panel,GLRenderer.MODO_METAL);
+        renderer.cambiarModo(panel, GLRenderer.MODO_METAL);
         panel.getContext().release();
 }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem4ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         // TODO add your handling code here:
         panel.getContext().makeCurrent();
-        renderer.cambiarModo(panel,GLRenderer.MODO_VACA);
+        renderer.cambiarModo(panel, GLRenderer.MODO_VACA);
         panel.getContext().release();
 }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem16ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem16ActionPerformed
         // TODO add your handling code here:
         panel.getContext().makeCurrent();
-        renderer.cambiarModo(panel,GLRenderer.MODO_SIN_TEXTURA);
+        renderer.cambiarModo(panel, GLRenderer.MODO_SIN_TEXTURA);
         panel.getContext().release();
 }//GEN-LAST:event_jMenuItem16ActionPerformed
+    private boolean arrastre = false;
+    private int yOriginal = 0;
+    private int xOriginal = 0;
+    private boolean sentidoHorario = false;
+    private int numMovimiento = 0;
+
+    private void panelMousePressed(MouseEvent evt) {//GEN-FIRST:event_panelMousePressed
+        // TODO add your handling code here:
+        if (evt.getButton() == MouseEvent.BUTTON1) {
+            int x = evt.getX() - panel.getWidth() / 2;
+            int y = panel.getHeight() / 2 - evt.getY();
+            int bolas = renderer.getNumBolas();
+            if (bolas % 2 == 0) {
+                double dist;
+                for (int i = 2; i <= bolas / 2; i++) {
+                    dist = Math.sqrt(Math.pow((20 + (i * -40)) - x, 2) + Math.pow(y + 40, 2));
+                    if (dist < 20.0f) {
+                        System.out.println("Bola " + (bolas / 2 - i + 1));
+                        arrastre = true;
+                        yOriginal = y;
+                        xOriginal = x;
+                        sentidoHorario = false;
+                        numMovimiento = bolas / 2 - i + 1;
+                        renderer.ponerArrastre(numMovimiento, sentidoHorario);
+                        return;
+                    }
+                    dist = Math.sqrt(Math.pow((-20 + (i * 40)) - x, 2) + Math.pow(y + 40, 2));
+                    if (dist < 20.0f) {
+                        System.out.println("Bola " + (bolas / 2 + i));
+                        arrastre = true;
+                        yOriginal = y;
+                        xOriginal = x;
+                        sentidoHorario = true;
+                        numMovimiento = bolas - (bolas / 2 + i) + 1;
+                        renderer.ponerArrastre(numMovimiento, sentidoHorario);
+                        return;
+                    }
+                }
+            } else {
+                double dist;
+                for (int i = 1; i <= bolas / 2; i++) {
+                    dist = Math.sqrt(Math.pow((-40 * i) - x, 2) + Math.pow(y + 40, 2));
+                    if (dist < 20.0f) {
+                        System.out.println("Bola " + (bolas / 2 - i + 1));
+                        arrastre = true;
+                        yOriginal = y;
+                        xOriginal = x;
+                        sentidoHorario = false;
+                        numMovimiento = bolas / 2 - i + 1;
+                        renderer.ponerArrastre(numMovimiento, sentidoHorario);
+                        return;
+                    }
+                    dist = Math.sqrt(Math.pow((40 * i) - x, 2) + Math.pow(y + 40, 2));
+                    if (dist < 20.0f) {
+                        System.out.println("Bola " + (bolas / 2 + i + 1));
+                        arrastre = true;
+                        yOriginal = y;
+                        xOriginal = x;
+                        sentidoHorario = true;
+                        numMovimiento = bolas - (bolas / 2 + i);
+                        renderer.ponerArrastre(numMovimiento, sentidoHorario);
+                        return;
+                    }
+                }
+            }
+            System.out.println(x + " " + y);
+        }
+    }//GEN-LAST:event_panelMousePressed
+
+        private void panelMouseDragged(MouseEvent evt) {//GEN-FIRST:event_panelMouseDragged
+            // TODO add your handling code here:
+            if (arrastre) {
+                int y = panel.getHeight() / 2 - evt.getY();
+                int x = evt.getX() - panel.getWidth() / 2;
+                int difX = x - xOriginal;
+                int difY = y - yOriginal;
+                System.out.println(difX + " " + difY);
+                if (difY >= 0 && ((difX > 0 && sentidoHorario) || (difX < 0 && !sentidoHorario))) {
+                    difX = Math.abs(difX);
+                    float angulo = (difX > difY) ? difX / 2.1f : difY / 2.1f;
+                    if (sentidoHorario) {
+                        renderer.arrastrarBola(angulo);
+                    } else {
+                        renderer.arrastrarBola(-angulo);
+                    }
+                }
+            }
+        }//GEN-LAST:event_panelMouseDragged
+
+        private void panelMouseReleased(MouseEvent evt) {//GEN-FIRST:event_panelMouseReleased
+            // TODO add your handling code here:
+            if (evt.getButton() == MouseEvent.BUTTON1) {
+                if (arrastre) {
+                    renderer.lanzarBola();
+                }
+                arrastre = false;
+            }
+        }//GEN-LAST:event_panelMouseReleased
 
     /**
      * Called from within initComponents().
@@ -414,38 +530,38 @@ public class Newton1 extends JFrame {
      * @return Returns customized GLCapabilities.
      */
     private GLCapabilities createGLCapabilites() {
-        
+
         GLCapabilities capabilities = new GLCapabilities();
         capabilities.setHardwareAccelerated(true);
 
         // try to enable 2x anti aliasing - should be supported on most hardware
         capabilities.setNumSamples(2);
         capabilities.setSampleBuffers(true);
-        
+
         return capabilities;
     }
-    
+
     /**
-    * @param args the command line arguments
-    */
+     * @param args the command line arguments
+     */
     public static void main(String args[]) {
         // Run this in the AWT event thread to prevent deadlocks and race conditions
         EventQueue.invokeLater(new Runnable() {
+
             public void run() {
-                
+
                 // switch to system l&f for native font rendering etc.
-                try{
+                try {
                     UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-                }catch(Exception ex) {
+                } catch (Exception ex) {
                     Logger.getLogger(getClass().getName()).log(Level.INFO, "can not enable system look and feel", ex);
                 }
-                
+
                 Newton1 frame = new Newton1();
                 frame.setVisible(true);
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private JCheckBoxMenuItem jCheckBoxMenuItem1;
     private JMenu jMenu1;
@@ -475,5 +591,4 @@ public class Newton1 extends JFrame {
     private Separator jSeparator4;
     private GLJPanel panel;
     // End of variables declaration//GEN-END:variables
-
 }
