@@ -65,7 +65,7 @@ public class GLRenderer implements GLEventListener {
 
         camara= new Camara();
 
-        skyBox=new SkyBox();
+        skyBox=new SkyBox(gl);
 
 
         bolasInicio=new Bola[5];
