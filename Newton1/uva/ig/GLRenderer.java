@@ -75,7 +75,7 @@ public class GLRenderer implements GLEventListener {
         //movimiento= new Movimiento(bolasInicio,bolasDemas);
         movimiento= new Movimiento(bolasInicio,1);
 
-        movimiento.setMovimiento(Movimiento.MOVIMIENTO_CUADRATICO);
+        movimiento.setMovimiento(Movimiento.QUIETO);
 
         texturaBola=new TexturaBola();
         texturaBola.cambiarTextura(gl, TexturaBola.TEXTURA_SIN_TEXTURA);
@@ -91,6 +91,10 @@ public class GLRenderer implements GLEventListener {
 	obj_file.init(gl, "cradle", "table2", "cylinder");
     }
 
+    public int getNumBolas(){
+        return bolasInicio.length;
+    }
+
     public void setTodasMovimiento(){
         int modo=movimiento.getModo();
         int mueven=bolasInicio.length;
@@ -103,8 +107,6 @@ public class GLRenderer implements GLEventListener {
     }
 
     public void cambiarMovimiento(int cual){
-//        ReproducirWav reproducir=ReproducirWav.getInstancia();
-//        reproducir.ReproducirFicheroWav(sonidoVaca);
         if (cual==1){
             movimiento.setMovimiento(Movimiento.MOVIMIENTO_LINEAL);
         }else if (cual==2){
@@ -144,6 +146,24 @@ public class GLRenderer implements GLEventListener {
     public void pararMovimiento() {
         restartCamara();
         movimiento.setMovimiento(Movimiento.QUIETO);
+    }
+
+    public void ponerArrastre(int numBolas, boolean derecha) {
+        movimiento=new Movimiento(bolasInicio,numBolas);
+        movimiento.setSentidoHorario(derecha);
+        movimiento.setMaxAngulo(0.0f);
+        movimiento.setMovimiento(Movimiento.ARRASTRE);
+    }
+
+    public void arrastrarBola (float angulo){
+        movimiento.setMaxAngulo(angulo);
+    }
+
+    public void lanzarBola (){
+        movimiento.setMovimiento(Movimiento.MOVIMIENTO_CUADRATICO);
+        if (movimiento.getMaxAngulo()<0.0f){
+            movimiento.setMaxAngulo(-movimiento.getMaxAngulo());
+        }
     }
 
     public void cambiarNumeroBolas (int bolas){
@@ -242,17 +262,6 @@ public class GLRenderer implements GLEventListener {
         gl.glPushMatrix();
         obj_file.draw(gl);
         gl.glPopMatrix();    
-
-
-        gl.glPushMatrix();
-        gl.glTranslatef(0.0f, -4f, 0.0f);
-        gl.glBegin(gl.GL_QUADS);
-        gl.glVertex3f(-6.0f, 0.0f, -6.0f);
-        gl.glVertex3f(6.0f, 0.0f, -6.0f);
-        gl.glVertex3f(6.0f, 0.0f, 6.0f);
-        gl.glVertex3f(-6.0f, 0.0f, 6.0f);
-        gl.glEnd();
-        gl.glPopMatrix();
 
         gl.glPushMatrix();
 
