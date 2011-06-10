@@ -14,184 +14,189 @@ import javax.media.opengl.glu.GLU;
  */
 public class GLRenderer implements GLEventListener {
 
-    public static final int MODO_SIN_SONIDO=-1;
-    public static final int MODO_SIN_TEXTURA=0;
-    public static final int MODO_VACA=1;
-    public static final int MODO_METAL=2;
-    public static final int MODO_TOON=3;
-    public static final int MODO_LUCIERNAGA=4;
-    public static final int MODO_TRANSLUCIDO=5;
-
-
+    public static final int SIN_SONIDO = -1;
+    public static final int MODO_SIN_TEXTURA = 0;
+    public static final int MODO_VACA = 1;
+    public static final int MODO_METAL = 2;
+    public static final int MODO_TRANSPARENTE = 3;
+    public static final int MODO_TOON = 4;
+    private int modosSonido[] = {Sonido.SONIDO_DEFECTO, Sonido.SONIDO_VACA, Sonido.SONIDO_METAL, Sonido.SONIDO_TRANSLUCIDO, Sonido.SONIDO_TOON};
+    private int modosTextura[] = {TexturaBola.TEXTURA_SIN_TEXTURA, TexturaBola.TEXTURA_VACA, TexturaBola.TEXTURA_PRUEBA, TexturaBola.TEXTURA_SIN_TEXTURA, TexturaBola.TEXTURA_SIN_TEXTURA};
+    private int modosShader[] = {Shader.SIN_SHADER, Shader.SIN_SHADER, Shader.SIN_SHADER, Shader.SIN_SHADER, Shader.SHADER_NUBES};
+    private int modosMaterial[] = {Material.VIVO, Material.VIVO, Material.VIVO,  Material.TRANSPARENTE, Material.VIVO};
     GLUT glut;
     GLU glu;
     GL gl;
-    private int modoActual=0;
-
+    private int modoActual = 0;
+    private boolean modoArrastre = true;
+    private boolean rozamiento = true;
+    private int modoMovimiento = 2;
     Iluminacion iluminacion;
     Camara camara;
-
     Bola bolasInicio[];
     Bola bolasDemas[];
-
     SkyBox skyBox;
-
     Material material;
     Movimiento movimiento;
     TexturaBola texturaBola;
-
     Sonido sonido;
-
     Shader shader;
-
     private ModelLoaderOBJ obj_file = new ModelLoaderOBJ();
 
 
-    public void init(GLAutoDrawable drawable) {
-        // Use debug pipeline
-        // drawable.setGL(new DebugGL(drawable.getGL()));
+    /*************************************************************
+     * Movimiento de la bola
+     *
+     */
 
-        gl = drawable.getGL();
-        glu = new GLU();
-        glut=new GLUT();
-        // Enable VSync
-        gl.setSwapInterval(1);
-
-        // Setup the drawing area and shading mode
-        gl.glClearColor(1.0f, 1.0f, 1.0f, 0.0f);
-        gl.glShadeModel(GL.GL_SMOOTH); // try setting this to GL_FLAT and see what happens.
-
-        gl.glEnable(gl.GL_DEPTH_TEST);
-
-        iluminacion= new Iluminacion();
-        iluminacion.setIluminacion(gl);
-
-        camara= new Camara();
-
-        skyBox=new SkyBox(gl);
-
-
-        bolasInicio=new Bola[5];
-        for (int i=0;i<bolasInicio.length;i++){
-            bolasInicio[i]=new Bola(0.5f, 20, 20);
-            bolasInicio[i].cambiarPosicion(i*3.0f, 0.0f, -2.0f);
+    public void cambiarMovimiento(int cual) {
+        if (cual == 1) {
+            movimiento.setMovimiento(Movimiento.MOVIMIENTO_LINEAL);
+        } else if (cual == 2) {
+            movimiento.setMovimiento(Movimiento.MOVIMIENTO_CUADRATICO);
         }
-
-        material= new Material();
-        material.setMaterial(Material.VIVO);
-        //movimiento= new Movimiento(bolasInicio,bolasDemas);
-        movimiento= new Movimiento(bolasInicio,1);
-
-        movimiento.setMovimiento(Movimiento.QUIETO);
-
-        texturaBola=new TexturaBola();
-        texturaBola.cambiarTextura(gl, TexturaBola.TEXTURA_SIN_TEXTURA);
-        Bola.setTextura(texturaBola);
-
-        sonido = Sonido.getInstancia();
-        sonido.cambiarSonido(Sonido.SONIDO_DEFECTO);
-
-        shader = new Shader();
-        shader.cambiarShader(Shader.SIN_SHADER, gl);
-        Bola.setShader(shader);
-
-	obj_file.init(gl, "cradle", "table2", "cylinder");
+        modoActual=cual;
+        cambiarRozamiento(rozamiento);
     }
 
-    public int getNumBolas(){
-        return bolasInicio.length;
+    public void cambiarRozamiento(boolean activado) {
+        if (activado) {
+            movimiento.setRozamiento(1.0f);
+        } else {
+            movimiento.setRozamiento(0.0f);
+        }
+        rozamiento = activado;
     }
 
-    public void setTodasMovimiento(){
-        int modo=movimiento.getModo();
-        int mueven=bolasInicio.length;
-        movimiento=new Movimiento(bolasInicio, mueven);
-        movimiento.setMovimiento(modo);
+    public void setTodasMovimiento() {
+        int mueven = bolasInicio.length;
+        movimiento = new Movimiento(bolasInicio, mueven,this);
+        movimiento.setMovimiento(modoMovimiento);
     }
 
-    public void cambiarAnguloMax(int a){
+    public void cambiarAnguloMax(int a) {
         movimiento.setMaxAngulo(a);
     }
 
-    public void cambiarMovimiento(int cual){
-        if (cual==1){
-            movimiento.setMovimiento(Movimiento.MOVIMIENTO_LINEAL);
-        }else if (cual==2){
-            movimiento.setMovimiento(Movimiento.MOVIMIENTO_CUADRATICO);
-        }
-    }
+    /*****************************************************************
+     * Movimiento de la cámara
+     *
+     */
 
-    public void cambiarRozamiento(boolean activado){
-        if (activado){
-            movimiento.setRozamiento(1.0f);
-        }else{
-            movimiento.setRozamiento(0.0f);
-        }
-    }
-
-    public void moverCamara (int donde){
+    public void moverCamara(int donde) {
         //1 iz
-        if (donde==1){
-            camara.moverGiroH(2.0f);
-        }else if (donde==2){
-            camara.moverGiroH(-2.0f);
-        }else if (donde==3){
-            camara.moverGiroV(2.0f);
-        }else if (donde==4){
-            camara.moverGiroV(-2.0f);
-        }else if (donde==5){
-            camara.cambiarZoom(0.5f);
-        }else if (donde==6){
-            camara.cambiarZoom(-0.5f);
+        if (!modoArrastre) {
+            if (donde == 1) {
+                camara.moverGiroH(2.0f);
+            } else if (donde == 2) {
+                camara.moverGiroH(-2.0f);
+            } else if (donde == 3) {
+                camara.moverGiroV(2.0f);
+            } else if (donde == 4) {
+                camara.moverGiroV(-2.0f);
+            } else if (donde == 5) {
+                camara.cambiarZoom(0.5f);
+            } else if (donde == 6) {
+                camara.cambiarZoom(-0.5f);
+            }
         }
     }
 
-    public void restartCamara (){
-        camara=new Camara();
+    /********************************************************
+     * Reinicios
+     */
+
+    public void restartCamara() {
+        camara = new Camara();
     }
 
     public void pararMovimiento() {
         restartCamara();
         movimiento.setMovimiento(Movimiento.QUIETO);
+        modoArrastre = true;
     }
+
+    /********************************************************
+     * Arrastre de la bola
+     *
+     */
 
     public void ponerArrastre(int numBolas, boolean derecha) {
-        movimiento=new Movimiento(bolasInicio,numBolas);
-        movimiento.setSentidoHorario(derecha);
-        movimiento.setMaxAngulo(0.0f);
-        movimiento.setMovimiento(Movimiento.ARRASTRE);
-    }
-
-    public void arrastrarBola (float angulo){
-        movimiento.setMaxAngulo(angulo);
-    }
-
-    public void lanzarBola (){
-        movimiento.setMovimiento(Movimiento.MOVIMIENTO_CUADRATICO);
-        if (movimiento.getMaxAngulo()<0.0f){
-            movimiento.setMaxAngulo(-movimiento.getMaxAngulo());
+        if (modoArrastre) {
+            movimiento = new Movimiento(bolasInicio, numBolas,this);
+            movimiento.setSentidoHorario(derecha);
+            movimiento.setMaxAngulo(0.0f);
+            movimiento.setMovimiento(Movimiento.ARRASTRE);
         }
     }
 
-    public void cambiarNumeroBolas (int bolas){
+    public void arrastrarBola(float angulo) {
+        if (modoArrastre) {
+            movimiento.setMaxAngulo(angulo);
+        }
+    }
+
+    public void lanzarBola() {
+        if (modoArrastre) {
+            movimiento.setMovimiento(modoMovimiento);
+            if (movimiento.getMaxAngulo() < 0.0f) {
+                movimiento.setMaxAngulo(-movimiento.getMaxAngulo());
+            }
+            modoArrastre = false;
+        }
+        cambiarRozamiento(rozamiento);
+    }
+
+    /*********************************************************************
+     * Cambiar de modo visual
+     *
+     */
+
+    public void cambiarModo(GLAutoDrawable panel, int modo) {
+        shader.cambiarShader(modosShader[modo], gl);
+        texturaBola.cambiarTextura(gl, modosTextura[modo]);
+        Bola.setTextura(texturaBola);
+        Bola.setShader(shader);
+        sonido.cambiarSonido(modosSonido[modo]);
+        material.setMaterial(modosMaterial[modo]);
+        modoActual = modo;
+    }
+
+    /*********************************************************************
+     * Numéro de Bolas
+     * 
+     */
+
+    public void cambiarNumeroBolas(int bolas) {
         //TODO: Por ahora pone en movimiento auto con un cierto numero de bolas
         //pero deberia parar y entrar en modo "drag"
         restartCamara();
-        bolasInicio=new Bola[bolas];
-        for (int i=0;i<bolasInicio.length;i++){
-            bolasInicio[i]=new Bola(0.5f, 20, 20);
-            bolasInicio[i].cambiarPosicion(i*3.0f, 0.0f, -2.0f);
+        bolasInicio = new Bola[bolas];
+        for (int i = 0; i < bolasInicio.length; i++) {
+            bolasInicio[i] = new Bola(0.5f, 20, 20);
+            bolasInicio[i].cambiarPosicion(i * 3.0f, 0.0f, -2.0f);
         }
-        int modo=movimiento.getModo();
-        int mueven=0;
-        if (bolas%2==0){
-            mueven=((int)Math.floor(bolas/2))-1;
-        }else{
-            mueven=(int)Math.floor(bolas/2);
+        int modo = movimiento.getModo();
+        int mueven = 0;
+        if (bolas % 2 == 0) {
+            mueven = ((int) Math.floor(bolas / 2)) - 1;
+        } else {
+            mueven = (int) Math.floor(bolas / 2);
         }
-        movimiento=new Movimiento(bolasInicio, mueven);
-        movimiento.setMovimiento(modo);
+        movimiento = new Movimiento(bolasInicio, mueven,this);
+        movimiento.setMovimiento(Movimiento.QUIETO);
+        modoArrastre=true;
+        cambiarRozamiento(rozamiento);
     }
+
+    public int getNumBolas() {
+        return bolasInicio.length;
+    }
+
+
+    /**************************************************************+
+     * Velocidad
+     */
 
     public void subirVelocidad (){
         movimiento.cambiarIncremento(-5f);
@@ -203,56 +208,69 @@ public class GLRenderer implements GLEventListener {
         comprobarSonido();
     }
 
-    public void cambiarModo(GLAutoDrawable panel,int modo){
-        if (modo==MODO_VACA){
-            material.setMaterial(Material.VIVO);
-            shader.cambiarShader(Shader.SIN_SHADER, gl);
-            texturaBola.cambiarTextura(gl, TexturaBola.TEXTURA_VACA);
-            Bola.setTextura(texturaBola);
-            Bola.setShader(shader);
-            sonido.cambiarSonido(Sonido.SONIDO_VACA);
-        }else if (modo==MODO_METAL){
-            material.setMaterial(Material.VIVO);
-            shader.cambiarShader(Shader.SIN_SHADER, gl);
-            texturaBola.cambiarTextura(gl, TexturaBola.TEXTURA_PRUEBA);
-            Bola.setTextura(texturaBola);
-            Bola.setShader(shader);
-            sonido.cambiarSonido(Sonido.SONIDO_METAL);
-        }else if (modo==MODO_SIN_TEXTURA){
-            material.setMaterial(Material.VIVO);
-            shader.cambiarShader(Shader.SIN_SHADER, gl);
-            texturaBola.cambiarTextura(gl, TexturaBola.TEXTURA_SIN_TEXTURA);
-            Bola.setTextura(texturaBola);
-            Bola.setShader(shader);
-            sonido.cambiarSonido(Sonido.SONIDO_DEFECTO);
-        }else if (modo==MODO_TOON){
-            material.setMaterial(Material.VIVO);
-            shader.cambiarShader(Shader.SHADER_NUBES, gl);
-            texturaBola.cambiarTextura(gl, TexturaBola.TEXTURA_SIN_TEXTURA);
-            Bola.setTextura(texturaBola);
-            Bola.setShader(shader);
-            sonido.cambiarSonido(Sonido.SONIDO_TOON);
-        }else if (modo==MODO_TRANSLUCIDO){
-            material.setMaterial(Material.TRANSPARENTE);
-            shader.cambiarShader(Shader.SIN_SHADER, gl);
-            texturaBola.cambiarTextura(gl, TexturaBola.TEXTURA_SIN_TEXTURA);
-            Bola.setTextura(texturaBola);
-            Bola.setShader(shader);
-            sonido.cambiarSonido(Sonido.SONIDO_TRANSLUCIDO);
-        }
-        modoActual = modo;
-    }
+    /******************************************************************
+     * Sonido
+     */
 
-    public void comprobarSonido(){
+   public void comprobarSonido(){
         if ((movimiento.getIncrementoAnguloDef() != movimiento.getIncrementoAngulo())
                 && (sonido.getModo() != sonido.SONIDO_SIN_SONIDO)){
-            sonido.cambiarSonido(MODO_SIN_SONIDO);
-
+            sonido.cambiarSonido(SIN_SONIDO);
         } else if ((movimiento.getIncrementoAnguloDef() == movimiento.getIncrementoAngulo())
                 && (sonido.getModo() == sonido.SONIDO_SIN_SONIDO)){
             sonido.cambiarSonido(modoActual);
-
         }
+    }
+
+    /********************************************************+++
+     * Métodos opengl
+     *
+     */
+
+    public void init(GLAutoDrawable drawable) {
+        // Use debug pipeline
+        // drawable.setGL(new DebugGL(drawable.getGL()));
+
+        gl = drawable.getGL();
+        glu = new GLU();
+        glut = new GLUT();
+        // Enable VSync
+        gl.setSwapInterval(1);
+
+        // Setup the drawing area and shading mode
+        gl.glClearColor(1.0f, 1.0f, 1.0f, 0.0f);
+        gl.glShadeModel(GL.GL_SMOOTH); // try setting this to GL_FLAT and see what happens.
+
+        gl.glEnable(gl.GL_DEPTH_TEST);
+
+        iluminacion = new Iluminacion();
+        iluminacion.setIluminacion(gl);
+
+        camara = new Camara();
+
+        skyBox = new SkyBox(gl);
+
+
+        bolasInicio = new Bola[5];
+        for (int i = 0; i < bolasInicio.length; i++) {
+            bolasInicio[i] = new Bola(0.5f, 20, 20);
+            //bolasInicio[i].cambiarPosicion(i*3.0f, 0.0f, -2.0f);
+        }
+
+        material = new Material();
+        movimiento = new Movimiento(bolasInicio, 1,this);
+
+        movimiento.setMovimiento(Movimiento.QUIETO);
+
+        texturaBola = new TexturaBola();
+
+        sonido = Sonido.getInstancia();
+
+        shader = new Shader();
+
+        cambiarModo(drawable, modoActual);
+
+        obj_file.init(gl, "cradle", "table2", "Cylinder");
     }
 
     public void reshape(GLAutoDrawable drawable, int x, int y, int width, int height) {
@@ -266,11 +284,11 @@ public class GLRenderer implements GLEventListener {
         gl.glMatrixMode(GL.GL_PROJECTION);
         gl.glLoadIdentity();
         glu.gluPerspective(45.0f, h, 1.0, 200.0);
-	// Para poner perspectiva ortho (eliminar el gluperspective), si quereis que se vea mas o menos pantalla, cambiad las 4 primeras coordenadas
-	//gl.glOrtho(-20, 20, -20, 20, 0, 50);
+        // Para poner perspectiva ortho (eliminar el gluperspective), si quereis que se vea mas o menos pantalla, cambiad las 4 primeras coordenadas
+        //gl.glOrtho(-20, 20, -20, 20, 0, 50);
         //gl.glFrustum(-10, 10, -10, 10, -10, 10);
-        texturaBola=new TexturaBola();
-        int modo=texturaBola.getModo();
+        texturaBola = new TexturaBola();
+        int modo = texturaBola.getModo();
         texturaBola.cambiarTextura(gl, modo);
 //        gl.glMatrixMode(GL.GL_MODELV-------IEW);
 //        gl.glLoadIdentity();
@@ -286,11 +304,10 @@ public class GLRenderer implements GLEventListener {
         gl.glMatrixMode(GL.GL_MODELVIEW);
         gl.glLoadIdentity();
 
-        camara.setCamara(glu,gl);
+        camara.setCamara(glu, gl);
         gl.glColor3d(1.0, 0.0, 0.0);
 
         gl.glDisable(GL.GL_BLEND);
-
 
         gl.glPushMatrix();
         skyBox.dibujar(gl);
@@ -298,18 +315,28 @@ public class GLRenderer implements GLEventListener {
 
         gl.glPushMatrix();
         obj_file.draw(gl);
-        gl.glPopMatrix();    
+        gl.glPopMatrix();
 
         gl.glPushMatrix();
 
         gl.glTranslatef(0.0f, 3.375f, 0.0f);
 
+        gl.glDisable(GL.GL_BLEND);
+
         material.ponerMaterial(gl);
-        for (int i=0;i<bolasInicio.length;i++){
-            bolasInicio[i].dibujar(gl);
+        if (camara.getGiroH()>=0&&camara.getGiroH()<=180){
+            for (int i = bolasInicio.length-1; i >= 0; i--) {
+                bolasInicio[i].dibujar(gl);
+            }
+            
+        }else{
+            for (int i = 0; i < bolasInicio.length; i++) {
+                bolasInicio[i].dibujar(gl);
+            }
         }
 
         gl.glPopMatrix();
+
 
         gl.glEnable(GL.GL_BLEND);
         // Flush all drawing operations to the graphics card
@@ -318,7 +345,4 @@ public class GLRenderer implements GLEventListener {
 
     public void displayChanged(GLAutoDrawable drawable, boolean modeChanged, boolean deviceChanged) {
     }
-
-
 }
-
