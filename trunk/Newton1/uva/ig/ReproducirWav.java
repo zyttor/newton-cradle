@@ -21,6 +21,8 @@ public class ReproducirWav {
 
      private static ReproducirWav instancia = null;
 
+     private Clip sonido;
+
      // Private constructor suppresses
     private ReproducirWav() {}
 
@@ -42,7 +44,7 @@ public class ReproducirWav {
     try {
 
             // Se obtiene un Clip de sonido
-            Clip sonido = AudioSystem.getClip();
+            sonido = AudioSystem.getClip();
 
             // Se carga con un fichero wav
 
@@ -66,12 +68,16 @@ public class ReproducirWav {
 
     }
 
+    public Clip getSonido() {
+        return sonido;
+    }
+
     public void ReproducirFicheroWav(String respuesta,int numero){
 
     try {
 
             // Se obtiene un Clip de sonido
-            Clip sonido = AudioSystem.getClip();
+            sonido = AudioSystem.getClip();
 
             // Se carga con un fichero wav
             sonido.open(AudioSystem.getAudioInputStream(new File(System.getProperty("user.dir")+"/sonidos/"+respuesta+"/"+respuesta+numero+".wav")));

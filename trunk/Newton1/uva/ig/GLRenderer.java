@@ -14,10 +14,14 @@ import javax.media.opengl.glu.GLU;
  */
 public class GLRenderer implements GLEventListener {
 
+    public static final int MODO_SIN_SONIDO=-1;
     public static final int MODO_SIN_TEXTURA=0;
     public static final int MODO_VACA=1;
     public static final int MODO_METAL=2;
     public static final int MODO_TOON=3;
+    public static final int MODO_LUCIERNAGA=4;
+    public static final int MODO_TRANSLUCIDO=5;
+
 
     GLUT glut;
     GLU glu;
@@ -31,7 +35,6 @@ public class GLRenderer implements GLEventListener {
     Bola bolasDemas[];
 
     SkyBox skyBox;
-
 
     Material material;
     Movimiento movimiento;
@@ -192,37 +195,62 @@ public class GLRenderer implements GLEventListener {
 
     public void subirVelocidad (){
         movimiento.cambiarIncremento(-5f);
+        comprobarSonido();
     }
 
     public void bajarVelocidad (){
         movimiento.cambiarIncremento(5f);
+        comprobarSonido();
     }
 
     public void cambiarModo(GLAutoDrawable panel,int modo){
         if (modo==MODO_VACA){
+            material.setMaterial(Material.VIVO);
             shader.cambiarShader(Shader.SIN_SHADER, gl);
             texturaBola.cambiarTextura(gl, TexturaBola.TEXTURA_VACA);
             Bola.setTextura(texturaBola);
             Bola.setShader(shader);
             sonido.cambiarSonido(Sonido.SONIDO_VACA);
         }else if (modo==MODO_METAL){
+            material.setMaterial(Material.VIVO);
             shader.cambiarShader(Shader.SIN_SHADER, gl);
             texturaBola.cambiarTextura(gl, TexturaBola.TEXTURA_PRUEBA);
             Bola.setTextura(texturaBola);
             Bola.setShader(shader);
             sonido.cambiarSonido(Sonido.SONIDO_METAL);
         }else if (modo==MODO_SIN_TEXTURA){
+            material.setMaterial(Material.VIVO);
             shader.cambiarShader(Shader.SIN_SHADER, gl);
             texturaBola.cambiarTextura(gl, TexturaBola.TEXTURA_SIN_TEXTURA);
             Bola.setTextura(texturaBola);
             Bola.setShader(shader);
             sonido.cambiarSonido(Sonido.SONIDO_DEFECTO);
         }else if (modo==MODO_TOON){
+            material.setMaterial(Material.VIVO);
             shader.cambiarShader(Shader.SHADER_NUBES, gl);
             texturaBola.cambiarTextura(gl, TexturaBola.TEXTURA_SIN_TEXTURA);
             Bola.setTextura(texturaBola);
             Bola.setShader(shader);
-            sonido.cambiarSonido(Sonido.SONIDO_DEFECTO);
+            sonido.cambiarSonido(Sonido.SONIDO_TOON);
+        }else if (modo==MODO_TRANSLUCIDO){
+            material.setMaterial(Material.TRANSPARENTE);
+            shader.cambiarShader(Shader.SIN_SHADER, gl);
+            texturaBola.cambiarTextura(gl, TexturaBola.TEXTURA_SIN_TEXTURA);
+            Bola.setTextura(texturaBola);
+            Bola.setShader(shader);
+            sonido.cambiarSonido(Sonido.SONIDO_TRANSLUCIDO);
+        }
+        modoActual = modo;
+    }
+
+    public void comprobarSonido(){
+        if ((movimiento.getIncrementoAnguloDef() != movimiento.getIncrementoAngulo())
+                && (sonido.getModo() != sonido.SONIDO_SIN_SONIDO)){
+            sonido.cambiarSonido(MODO_SIN_SONIDO);
+
+        } else if ((movimiento.getIncrementoAnguloDef() == movimiento.getIncrementoAngulo())
+                && (sonido.getModo() == sonido.SONIDO_SIN_SONIDO)){
+            sonido.cambiarSonido(modoActual);
 
         }
     }

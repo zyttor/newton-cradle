@@ -10,6 +10,7 @@ public class Movimiento {
     private float angulomax = 70;       //Angulo maximo
     private float rozamiento=0f;
     private float incrementoAngulo = 3.0f;  //Incremento del angulo en cada pasada.Marca velocidad.
+    private float incrementoAnguloDef = incrementoAngulo;
     private float angulo;  //Angulo de la bola
     private boolean sentidoHorario = false;     //para controlar el sentido en que se mueven las bolas
     public static final int QUIETO =0;
@@ -21,6 +22,8 @@ public class Movimiento {
     private int modo;
 
     private Sonido sonido;
+
+    HiloReproduccion miThread;
 
     //public Movimiento(Bola inicio[], Bola demas[]) {
     public Movimiento(Bola inicio[], int movimiento) {
@@ -68,6 +71,14 @@ public class Movimiento {
     public void cambiarIncremento (float m){
         incrementoAngulo*=(100-m)/100;
         System.out.println(incrementoAngulo);
+    }
+
+    public float getIncrementoAnguloDef(){
+        return incrementoAnguloDef;
+    }
+
+    public float getIncrementoAngulo(){
+        return incrementoAngulo;
     }
 
     public void mover() {
@@ -122,6 +133,7 @@ public class Movimiento {
          */
         private void calcularAnguloActual() {
             if (angulomax<=0){
+                miThread.destroy();
                 angulo=0.0f;
 //                ReproducirWav reproducir = ReproducirWav.getInstancia();
 //                reproducir.ReproducirFicheroWav(sonido.rutaSonido);
@@ -137,13 +149,13 @@ public class Movimiento {
 
             if (sentidoHorario) {
                 if (angulo>=0 && angulo-incrementoAngulo<=0){                    
-                    HiloReproduccion miThread = new HiloReproduccion(sonido.rutaSonido);
+                    miThread = new HiloReproduccion(sonido.rutaSonido);
                     miThread.start();
                 }
                 angulo -= incrementoAngulo;
             } else {
                 if (angulo<=0 && angulo+incrementoAngulo>=0){
-                    HiloReproduccion miThread = new HiloReproduccion(sonido.rutaSonido);
+                    miThread = new HiloReproduccion(sonido.rutaSonido);
                     miThread.start();
                 }
                 angulo += incrementoAngulo;
@@ -228,6 +240,7 @@ public class Movimiento {
         private void calcularAnguloActual() {
             //TODO:introducir un coeficiente de fricci�n para que vaya parando la bola.
             if (angulomax<=0){
+                miThread.destroy();
                 angulo=0.0f;
                 return;
             }
@@ -251,14 +264,14 @@ public class Movimiento {
             }
             if (sentidoHorario) {
                 if (angulo>=0 && angulo-velocidad<=0){
-                    HiloReproduccion miThread = new HiloReproduccion(sonido.rutaSonido);
+                    miThread = new HiloReproduccion(sonido.rutaSonido);
                     miThread.start();
                     angulomax-=rozamiento;
                 }
                 angulo -= velocidad;
             } else {
                 if (angulo<=0 && angulo+velocidad>=0){
-                    HiloReproduccion miThread = new HiloReproduccion(sonido.rutaSonido);
+                    miThread = new HiloReproduccion(sonido.rutaSonido);
                     miThread.start();
                     angulomax-=rozamiento;
                 }
