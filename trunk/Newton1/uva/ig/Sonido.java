@@ -56,4 +56,8 @@ public class Sonido {
         return modo;
     }
 
+    public String getRutaSonido() {
+        return rutaSonido;
+    }
+
 }
