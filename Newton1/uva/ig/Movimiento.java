@@ -160,14 +160,18 @@ public class Movimiento {
 
             if (sentidoHorario) {
                 if (angulo>=0 && angulo-incrementoAngulo<=0){                    
-                    miThread = new HiloReproduccion(sonido.rutaSonido);
-                    miThread.start();
+                    if (!sonido.getRutaSonido().equals("")){
+                        miThread = new HiloReproduccion(sonido.rutaSonido);
+                        miThread.start();
+                    }
                 }
                 angulo -= incrementoAngulo;
             } else {
                 if (angulo<=0 && angulo+incrementoAngulo>=0){
-                    miThread = new HiloReproduccion(sonido.rutaSonido);
-                    miThread.start();
+                    if (!sonido.getRutaSonido().equals("")){
+                        miThread = new HiloReproduccion(sonido.rutaSonido);
+                        miThread.start();
+                    }
                 }
                 angulo += incrementoAngulo;
             }
@@ -275,15 +279,19 @@ public class Movimiento {
             }
             if (sentidoHorario) {
                 if (angulo>=0 && angulo-velocidad<=0){
-                    miThread = new HiloReproduccion(sonido.rutaSonido);
-                    miThread.start();
+                    if (!sonido.getRutaSonido().equals("")){
+                        miThread = new HiloReproduccion(sonido.rutaSonido);
+                        miThread.start();
+                    }
                     angulomax-=rozamiento;
                 }
                 angulo -= velocidad;
             } else {
                 if (angulo<=0 && angulo+velocidad>=0){
-                    miThread = new HiloReproduccion(sonido.rutaSonido);
-                    miThread.start();
+                    if (!sonido.getRutaSonido().equals("")){
+                        miThread = new HiloReproduccion(sonido.rutaSonido);
+                        miThread.start();
+                    }
                     angulomax-=rozamiento;
                 }
                 angulo += velocidad;
