@@ -24,6 +24,8 @@ public class Movimiento {
 
     private Sonido sonido;
 
+    HiloReproduccion miThread;
+
     //public Movimiento(Bola inicio[], Bola demas[]) {
     public Movimiento(Bola inicio[], int movimiento,GLRenderer r) {
         bolasInicio = inicio;
@@ -140,6 +142,7 @@ public class Movimiento {
             if (angulomax<=0){
                 angulo=0.0f;
                 renderer.pararMovimiento();
+                miThread.destroy();
                 return;
             }
             if (sentidoHorario && angulo <= -angulomax) {
@@ -152,14 +155,18 @@ public class Movimiento {
 
             if (sentidoHorario) {
                 if (angulo>=0 && angulo-incrementoAngulo<=0){                    
-                    HiloReproduccion miThread = new HiloReproduccion(sonido.rutaSonido);
-                    miThread.start();
+                    if (!sonido.getRutaSonido().equals("")){
+                        miThread = new HiloReproduccion(sonido.rutaSonido);
+                        miThread.start();
+                    }
                 }
                 angulo -= incrementoAngulo;
             } else {
                 if (angulo<=0 && angulo+incrementoAngulo>=0){
-                    HiloReproduccion miThread = new HiloReproduccion(sonido.rutaSonido);
-                    miThread.start();
+                    if (!sonido.getRutaSonido().equals("")){
+                        miThread = new HiloReproduccion(sonido.rutaSonido);
+                        miThread.start();
+                    }
                 }
                 angulo += incrementoAngulo;
             }
@@ -245,6 +252,7 @@ public class Movimiento {
             if (angulomax<=0){
                 angulo=0.0f;
                 renderer.pararMovimiento();
+                miThread.destroy();
                 return;
             }
             if (sentidoHorario && angulo <= -angulomax) {
@@ -267,15 +275,19 @@ public class Movimiento {
             }
             if (sentidoHorario) {
                 if (angulo>=0 && angulo-velocidad<=0){
-                    HiloReproduccion miThread = new HiloReproduccion(sonido.rutaSonido);
-                    miThread.start();
+                    if (!sonido.getRutaSonido().equals("")){
+                        miThread = new HiloReproduccion(sonido.rutaSonido);
+                        miThread.start();
+                    }
                     angulomax-=rozamiento;
                 }
                 angulo -= velocidad*1.5;
             } else {
                 if (angulo<=0 && angulo+velocidad>=0){
-                    HiloReproduccion miThread = new HiloReproduccion(sonido.rutaSonido);
-                    miThread.start();
+                    if (!sonido.getRutaSonido().equals("")){
+                        miThread = new HiloReproduccion(sonido.rutaSonido);
+                        miThread.start();
+                    }
                     angulomax-=rozamiento;
                 }
                 angulo += velocidad*1.5;

@@ -47,7 +47,7 @@ public class Newton1 extends JFrame {
     /** Creates new form MainFrame */
     public Newton1() {
         initComponents();
-        setTitle("Simple JOGL Application");
+        setTitle("Newton's Cradle");
 
         renderer = new GLRenderer();
         panel.addGLEventListener(renderer);
@@ -209,7 +209,7 @@ public class Newton1 extends JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Apparience");
+        jMenu2.setText("Appearance");
 
         jMenuItem6.setText("Material");
         jMenuItem6.setEnabled(false);
@@ -664,6 +664,7 @@ public class Newton1 extends JFrame {
                 }
 
                 Newton1 frame = new Newton1();
+                frame.setLocationRelativeTo(null);
                 frame.setVisible(true);
             }
         });
