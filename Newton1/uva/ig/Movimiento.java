@@ -9,7 +9,7 @@ public class Movimiento {
      
     private float angulomax = 70;       //Angulo maximo
     private float rozamiento=0f;
-    private float incrementoAngulo = 3.0f;  //Incremento del angulo en cada pasada.Marca velocidad.
+    private float incrementoAngulo = 1.0f;  //Incremento del angulo en cada pasada.Marca velocidad.
     private float incrementoAnguloDef = incrementoAngulo;
     private float angulo;  //Angulo de la bola
     private boolean sentidoHorario = false;     //para controlar el sentido en que se mueven las bolas
@@ -69,7 +69,13 @@ public class Movimiento {
     }
 
     public void cambiarIncremento (float m){
+
+        float incrementoTemp=incrementoAngulo;
+
         incrementoAngulo*=(100-m)/100;
+        if (incrementoAngulo >= 4 || incrementoAngulo <=0.4){
+            incrementoAngulo=incrementoTemp;
+        }
         System.out.println(incrementoAngulo);
     }
 
@@ -126,6 +132,11 @@ public class Movimiento {
                 bolasInicio[i].hilo[0]= Double.valueOf(Math.sin(angulo*ro)*largoHilo).floatValue();
                 bolasInicio[i].hilo[1]= Double.valueOf(Math.cos(angulo*ro)*largoHilo).floatValue();
             }
+
+
+
+
+
         }
         /**
          * Calculamos el angulo actual teniendo en cuenta el sentido de la bola,y el angulo que tiene
@@ -251,13 +262,13 @@ public class Movimiento {
             }
             if (angulo>=0){
                 if (Math.abs(angulomax-angulo)>0.2){
-                    velocidad=(angulomax-angulo)/15+0.2f;
+                    velocidad=((angulomax-angulo) * incrementoAngulo)/15+0.2f;
                 }else{
                     velocidad=0.2f;
                 }
             }else{
                 if (Math.abs(-angulomax-angulo)>0.2){
-                    velocidad=(angulomax+angulo)/15+0.2f;
+                    velocidad=((angulomax+angulo) * incrementoAngulo)/15+0.2f;
                 }else{
                     velocidad=0.2f;
                 }

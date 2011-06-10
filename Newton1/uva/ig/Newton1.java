@@ -78,13 +78,17 @@ public class Newton1 extends JFrame {
                 } else if (evt.getKeyCode() == KeyEvent.VK_RIGHT) {
                     renderer.moverCamara(2);
                 } else if (evt.getKeyCode() == KeyEvent.VK_UP) {
-                    if ((evt.getModifiers() & KeyEvent.CTRL_DOWN_MASK) == KeyEvent.CTRL_DOWN_MASK) {
+                    if ((evt.getModifiers() & KeyEvent.CTRL_MASK) == KeyEvent.CTRL_MASK) {
                         renderer.subirVelocidad();
                     } else {
                         renderer.moverCamara(3);
                     }
                 } else if (evt.getKeyCode() == KeyEvent.VK_DOWN) {
-                    renderer.moverCamara(4);
+                   if ((evt.getModifiers() & KeyEvent.CTRL_MASK) == KeyEvent.CTRL_MASK) {
+                        renderer.bajarVelocidad();
+                    } else {
+                        renderer.moverCamara(4);
+                    }
                 } else if (evt.getKeyCode() == KeyEvent.VK_PLUS || evt.getKeyCode() == KeyEvent.VK_ADD) {
                     renderer.moverCamara(5);
                 } else if (evt.getKeyCode() == KeyEvent.VK_MINUS || evt.getKeyCode() == KeyEvent.VK_SUBTRACT) {
