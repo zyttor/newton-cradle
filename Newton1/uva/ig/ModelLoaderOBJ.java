@@ -36,6 +36,22 @@ public class ModelLoaderOBJ {
   protected GLModel model2;
   protected GLModel model3;
 
+    private static float ambiente1[] =  {0.8f,0.8f,0.8f,1.0f};
+    private static float difusa1[] =    {0.8f,0.8f,0.8f,1.0f};
+    private static float especular1[] = {0.8f,0.8f,0.8f,1.0f};
+    private static float brillo1 = 1000.0f;
+    private static float mat_emiss[] = {0f, 0f, 0f, 0.0f};
+
+    private static float ambiente2[] = {0.19f,0.19f,0.19f,1.0f};
+    private static float difusa2[] = {0.51f,0.51f,0.51f,1.0f};
+    private static float especular2[] = {0.51f,0.51f,0.51f,1.0f};
+    private static float brillo2 = 51.2f;
+
+
+    private static float ambiente3[] = {0.5f,0.5f,0.5f,1.0f};
+    private static float difusa3[] = {0.5f,0.5f,0.5f,1.0f};
+    private static float especular3[] = {0.5f,0.5f,0.5f,1.0f};
+
 
    private Texture TMesa;
    private Texture TCraddle1;
@@ -139,6 +155,12 @@ public class ModelLoaderOBJ {
   public void draw( GL gl ) 
     {
 
+            gl.glMaterialfv(gl.GL_FRONT, gl.GL_AMBIENT, ambiente1,0);
+            gl.glMaterialfv(gl.GL_FRONT, gl.GL_DIFFUSE, difusa1,0);
+            gl.glMaterialfv(gl.GL_FRONT, gl.GL_SPECULAR, especular1,0);
+            gl.glMaterialf(gl.GL_FRONT, gl.GL_SHININESS, brillo1);
+            gl.glMaterialfv( GL.GL_FRONT_AND_BACK, GL.GL_EMISSION, mat_emiss,0);
+
  // Enable 2D Texture Mapping
         gl.glEnable(GL.GL_TEXTURE_2D);
         gl.glTexEnvi(gl.GL_TEXTURE_ENV, gl.GL_TEXTURE_ENV_MODE, gl.GL_MODULATE) ;
@@ -173,6 +195,11 @@ public class ModelLoaderOBJ {
 
            
            // THE TABLE*************************************************************
+           gl.glMaterialfv(gl.GL_FRONT, gl.GL_AMBIENT, ambiente3,0);
+           gl.glMaterialfv(gl.GL_FRONT, gl.GL_DIFFUSE, difusa3,0);
+           gl.glMaterialfv(gl.GL_FRONT, gl.GL_SPECULAR, especular3,0);
+           gl.glMaterialf(gl.GL_FRONT, gl.GL_SHININESS, 0f);
+
             gl.glEnable(GL.GL_TEXTURE_2D);
             gl.glTexEnvi(gl.GL_TEXTURE_ENV, gl.GL_TEXTURE_ENV_MODE, gl.GL_MODULATE) ;
 
@@ -210,6 +237,14 @@ public class ModelLoaderOBJ {
   
 
             // THE COLUMNS*************************************************************
+
+
+            gl.glMaterialfv(gl.GL_FRONT, gl.GL_AMBIENT, ambiente2,0);
+            gl.glMaterialfv(gl.GL_FRONT, gl.GL_DIFFUSE, difusa2,0);
+            gl.glMaterialfv(gl.GL_FRONT, gl.GL_SPECULAR, especular2,0);
+            gl.glMaterialf(gl.GL_FRONT, gl.GL_SHININESS, brillo2);
+
+
             gl.glEnable(GL.GL_TEXTURE_2D);
             gl.glTexEnvi(gl.GL_TEXTURE_ENV, gl.GL_TEXTURE_ENV_MODE, gl.GL_MODULATE) ;
 

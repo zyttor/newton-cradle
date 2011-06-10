@@ -29,7 +29,7 @@ public class Material {
     private static float brillo2 = 20.0f;
 
     private static float ambienteT[] = {1.0f,1.0f,1.0f,0.6f};
-    private static float difusaT[] = {0.85f,0.40f,0.30f,0.6f};
+    private static float difusaT[] = {0.45f,0.50f,0.50f,0.6f};
     private static float especularT[] = {0.96f,0.20f,0.60f,0.7f};
     private static float brilloT = 20.0f;
 
@@ -65,6 +65,7 @@ public class Material {
         }
 
         public void manejarEventoMaterial(GL gl) {
+            gl.glDisable (gl.GL_BLEND);
             gl.glMaterialfv(gl.GL_FRONT, gl.GL_AMBIENT, material.ambiente1,0);
             gl.glMaterialfv(gl.GL_FRONT, gl.GL_DIFFUSE, material.difusa1,0);
             gl.glMaterialfv(gl.GL_FRONT, gl.GL_SPECULAR, material.especular1,0);
@@ -80,6 +81,7 @@ public class Material {
         }
 
         public void manejarEventoMaterial(GL gl) {
+            gl.glDisable (gl.GL_BLEND);
             gl.glMaterialfv(gl.GL_FRONT, gl.GL_AMBIENT, material.ambiente2,0);
             gl.glMaterialfv(gl.GL_FRONT, gl.GL_DIFFUSE, material.difusa2,0);
             gl.glMaterialfv(gl.GL_FRONT, gl.GL_SPECULAR, material.especular2,0);
@@ -100,6 +102,8 @@ public class Material {
             gl.glBlendFunc (gl.GL_ONE_MINUS_SRC_ALPHA, gl.GL_ONE_MINUS_SRC_ALPHA);
             gl.glDepthFunc(gl.GL_EQUAL);
             gl.glDisable(GL.GL_DEPTH_TEST);
+//            gl.glDepthMask(false);
+//            gl.glEnable(gl.GL_DEPTH_TEST);
             gl.glMaterialfv(gl.GL_FRONT, gl.GL_AMBIENT, material.ambienteT,0);
             gl.glMaterialfv(gl.GL_FRONT, gl.GL_DIFFUSE, material.difusaT,0);
             gl.glMaterialfv(gl.GL_FRONT, gl.GL_SPECULAR, material.especularT,0);

@@ -45,7 +45,7 @@ public class Newton1 extends JFrame {
     /** Creates new form MainFrame */
     public Newton1() {
         initComponents();
-        setTitle("Simple JOGL Application");
+        setTitle("Newton's Cradle");
 
         renderer = new GLRenderer();
         panel.addGLEventListener(renderer);
@@ -127,6 +127,8 @@ public class Newton1 extends JFrame {
         jMenuItem16 = new JMenuItem();
         jMenuItem4 = new JMenuItem();
         jMenuItem5 = new JMenuItem();
+        jMenuItem17 = new JMenuItem();
+        jMenuItem18 = new JMenuItem();
         jSeparator2 = new Separator();
         jMenuItem15 = new JMenuItem();
         jSeparator3 = new Separator();
@@ -143,6 +145,10 @@ public class Newton1 extends JFrame {
         jMenuItem14 = new JMenuItem();
         jSeparator4 = new Separator();
         jCheckBoxMenuItem1 = new JCheckBoxMenuItem();
+        jMenu5 = new JMenu();
+        jMenuItem19 = new JMenuItem();
+        jSeparator5 = new Separator();
+        jMenuItem20 = new JMenuItem();
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -227,6 +233,22 @@ public class Newton1 extends JFrame {
             }
         });
         jMenu2.add(jMenuItem5);
+
+        jMenuItem17.setText("Firefly");
+        jMenuItem17.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jMenuItem17ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem17);
+
+        jMenuItem18.setText("Translucent");
+        jMenuItem18.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jMenuItem18ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem18);
         jMenu2.add(jSeparator2);
 
         jMenuItem15.setText("Toon (shader)");
@@ -328,6 +350,17 @@ public class Newton1 extends JFrame {
         jMenu4.add(jCheckBoxMenuItem1);
 
         jMenuBar1.add(jMenu4);
+
+        jMenu5.setText("Help");
+
+        jMenuItem19.setText("Help");
+        jMenu5.add(jMenuItem19);
+        jMenu5.add(jSeparator5);
+
+        jMenuItem20.setText("About");
+        jMenu5.add(jMenuItem20);
+
+        jMenuBar1.add(jMenu5);
 
         setJMenuBar(jMenuBar1);
 
@@ -524,6 +557,20 @@ public class Newton1 extends JFrame {
             }
         }//GEN-LAST:event_panelMouseReleased
 
+        private void jMenuItem17ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem17ActionPerformed
+            // Firefly mode
+            panel.getContext().makeCurrent();
+            renderer.cambiarModo(panel, GLRenderer.MODO_LUCIERNAGA);
+            panel.getContext().release();
+        }//GEN-LAST:event_jMenuItem17ActionPerformed
+
+        private void jMenuItem18ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem18ActionPerformed
+            // Translucent mode
+            panel.getContext().makeCurrent();
+            renderer.cambiarModo(panel, GLRenderer.MODO_TRANSLUCIDO);
+            panel.getContext().release();
+        }//GEN-LAST:event_jMenuItem18ActionPerformed
+
     /**
      * Called from within initComponents().
      * hint: to customize the generated code choose 'Customize Code' in the contextmenu
@@ -559,6 +606,7 @@ public class Newton1 extends JFrame {
                 }
 
                 Newton1 frame = new Newton1();
+                frame.setLocationRelativeTo(null);
                 frame.setVisible(true);
             }
         });
@@ -569,6 +617,7 @@ public class Newton1 extends JFrame {
     private JMenu jMenu2;
     private JMenu jMenu3;
     private JMenu jMenu4;
+    private JMenu jMenu5;
     private JMenuBar jMenuBar1;
     private JMenuItem jMenuItem1;
     private JMenuItem jMenuItem10;
@@ -578,7 +627,11 @@ public class Newton1 extends JFrame {
     private JMenuItem jMenuItem14;
     private JMenuItem jMenuItem15;
     private JMenuItem jMenuItem16;
+    private JMenuItem jMenuItem17;
+    private JMenuItem jMenuItem18;
+    private JMenuItem jMenuItem19;
     private JMenuItem jMenuItem2;
+    private JMenuItem jMenuItem20;
     private JMenuItem jMenuItem3;
     private JMenuItem jMenuItem4;
     private JMenuItem jMenuItem5;
@@ -590,6 +643,7 @@ public class Newton1 extends JFrame {
     private Separator jSeparator2;
     private Separator jSeparator3;
     private Separator jSeparator4;
+    private Separator jSeparator5;
     private GLJPanel panel;
     // End of variables declaration//GEN-END:variables
 }

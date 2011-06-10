@@ -13,6 +13,7 @@ package uva.ig;
 public class HiloReproduccion extends Thread{
 
    private String fichero;
+   private ReproducirWav reproducir;
 
    public HiloReproduccion (String mifichero) { // Constructor
 
@@ -22,10 +23,15 @@ public class HiloReproduccion extends Thread{
    @Override
    public void run() { // Sobrecargando al método run
 
-        ReproducirWav reproducir = ReproducirWav.getInstancia();
+        reproducir = ReproducirWav.getInstancia();
 
         reproducir.ReproducirFicheroWav(fichero);
 
+   }
+
+   @Override
+   public void destroy() {
+       reproducir.getSonido().close();
    }
 
 }
