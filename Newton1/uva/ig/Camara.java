@@ -25,7 +25,10 @@ public class Camara {
     public Camara(){
         
     }
-    
+
+    public float getGiroH (){
+        return giroH;
+    }
     
     public void setCamara(GLU glu, GL gl){
         gl.glTranslated(0.0, -1.0, zoom);
@@ -74,6 +77,5 @@ public class Camara {
                 zoom=MAX_ZOOM;
             }
          }
-         System.out.println(zoom);
      }
 }

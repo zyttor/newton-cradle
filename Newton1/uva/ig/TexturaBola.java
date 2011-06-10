@@ -118,12 +118,12 @@ public class TexturaBola {
         public void manejarEventoTextura(GL gl) {
 
 
-            gl.glTexGeni(gl.GL_S, gl.GL_TEXTURE_GEN_MODE, gl.GL_SPHERE_MAP);
-            gl.glTexGeni(gl.GL_T, gl.GL_TEXTURE_GEN_MODE, gl.GL_SPHERE_MAP);
-
-
-            gl.glEnable(gl.GL_TEXTURE_GEN_S);
-            gl.glEnable(gl.GL_TEXTURE_GEN_T);
+//            gl.glTexGeni(gl.GL_S, gl.GL_TEXTURE_GEN_MODE, gl.GL_SPHERE_MAP);
+//            gl.glTexGeni(gl.GL_T, gl.GL_TEXTURE_GEN_MODE, gl.GL_SPHERE_MAP);
+//
+//
+//            gl.glEnable(gl.GL_TEXTURE_GEN_S);
+//            gl.glEnable(gl.GL_TEXTURE_GEN_T);
 
             textura.enable();
             textura.bind();

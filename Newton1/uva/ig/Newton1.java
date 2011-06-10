@@ -29,8 +29,10 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu.Separator;
+import javax.swing.JRadioButtonMenuItem;
 import javax.swing.UIManager;
 import javax.swing.WindowConstants;
+import javax.swing.plaf.basic.BasicBorders.RadioButtonBorder;
 
 /**
  *
@@ -45,7 +47,7 @@ public class Newton1 extends JFrame {
     /** Creates new form MainFrame */
     public Newton1() {
         initComponents();
-        setTitle("Newton's Cradle");
+        setTitle("Simple JOGL Application");
 
         renderer = new GLRenderer();
         panel.addGLEventListener(renderer);
@@ -128,31 +130,26 @@ public class Newton1 extends JFrame {
         jSeparator1 = new Separator();
         jMenuItem3 = new JMenuItem();
         jMenu2 = new JMenu();
-        jMenuItem16 = new JMenuItem();
-        jMenuItem4 = new JMenuItem();
-        jMenuItem5 = new JMenuItem();
-        jMenuItem17 = new JMenuItem();
-        jMenuItem18 = new JMenuItem();
-        jSeparator2 = new Separator();
-        jMenuItem15 = new JMenuItem();
-        jSeparator3 = new Separator();
-        jMenuItem11 = new JMenuItem();
-        jMenuItem12 = new JMenuItem();
-        jMenu3 = new JMenu();
         jMenuItem6 = new JMenuItem();
+        jRadioButtonMenuItem8 = new JRadioButtonMenuItem();
+        jRadioButtonMenuItem9 = new JRadioButtonMenuItem();
+        jRadioButtonMenuItem10 = new JRadioButtonMenuItem();
         jMenuItem7 = new JMenuItem();
+        jRadioButtonMenuItem11 = new JRadioButtonMenuItem();
+        jRadioButtonMenuItem12 = new JRadioButtonMenuItem();
         jMenuItem8 = new JMenuItem();
-        jMenuItem9 = new JMenuItem();
-        jMenuItem10 = new JMenuItem();
+        jRadioButtonMenuItem13 = new JRadioButtonMenuItem();
+        jMenu3 = new JMenu();
+        jRadioButtonMenuItem1 = new JRadioButtonMenuItem();
+        jRadioButtonMenuItem2 = new JRadioButtonMenuItem();
+        jRadioButtonMenuItem3 = new JRadioButtonMenuItem();
+        jRadioButtonMenuItem4 = new JRadioButtonMenuItem();
+        jRadioButtonMenuItem5 = new JRadioButtonMenuItem();
         jMenu4 = new JMenu();
-        jMenuItem13 = new JMenuItem();
-        jMenuItem14 = new JMenuItem();
+        jRadioButtonMenuItem6 = new JRadioButtonMenuItem();
+        jRadioButtonMenuItem7 = new JRadioButtonMenuItem();
         jSeparator4 = new Separator();
         jCheckBoxMenuItem1 = new JCheckBoxMenuItem();
-        jMenu5 = new JMenu();
-        jMenuItem19 = new JMenuItem();
-        jSeparator5 = new Separator();
-        jMenuItem20 = new JMenuItem();
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -212,139 +209,137 @@ public class Newton1 extends JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Mode");
+        jMenu2.setText("Apparience");
 
-        jMenuItem16.setText("Material");
-        jMenuItem16.addActionListener(new ActionListener() {
+        jMenuItem6.setText("Material");
+        jMenuItem6.setEnabled(false);
+        jMenu2.add(jMenuItem6);
+
+        jRadioButtonMenuItem8.setSelected(true);
+        jRadioButtonMenuItem8.setText("Plastic");
+        jRadioButtonMenuItem8.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jMenuItem16ActionPerformed(evt);
+                jRadioButtonMenuItem8ActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem16);
+        jMenu2.add(jRadioButtonMenuItem8);
 
-        jMenuItem4.setText("Cow");
-        jMenuItem4.addActionListener(new ActionListener() {
+        jRadioButtonMenuItem9.setText("Casper");
+        jRadioButtonMenuItem9.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
+                jRadioButtonMenuItem9ActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem4);
+        jMenu2.add(jRadioButtonMenuItem9);
 
-        jMenuItem5.setText("Metal");
-        jMenuItem5.addActionListener(new ActionListener() {
+        jRadioButtonMenuItem10.setText("Firefly");
+        jRadioButtonMenuItem10.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jMenuItem5ActionPerformed(evt);
+                jRadioButtonMenuItem10ActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem5);
+        jMenu2.add(jRadioButtonMenuItem10);
 
-        jMenuItem17.setText("Firefly");
-        jMenuItem17.addActionListener(new ActionListener() {
+        jMenuItem7.setText("Texture");
+        jMenuItem7.setEnabled(false);
+        jMenu2.add(jMenuItem7);
+
+        jRadioButtonMenuItem11.setText("Metal");
+        jRadioButtonMenuItem11.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jMenuItem17ActionPerformed(evt);
+                jRadioButtonMenuItem11ActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem17);
+        jMenu2.add(jRadioButtonMenuItem11);
 
-        jMenuItem18.setText("Translucent");
-        jMenuItem18.addActionListener(new ActionListener() {
+        jRadioButtonMenuItem12.setText("Cow");
+        jRadioButtonMenuItem12.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jMenuItem18ActionPerformed(evt);
+                jRadioButtonMenuItem12ActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem18);
-        jMenu2.add(jSeparator2);
+        jMenu2.add(jRadioButtonMenuItem12);
 
-        jMenuItem15.setText("Toon (shader)");
-        jMenuItem15.addActionListener(new ActionListener() {
+        jMenuItem8.setText("Shader");
+        jMenuItem8.setEnabled(false);
+        jMenu2.add(jMenuItem8);
+
+        jRadioButtonMenuItem13.setText("Toon");
+        jRadioButtonMenuItem13.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jMenuItem15ActionPerformed(evt);
+                jRadioButtonMenuItem13ActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem15);
-        jMenu2.add(jSeparator3);
-
-        jMenuItem11.setText("Can Can (prueba)");
-        jMenuItem11.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                jMenuItem11ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuItem11);
-
-        jMenuItem12.setText("Suicida (prueba)");
-        jMenuItem12.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                jMenuItem12ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuItem12);
+        jMenu2.add(jRadioButtonMenuItem13);
 
         jMenuBar1.add(jMenu2);
 
         jMenu3.setText("Balls");
 
-        jMenuItem6.setText("3");
-        jMenuItem6.addActionListener(new ActionListener() {
+        jRadioButtonMenuItem1.setText("3");
+        jRadioButtonMenuItem1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jMenuItem6ActionPerformed(evt);
+                jRadioButtonMenuItem1ActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem6);
+        jMenu3.add(jRadioButtonMenuItem1);
 
-        jMenuItem7.setText("4");
-        jMenuItem7.addActionListener(new ActionListener() {
+        jRadioButtonMenuItem2.setText("4");
+        jRadioButtonMenuItem2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jMenuItem7ActionPerformed(evt);
+                jRadioButtonMenuItem2ActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem7);
+        jMenu3.add(jRadioButtonMenuItem2);
 
-        jMenuItem8.setText("5");
-        jMenuItem8.addActionListener(new ActionListener() {
+        jRadioButtonMenuItem3.setSelected(true);
+        jRadioButtonMenuItem3.setText("5");
+        jRadioButtonMenuItem3.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jMenuItem8ActionPerformed(evt);
+                jRadioButtonMenuItem3ActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem8);
+        jMenu3.add(jRadioButtonMenuItem3);
 
-        jMenuItem9.setText("6");
-        jMenuItem9.addActionListener(new ActionListener() {
+        jRadioButtonMenuItem4.setText("6");
+        jRadioButtonMenuItem4.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jMenuItem9ActionPerformed(evt);
+                jRadioButtonMenuItem4ActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem9);
+        jMenu3.add(jRadioButtonMenuItem4);
 
-        jMenuItem10.setText("7");
-        jMenuItem10.addActionListener(new ActionListener() {
+        jRadioButtonMenuItem5.setText("7");
+        jRadioButtonMenuItem5.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jMenuItem10ActionPerformed(evt);
+                jRadioButtonMenuItem5ActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem10);
+        jMenu3.add(jRadioButtonMenuItem5);
 
         jMenuBar1.add(jMenu3);
 
         jMenu4.setText("Movement");
 
-        jMenuItem13.setText("Linear");
-        jMenuItem13.addActionListener(new ActionListener() {
+        jRadioButtonMenuItem6.setText("Linear");
+        jRadioButtonMenuItem6.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jMenuItem13ActionPerformed(evt);
+                jRadioButtonMenuItem6ActionPerformed(evt);
             }
         });
-        jMenu4.add(jMenuItem13);
+        jMenu4.add(jRadioButtonMenuItem6);
 
-        jMenuItem14.setText("Quadratic");
-        jMenuItem14.addActionListener(new ActionListener() {
+        jRadioButtonMenuItem7.setSelected(true);
+        jRadioButtonMenuItem7.setText("Quadratic");
+        jRadioButtonMenuItem7.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jMenuItem14ActionPerformed(evt);
+                jRadioButtonMenuItem7ActionPerformed(evt);
             }
         });
-        jMenu4.add(jMenuItem14);
+        jMenu4.add(jRadioButtonMenuItem7);
         jMenu4.add(jSeparator4);
 
+        jCheckBoxMenuItem1.setSelected(true);
         jCheckBoxMenuItem1.setText("Friction");
         jCheckBoxMenuItem1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
@@ -354,17 +349,6 @@ public class Newton1 extends JFrame {
         jMenu4.add(jCheckBoxMenuItem1);
 
         jMenuBar1.add(jMenu4);
-
-        jMenu5.setText("Help");
-
-        jMenuItem19.setText("Help");
-        jMenu5.add(jMenuItem19);
-        jMenu5.add(jSeparator5);
-
-        jMenuItem20.setText("About");
-        jMenu5.add(jMenuItem20);
-
-        jMenuBar1.add(jMenu5);
 
         setJMenuBar(jMenuBar1);
 
@@ -395,73 +379,9 @@ public class Newton1 extends JFrame {
         renderer.pararMovimiento();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
-    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-        renderer.cambiarNumeroBolas(3);
-    }//GEN-LAST:event_jMenuItem6ActionPerformed
-
-    private void jMenuItem7ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
-        renderer.cambiarNumeroBolas(4);
-    }//GEN-LAST:event_jMenuItem7ActionPerformed
-
-    private void jMenuItem8ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
-        renderer.cambiarNumeroBolas(5);
-    }//GEN-LAST:event_jMenuItem8ActionPerformed
-
-    private void jMenuItem9ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
-        renderer.cambiarNumeroBolas(6);
-    }//GEN-LAST:event_jMenuItem9ActionPerformed
-
-    private void jMenuItem10ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
-        renderer.cambiarNumeroBolas(7);
-    }//GEN-LAST:event_jMenuItem10ActionPerformed
-
-    private void jMenuItem13ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
-        renderer.cambiarMovimiento(1);
-    }//GEN-LAST:event_jMenuItem13ActionPerformed
-
-    private void jMenuItem14ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
-        renderer.cambiarMovimiento(2);
-    }//GEN-LAST:event_jMenuItem14ActionPerformed
-
     private void jCheckBoxMenuItem1ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItem1ActionPerformed
         renderer.cambiarRozamiento(jCheckBoxMenuItem1.getState());
     }//GEN-LAST:event_jCheckBoxMenuItem1ActionPerformed
-
-    private void jMenuItem12ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
-        renderer.cambiarAnguloMax(180);
-}//GEN-LAST:event_jMenuItem12ActionPerformed
-
-    private void jMenuItem11ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
-        renderer.setTodasMovimiento();
-}//GEN-LAST:event_jMenuItem11ActionPerformed
-
-    private void jMenuItem15ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem15ActionPerformed
-        // TODO add your handling code here:
-        panel.getContext().makeCurrent();
-        renderer.cambiarModo(panel, GLRenderer.MODO_TOON);
-        panel.getContext().release();
-}//GEN-LAST:event_jMenuItem15ActionPerformed
-
-    private void jMenuItem5ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        // TODO add your handling code here:
-        panel.getContext().makeCurrent();
-        renderer.cambiarModo(panel, GLRenderer.MODO_METAL);
-        panel.getContext().release();
-}//GEN-LAST:event_jMenuItem5ActionPerformed
-
-    private void jMenuItem4ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        // TODO add your handling code here:
-        panel.getContext().makeCurrent();
-        renderer.cambiarModo(panel, GLRenderer.MODO_VACA);
-        panel.getContext().release();
-}//GEN-LAST:event_jMenuItem4ActionPerformed
-
-    private void jMenuItem16ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem16ActionPerformed
-        // TODO add your handling code here:
-        panel.getContext().makeCurrent();
-        renderer.cambiarModo(panel, GLRenderer.MODO_SIN_TEXTURA);
-        panel.getContext().release();
-}//GEN-LAST:event_jMenuItem16ActionPerformed
     private boolean arrastre = false;
     private int yOriginal = 0;
     private int xOriginal = 0;
@@ -479,7 +399,6 @@ public class Newton1 extends JFrame {
                 for (int i = 2; i <= bolas / 2; i++) {
                     dist = Math.sqrt(Math.pow((20 + (i * -40)) - x, 2) + Math.pow(y + 40, 2));
                     if (dist < 20.0f) {
-                        System.out.println("Bola " + (bolas / 2 - i + 1));
                         arrastre = true;
                         yOriginal = y;
                         xOriginal = x;
@@ -490,7 +409,6 @@ public class Newton1 extends JFrame {
                     }
                     dist = Math.sqrt(Math.pow((-20 + (i * 40)) - x, 2) + Math.pow(y + 40, 2));
                     if (dist < 20.0f) {
-                        System.out.println("Bola " + (bolas / 2 + i));
                         arrastre = true;
                         yOriginal = y;
                         xOriginal = x;
@@ -505,7 +423,6 @@ public class Newton1 extends JFrame {
                 for (int i = 1; i <= bolas / 2; i++) {
                     dist = Math.sqrt(Math.pow((-40 * i) - x, 2) + Math.pow(y + 40, 2));
                     if (dist < 20.0f) {
-                        System.out.println("Bola " + (bolas / 2 - i + 1));
                         arrastre = true;
                         yOriginal = y;
                         xOriginal = x;
@@ -516,7 +433,6 @@ public class Newton1 extends JFrame {
                     }
                     dist = Math.sqrt(Math.pow((40 * i) - x, 2) + Math.pow(y + 40, 2));
                     if (dist < 20.0f) {
-                        System.out.println("Bola " + (bolas / 2 + i + 1));
                         arrastre = true;
                         yOriginal = y;
                         xOriginal = x;
@@ -527,7 +443,6 @@ public class Newton1 extends JFrame {
                     }
                 }
             }
-            System.out.println(x + " " + y);
         }
     }//GEN-LAST:event_panelMousePressed
 
@@ -538,7 +453,6 @@ public class Newton1 extends JFrame {
                 int x = evt.getX() - panel.getWidth() / 2;
                 int difX = x - xOriginal;
                 int difY = y - yOriginal;
-                System.out.println(difX + " " + difY);
                 if (difY >= 0 && ((difX > 0 && sentidoHorario) || (difX < 0 && !sentidoHorario))) {
                     difX = Math.abs(difX);
                     float angulo = (difX > difY) ? difX / 2.1f : difY / 2.1f;
@@ -561,19 +475,159 @@ public class Newton1 extends JFrame {
             }
         }//GEN-LAST:event_panelMouseReleased
 
-        private void jMenuItem17ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem17ActionPerformed
-            // Firefly mode
-            panel.getContext().makeCurrent();
-            renderer.cambiarModo(panel, GLRenderer.MODO_LUCIERNAGA);
-            panel.getContext().release();
-        }//GEN-LAST:event_jMenuItem17ActionPerformed
+        private void jRadioButtonMenuItem1ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem1ActionPerformed
+            if (jRadioButtonMenuItem1.isSelected()) {
+                renderer.cambiarNumeroBolas(3);
+            }
+        }//GEN-LAST:event_jRadioButtonMenuItem1ActionPerformed
 
-        private void jMenuItem18ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem18ActionPerformed
-            // Translucent mode
-            panel.getContext().makeCurrent();
-            renderer.cambiarModo(panel, GLRenderer.MODO_TRANSLUCIDO);
-            panel.getContext().release();
-        }//GEN-LAST:event_jMenuItem18ActionPerformed
+        private void jRadioButtonMenuItem2ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem2ActionPerformed
+            if (jRadioButtonMenuItem2.isSelected()) {
+                renderer.cambiarNumeroBolas(4);
+            }
+            seleccionarRadioButonNumBolas(evt.getSource());
+        }//GEN-LAST:event_jRadioButtonMenuItem2ActionPerformed
+
+        private void jRadioButtonMenuItem3ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem3ActionPerformed
+            if (jRadioButtonMenuItem3.isSelected()) {
+                renderer.cambiarNumeroBolas(5);
+            }
+            seleccionarRadioButonNumBolas(evt.getSource());
+        }//GEN-LAST:event_jRadioButtonMenuItem3ActionPerformed
+
+        private void jRadioButtonMenuItem4ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem4ActionPerformed
+            if (jRadioButtonMenuItem4.isSelected()) {
+                renderer.cambiarNumeroBolas(6);
+            }
+            seleccionarRadioButonNumBolas(evt.getSource());
+        }//GEN-LAST:event_jRadioButtonMenuItem4ActionPerformed
+
+        private void jRadioButtonMenuItem5ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem5ActionPerformed
+            if (jRadioButtonMenuItem5.isSelected()) {
+                renderer.cambiarNumeroBolas(7);
+            }
+            seleccionarRadioButonNumBolas(evt.getSource());
+        }//GEN-LAST:event_jRadioButtonMenuItem5ActionPerformed
+
+        private void jRadioButtonMenuItem6ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem6ActionPerformed
+            if (jRadioButtonMenuItem6.isSelected()) {
+                renderer.cambiarMovimiento(Movimiento.MOVIMIENTO_LINEAL);
+            }
+            seleccionarRadioMovimiento(jRadioButtonMenuItem6);
+        }//GEN-LAST:event_jRadioButtonMenuItem6ActionPerformed
+
+        private void jRadioButtonMenuItem7ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem7ActionPerformed
+            if (jRadioButtonMenuItem7.isSelected()) {
+                renderer.cambiarMovimiento(Movimiento.MOVIMIENTO_CUADRATICO);
+            }
+            seleccionarRadioMovimiento(jRadioButtonMenuItem7);
+        }//GEN-LAST:event_jRadioButtonMenuItem7ActionPerformed
+
+        private void jRadioButtonMenuItem13ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem13ActionPerformed
+            if (jRadioButtonMenuItem13.isSelected()) {
+                panel.getContext().makeCurrent();
+                renderer.cambiarModo(panel, GLRenderer.MODO_TOON);
+                panel.getContext().release();
+            }
+            seleccionarRadioButonApariencia(evt.getSource());
+}//GEN-LAST:event_jRadioButtonMenuItem13ActionPerformed
+
+        private void jRadioButtonMenuItem12ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem12ActionPerformed
+            if (jRadioButtonMenuItem12.isSelected()) {
+                panel.getContext().makeCurrent();
+                renderer.cambiarModo(panel, GLRenderer.MODO_VACA);
+                panel.getContext().release();
+            }
+            seleccionarRadioButonApariencia(evt.getSource());
+}//GEN-LAST:event_jRadioButtonMenuItem12ActionPerformed
+
+        private void jRadioButtonMenuItem11ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem11ActionPerformed
+            if (jRadioButtonMenuItem11.isSelected()) {
+                panel.getContext().makeCurrent();
+                renderer.cambiarModo(panel, GLRenderer.MODO_METAL);
+                panel.getContext().release();
+            }
+            seleccionarRadioButonApariencia(evt.getSource());
+}//GEN-LAST:event_jRadioButtonMenuItem11ActionPerformed
+
+        private void jRadioButtonMenuItem8ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem8ActionPerformed
+            if (jRadioButtonMenuItem8.isSelected()) {
+                panel.getContext().makeCurrent();
+                renderer.cambiarModo(panel, GLRenderer.MODO_SIN_TEXTURA);
+                panel.getContext().release();
+            }
+            seleccionarRadioButonApariencia(evt.getSource());
+}//GEN-LAST:event_jRadioButtonMenuItem8ActionPerformed
+
+        private void jRadioButtonMenuItem9ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem9ActionPerformed
+            if (jRadioButtonMenuItem9.isSelected()) {
+                panel.getContext().makeCurrent();
+                renderer.cambiarModo(panel, GLRenderer.MODO_TRANSPARENTE);
+                panel.getContext().release();
+            }
+            seleccionarRadioButonApariencia(evt.getSource());
+        }//GEN-LAST:event_jRadioButtonMenuItem9ActionPerformed
+
+        private void jRadioButtonMenuItem10ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem10ActionPerformed
+            if (jRadioButtonMenuItem10.isSelected()) {
+                panel.getContext().makeCurrent();
+                //renderer.cambiarModo(panel, GLRenderer.MODO_TRANSPARENTE);
+                panel.getContext().release();
+            }
+            seleccionarRadioButonApariencia(evt.getSource());
+        }//GEN-LAST:event_jRadioButtonMenuItem10ActionPerformed
+
+    private void seleccionarRadioButonNumBolas(Object cual) {
+        if (!jRadioButtonMenuItem1.equals(cual)) {
+            jRadioButtonMenuItem1.setSelected(false);
+        }
+        if (!jRadioButtonMenuItem2.equals(cual)) {
+            jRadioButtonMenuItem2.setSelected(false);
+        }
+        if (!jRadioButtonMenuItem3.equals(cual)) {
+            jRadioButtonMenuItem3.setSelected(false);
+        }
+        if (!jRadioButtonMenuItem4.equals(cual)) {
+            jRadioButtonMenuItem4.setSelected(false);
+        }
+        if (!jRadioButtonMenuItem5.equals(cual)) {
+            jRadioButtonMenuItem5.setSelected(false);
+        }
+        ((JRadioButtonMenuItem) cual).setSelected(true);
+    }
+
+    private void seleccionarRadioMovimiento(JRadioButtonMenuItem cual) {
+        if (cual.equals(jRadioButtonMenuItem6)) {
+            jRadioButtonMenuItem6.setSelected(true);
+            jRadioButtonMenuItem7.setSelected(false);
+        } else {
+            jRadioButtonMenuItem6.setSelected(false);
+            jRadioButtonMenuItem7.setSelected(true);
+        }
+    }
+
+    private void seleccionarRadioButonApariencia(Object cual) {
+        if (!jRadioButtonMenuItem8.equals(cual)) {
+            jRadioButtonMenuItem8.setSelected(false);
+        }
+        if (!jRadioButtonMenuItem9.equals(cual)) {
+            jRadioButtonMenuItem9.setSelected(false);
+        }
+        if (!jRadioButtonMenuItem10.equals(cual)) {
+            jRadioButtonMenuItem10.setSelected(false);
+        }
+        if (!jRadioButtonMenuItem11.equals(cual)) {
+            jRadioButtonMenuItem11.setSelected(false);
+        }
+        if (!jRadioButtonMenuItem12.equals(cual)) {
+            jRadioButtonMenuItem12.setSelected(false);
+        }
+        if (!jRadioButtonMenuItem13.equals(cual)) {
+            jRadioButtonMenuItem13.setSelected(false);
+        }
+        ((JRadioButtonMenuItem) cual).setSelected(true);
+    }
+
 
     /**
      * Called from within initComponents().
@@ -610,7 +664,6 @@ public class Newton1 extends JFrame {
                 }
 
                 Newton1 frame = new Newton1();
-                frame.setLocationRelativeTo(null);
                 frame.setVisible(true);
             }
         });
@@ -621,33 +674,28 @@ public class Newton1 extends JFrame {
     private JMenu jMenu2;
     private JMenu jMenu3;
     private JMenu jMenu4;
-    private JMenu jMenu5;
     private JMenuBar jMenuBar1;
     private JMenuItem jMenuItem1;
-    private JMenuItem jMenuItem10;
-    private JMenuItem jMenuItem11;
-    private JMenuItem jMenuItem12;
-    private JMenuItem jMenuItem13;
-    private JMenuItem jMenuItem14;
-    private JMenuItem jMenuItem15;
-    private JMenuItem jMenuItem16;
-    private JMenuItem jMenuItem17;
-    private JMenuItem jMenuItem18;
-    private JMenuItem jMenuItem19;
     private JMenuItem jMenuItem2;
-    private JMenuItem jMenuItem20;
     private JMenuItem jMenuItem3;
-    private JMenuItem jMenuItem4;
-    private JMenuItem jMenuItem5;
     private JMenuItem jMenuItem6;
     private JMenuItem jMenuItem7;
     private JMenuItem jMenuItem8;
-    private JMenuItem jMenuItem9;
+    private JRadioButtonMenuItem jRadioButtonMenuItem1;
+    private JRadioButtonMenuItem jRadioButtonMenuItem10;
+    private JRadioButtonMenuItem jRadioButtonMenuItem11;
+    private JRadioButtonMenuItem jRadioButtonMenuItem12;
+    private JRadioButtonMenuItem jRadioButtonMenuItem13;
+    private JRadioButtonMenuItem jRadioButtonMenuItem2;
+    private JRadioButtonMenuItem jRadioButtonMenuItem3;
+    private JRadioButtonMenuItem jRadioButtonMenuItem4;
+    private JRadioButtonMenuItem jRadioButtonMenuItem5;
+    private JRadioButtonMenuItem jRadioButtonMenuItem6;
+    private JRadioButtonMenuItem jRadioButtonMenuItem7;
+    private JRadioButtonMenuItem jRadioButtonMenuItem8;
+    private JRadioButtonMenuItem jRadioButtonMenuItem9;
     private Separator jSeparator1;
-    private Separator jSeparator2;
-    private Separator jSeparator3;
     private Separator jSeparator4;
-    private Separator jSeparator5;
     private GLJPanel panel;
     // End of variables declaration//GEN-END:variables
 }
