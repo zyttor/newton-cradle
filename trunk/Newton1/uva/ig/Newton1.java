@@ -44,6 +44,9 @@ public class Newton1 extends JFrame {
     private Animator animator;
     private GLRenderer renderer;
 
+    public static final int TEXTURA_MONTANA=1;
+    public static final int TEXTURA_MARIO=2;
+
     /** Creates new form MainFrame */
     public Newton1() {
         initComponents();
@@ -150,6 +153,9 @@ public class Newton1 extends JFrame {
         jRadioButtonMenuItem7 = new JRadioButtonMenuItem();
         jSeparator4 = new Separator();
         jCheckBoxMenuItem1 = new JCheckBoxMenuItem();
+        jMenu5 = new JMenu();
+        jMenuItem4 = new JMenuItem();
+        jMenuItem5 = new JMenuItem();
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -349,6 +355,26 @@ public class Newton1 extends JFrame {
         jMenu4.add(jCheckBoxMenuItem1);
 
         jMenuBar1.add(jMenu4);
+
+        jMenu5.setText("World");
+
+        jMenuItem4.setText("Mountain");
+        jMenuItem4.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenu5.add(jMenuItem4);
+
+        jMenuItem5.setText("Videogame");
+        jMenuItem5.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        jMenu5.add(jMenuItem5);
+
+        jMenuBar1.add(jMenu5);
 
         setJMenuBar(jMenuBar1);
 
@@ -577,6 +603,18 @@ public class Newton1 extends JFrame {
             seleccionarRadioButonApariencia(evt.getSource());
         }//GEN-LAST:event_jRadioButtonMenuItem10ActionPerformed
 
+        private void jMenuItem4ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+            panel.getContext().makeCurrent();
+            renderer.cambiarSkyBox(panel, TEXTURA_MONTANA);
+            panel.getContext().release();
+        }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+        private void jMenuItem5ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+            panel.getContext().makeCurrent();
+            renderer.cambiarSkyBox(panel, TEXTURA_MARIO);
+            panel.getContext().release();
+        }//GEN-LAST:event_jMenuItem5ActionPerformed
+
     private void seleccionarRadioButonNumBolas(Object cual) {
         if (!jRadioButtonMenuItem1.equals(cual)) {
             jRadioButtonMenuItem1.setSelected(false);
@@ -675,10 +713,13 @@ public class Newton1 extends JFrame {
     private JMenu jMenu2;
     private JMenu jMenu3;
     private JMenu jMenu4;
+    private JMenu jMenu5;
     private JMenuBar jMenuBar1;
     private JMenuItem jMenuItem1;
     private JMenuItem jMenuItem2;
     private JMenuItem jMenuItem3;
+    private JMenuItem jMenuItem4;
+    private JMenuItem jMenuItem5;
     private JMenuItem jMenuItem6;
     private JMenuItem jMenuItem7;
     private JMenuItem jMenuItem8;
