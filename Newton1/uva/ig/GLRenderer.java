@@ -5,6 +5,7 @@ import javax.media.opengl.GL;
 import javax.media.opengl.GLAutoDrawable;
 import javax.media.opengl.GLEventListener;
 import javax.media.opengl.glu.GLU;
+import java.awt.Color;
 
 /**
  * GLRenderer.java <BR>
@@ -20,6 +21,8 @@ public class GLRenderer implements GLEventListener {
     public static final int MODO_METAL = 2;
     public static final int MODO_TRANSPARENTE = 3;
     public static final int MODO_TOON = 4;
+    public static final int TEXTURA_MONTANA=1;
+    public static final int TEXTURA_MARIO=2;
     private int modosSonido[] = {Sonido.SONIDO_DEFECTO, Sonido.SONIDO_VACA, Sonido.SONIDO_METAL, Sonido.SONIDO_TRANSLUCIDO, Sonido.SONIDO_TOON};
     private int modosTextura[] = {TexturaBola.TEXTURA_SIN_TEXTURA, TexturaBola.TEXTURA_VACA, TexturaBola.TEXTURA_PRUEBA, TexturaBola.TEXTURA_SIN_TEXTURA, TexturaBola.TEXTURA_SIN_TEXTURA};
     private int modosShader[] = {Shader.SIN_SHADER, Shader.SIN_SHADER, Shader.SIN_SHADER, Shader.SIN_SHADER, Shader.SHADER_NUBES};
@@ -36,6 +39,8 @@ public class GLRenderer implements GLEventListener {
     Bola bolasInicio[];
     Bola bolasDemas[];
     SkyBox skyBox;
+    TexturaSkyBox texturaSkyBox;
+    Texto texto;
     Material material;
     Movimiento movimiento;
     TexturaBola texturaBola;
@@ -162,6 +167,17 @@ public class GLRenderer implements GLEventListener {
         modoActual = modo;
     }
 
+
+    public void cambiarSkyBox(GLAutoDrawable panel,int modo){
+        if (modo==TEXTURA_MONTANA){
+           texturaSkyBox.cambiarTextura(gl, TexturaSkyBox.SKYBOX_MONTANA);
+            SkyBox.setTextura(texturaSkyBox);
+        }else if (modo==TEXTURA_MARIO){
+             texturaSkyBox.cambiarTextura(gl, TexturaSkyBox.SKYBOX_MARIO);
+            SkyBox.setTextura(texturaSkyBox);
+        }
+    }
+
     /*********************************************************************
      * Numéro de Bolas
      * 
@@ -248,7 +264,13 @@ public class GLRenderer implements GLEventListener {
 
         camara = new Camara();
 
-        skyBox = new SkyBox(gl);
+        skyBox = new SkyBox();
+
+        texturaSkyBox=new TexturaSkyBox();
+        texturaSkyBox.cambiarTextura(gl, TexturaSkyBox.SKYBOX_MONTANA);
+        SkyBox.setTextura(texturaSkyBox);
+
+        texto=new Texto();
 
 
         bolasInicio = new Bola[5];
@@ -336,6 +358,8 @@ public class GLRenderer implements GLEventListener {
         }
 
         gl.glPopMatrix();
+
+        texto.dibujar(gl, -2.15f, -2.3f,3.06f, "Aldearaban", Color.black);
 
 
         gl.glEnable(GL.GL_BLEND);

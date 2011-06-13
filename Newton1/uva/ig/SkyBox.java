@@ -31,89 +31,54 @@ import com.sun.opengl.util.j2d.*;
  * @author Cotri
  */
 public class SkyBox implements IObjetoGL{
-    
+
     public float traslacion[]={0.0f,0.0f,0.0f};
     public float giro[]={0.0f,0.0f,0.0f};
     public float escalado[]={1.0f,1.0f,1.0f};
     public float hilo[]={1.0f,1.0f,2.125f};
-    
+
    private GL gl;
 
-   
+   private static TexturaSkyBox textura;
 
-
-     // for the floor
-  private final static int FLOOR_LEN = 40;  // should be even
 
      private Texture texturaFront,texturaRight,texturaBack,texturaLeft,texturaTop,texturaBottom;
 
-     
-    public SkyBox(GL migl) {
-        gl=migl;
-        this.loadTextures();
+
+    public SkyBox() {
+
     }
 
-    public void dibujar (GL migl){
+    public static void setTextura (TexturaSkyBox t){
+        textura=t;
+    }
 
-       
-
-        
-    //gl.glDisable(GL.GL_LIGHTING);
-
-    // enable texturing and choose the 'stars' texture
-    //gl.glEnable(GL.GL_TEXTURE_2D);
-    //starsTex.bind();
-    // rTex.bind();
-
-//    gl.glMatrixMode(GL.GL_TEXTURE);
-//    gl.glLoadIdentity();
-//    gl.glScalef(0.100f, 0.100f, 1f);
-//    gl.glMatrixMode(gl.GL_MODELVIEW);
-
-     gl.glTexGeni(gl.GL_S, gl.GL_TEXTURE_GEN_MODE, gl.GL_EYE_LINEAR);
-            gl.glTexGeni(gl.GL_T, gl.GL_TEXTURE_GEN_MODE, gl.GL_EYE_LINEAR);
-
-
-            gl.glEnable(gl.GL_TEXTURE_GEN_S);
-            gl.glEnable(gl.GL_TEXTURE_GEN_T);
-
-//    TextureCoords tc = texturasSkyBox0.getImageTexCoords();
-//    float left = tc.left()*4;
-//    float right = tc.right()*4;
-//    float bottom = tc.bottom()*4;
-//    float top = tc.top()*4;
-
-
-    gl.glEnable(gl.GL_TEXTURE_2D);
-    gl.glDisable(gl.GL_TEXTURE_GEN_S);
-    gl.glDisable(gl.GL_TEXTURE_GEN_T);
-    //gl.glDisable(gl.GL_DEPTH_TEST);
-    //gl.glDisable(gl.GL_LIGHTING);
-    //gl.glDisable(gl.GL_BLEND);
+    public void dibujar (GL gl){
 
 //     gl.glTexGeni(gl.GL_S, gl.GL_TEXTURE_GEN_MODE, gl.GL_EYE_LINEAR);
-//        gl.glTexGeni(gl.GL_T, gl.GL_TEXTURE_GEN_MODE, gl.GL_EYE_LINEAR);
-
-//    gl.glTexParameteri(GL.GL_TEXTURE_2D, GL.GL_TEXTURE_MAG_FILTER, GL.GL_LINEAR);
-//    gl.glTexParameteri(GL.GL_TEXTURE_2D, GL.GL_TEXTURE_MIN_FILTER, GL.GL_LINEAR);
-
-    gl.glTexEnvi(gl.GL_TEXTURE_ENV,gl.GL_TEXTURE_ENV_MODE ,gl.GL_DECAL);
+//            gl.glTexGeni(gl.GL_T, gl.GL_TEXTURE_GEN_MODE, gl.GL_EYE_LINEAR);
 //
-    gl.glTexParameteri(gl.GL_TEXTURE_2D, gl.GL_TEXTURE_WRAP_S, gl.GL_CLAMP);
-    gl.glTexParameteri(gl.GL_TEXTURE_2D, gl.GL_TEXTURE_WRAP_T, gl.GL_CLAMP);
+//
+//            gl.glEnable(gl.GL_TEXTURE_GEN_S);
+//            gl.glEnable(gl.GL_TEXTURE_GEN_T);
+//
+//
+//    gl.glEnable(gl.GL_TEXTURE_2D);
+//    gl.glDisable(gl.GL_TEXTURE_GEN_S);
+//    gl.glDisable(gl.GL_TEXTURE_GEN_T);
+//
+//
+//    gl.glTexEnvi(gl.GL_TEXTURE_ENV,gl.GL_TEXTURE_ENV_MODE ,gl.GL_DECAL);
+//
+//    gl.glTexParameteri(gl.GL_TEXTURE_2D, gl.GL_TEXTURE_WRAP_S, gl.GL_CLAMP);
+//    gl.glTexParameteri(gl.GL_TEXTURE_2D, gl.GL_TEXTURE_WRAP_T, gl.GL_CLAMP);
 
+    textura.renderTextura(gl);
 
-
-    int edge = (FLOOR_LEN);
-
-    
-
-    
-    
     gl.glTranslatef(0f, 50.75f, 0f);
     gl.glScalef(-70.0f, -70.0f, 70.0f);
 
-    texturaFront.bind();
+    textura.activarFront(gl);
     gl.glBegin(gl.GL_QUADS);
     // Front Face
 		gl.glTexCoord2f(0.0f, 0.0f); gl.glVertex3f(-1.0f, -1.0f,  1.0f);	// Bottom Left Of The Texture and Quad
@@ -122,7 +87,7 @@ public class SkyBox implements IObjetoGL{
 		gl.glTexCoord2f(0.0f, 1.0f); gl.glVertex3f(-1.0f,  1.0f,  1.0f);
     gl.glEnd();
 
-    texturaBack.bind();
+    textura.activarBack(gl);
     gl.glBegin(gl.GL_QUADS);
     // Back Face
 		gl.glTexCoord2f(1.0f, 0.0f); gl.glVertex3f(-1.0f, -1.0f, -1.0f);	// Bottom Right Of The Texture and Quad
@@ -131,7 +96,7 @@ public class SkyBox implements IObjetoGL{
 		gl.glTexCoord2f(0.0f, 0.0f); gl.glVertex3f( 1.0f, -1.0f, -1.0f);
     gl.glEnd();
 
-    texturaBottom.bind();
+    textura.activarBottom(gl);
     gl.glBegin(gl.GL_QUADS);
     // Bottom Face
 		gl.glTexCoord2f(0.0f, 1.0f); gl.glVertex3f(-1.0f,  1.0f, -1.0f);	// Top Left Of The Texture and Quad
@@ -140,7 +105,7 @@ public class SkyBox implements IObjetoGL{
 		gl.glTexCoord2f(1.0f, 1.0f); gl.glVertex3f( 1.0f,  1.0f, -1.0f);
     gl.glEnd();
 
-    texturaTop.bind();
+    textura.activarTop(gl);
     gl.glBegin(gl.GL_QUADS);
     // Top Face
 		gl.glTexCoord2f(1.0f, 1.0f); gl.glVertex3f(-1.0f, -1.0f, -1.0f);	// Top Right Of The Texture and Quad
@@ -149,7 +114,7 @@ public class SkyBox implements IObjetoGL{
 		gl.glTexCoord2f(1.0f, 0.0f); gl.glVertex3f(-1.0f, -1.0f,  1.0f);
     gl.glEnd();
 
-    texturaRight.bind();
+    textura.activarRight(gl);
     gl.glBegin(gl.GL_QUADS);
     // Right face
 		gl.glTexCoord2f(1.0f, 0.0f); gl.glVertex3f( 1.0f, -1.0f, -1.0f);	// Bottom Right Of The Texture and Quad
@@ -158,7 +123,7 @@ public class SkyBox implements IObjetoGL{
 		gl.glTexCoord2f(0.0f, 0.0f); gl.glVertex3f( 1.0f, -1.0f,  1.0f);
     gl.glEnd();
 
-    texturaLeft.bind();
+    textura.activarLeft(gl);
     gl.glBegin(gl.GL_QUADS);
     // Left Face
 		gl.glTexCoord2f(0.0f, 0.0f); gl.glVertex3f(-1.0f, -1.0f, -1.0f);	// Bottom Left Of The Texture and Quad
@@ -166,127 +131,8 @@ public class SkyBox implements IObjetoGL{
 		gl.glTexCoord2f(1.0f, 1.0f); gl.glVertex3f(-1.0f,  1.0f,  1.0f);	// Top Right Of The Texture and Quad
 		gl.glTexCoord2f(0.0f, 1.0f); gl.glVertex3f(-1.0f,  1.0f, -1.0f);
     gl.glEnd();
-    
 
-//    gl.glBegin(gl.GL_QUADS);
-//		// Front Face
-//		gl.glTexCoord2f(0.0f, 0.0f); gl.glVertex3f(-1.0f, -1.0f,  1.0f);	// Bottom Left Of The Texture and Quad
-//		gl.glTexCoord2f(1.0f, 0.0f); gl.glVertex3f( 1.0f, -1.0f,  1.0f);	// Bottom Right Of The Texture and Quad
-//		gl.glTexCoord2f(1.0f, 1.0f); gl.glVertex3f( 1.0f,  1.0f,  1.0f);	// Top Right Of The Texture and Quad
-//		gl.glTexCoord2f(0.0f, 1.0f); gl.glVertex3f(-1.0f,  1.0f,  1.0f);	// Top Left Of The Texture and Quad
-//
-//		// Back Face
-//		gl.glTexCoord2f(1.0f, 0.0f); gl.glVertex3f(-1.0f, -1.0f, -1.0f);	// Bottom Right Of The Texture and Quad
-//		gl.glTexCoord2f(1.0f, 1.0f); gl.glVertex3f(-1.0f,  1.0f, -1.0f);	// Top Right Of The Texture and Quad
-//		gl.glTexCoord2f(0.0f, 1.0f); gl.glVertex3f( 1.0f,  1.0f, -1.0f);	// Top Left Of The Texture and Quad
-//		gl.glTexCoord2f(0.0f, 0.0f); gl.glVertex3f( 1.0f, -1.0f, -1.0f);	// Bottom Left Of The Texture and Quad
-//		// Top Face
-//		gl.glTexCoord2f(0.0f, 1.0f); gl.glVertex3f(-1.0f,  1.0f, -1.0f);	// Top Left Of The Texture and Quad
-//		gl.glTexCoord2f(0.0f, 0.0f); gl.glVertex3f(-1.0f,  1.0f,  1.0f);	// Bottom Left Of The Texture and Quad
-//		gl.glTexCoord2f(1.0f, 0.0f); gl.glVertex3f( 1.0f,  1.0f,  1.0f);	// Bottom Right Of The Texture and Quad
-//		gl.glTexCoord2f(1.0f, 1.0f); gl.glVertex3f( 1.0f,  1.0f, -1.0f);	// Top Right Of The Texture and Quad
-//		// Bottom Face
-//		gl.glTexCoord2f(1.0f, 1.0f); gl.glVertex3f(-1.0f, -1.0f, -1.0f);	// Top Right Of The Texture and Quad
-//		gl.glTexCoord2f(0.0f, 1.0f); gl.glVertex3f( 1.0f, -1.0f, -1.0f);	// Top Left Of The Texture and Quad
-//		gl.glTexCoord2f(0.0f, 0.0f); gl.glVertex3f( 1.0f, -1.0f,  1.0f);	// Bottom Left Of The Texture and Quad
-//		gl.glTexCoord2f(1.0f, 0.0f); gl.glVertex3f(-1.0f, -1.0f,  1.0f);	// Bottom Right Of The Texture and Quad
-//		// Right face
-//		gl.glTexCoord2f(1.0f, 0.0f); gl.glVertex3f( 1.0f, -1.0f, -1.0f);	// Bottom Right Of The Texture and Quad
-//		gl.glTexCoord2f(1.0f, 1.0f); gl.glVertex3f( 1.0f,  1.0f, -1.0f);	// Top Right Of The Texture and Quad
-//		gl.glTexCoord2f(0.0f, 1.0f); gl.glVertex3f( 1.0f,  1.0f,  1.0f);	// Top Left Of The Texture and Quad
-//		gl.glTexCoord2f(0.0f, 0.0f); gl.glVertex3f( 1.0f, -1.0f,  1.0f);	// Bottom Left Of The Texture and Quad
-//		// Left Face
-//		gl.glTexCoord2f(0.0f, 0.0f); gl.glVertex3f(-1.0f, -1.0f, -1.0f);	// Bottom Left Of The Texture and Quad
-//		gl.glTexCoord2f(1.0f, 0.0f); gl.glVertex3f(-1.0f, -1.0f,  1.0f);	// Bottom Right Of The Texture and Quad
-//		gl.glTexCoord2f(1.0f, 1.0f); gl.glVertex3f(-1.0f,  1.0f,  1.0f);	// Top Right Of The Texture and Quad
-//		gl.glTexCoord2f(0.0f, 1.0f); gl.glVertex3f(-1.0f,  1.0f, -1.0f);	// Top Left Of The Texture and Quad
-//	gl.glEnd();
-
-//    gl.glBegin(GL.GL_QUADS);
-//      // back wall
-//
-//      //gl.glTexCoord2f(left, bottom);
-//      gl.glVertex3i(-edge, -edge, -edge);
-////      gl.glTexCoord2f(right, bottom);
-//      gl.glVertex3i(edge, -edge, -edge);
-////      gl.glTexCoord2f(right, top);
-//      gl.glVertex3i(edge, edge, -edge);
-////      gl.glTexCoord2f(left, top);
-//      gl.glVertex3i(-edge, edge, -edge);
-//    gl.glEnd();
-// texturasSkyBox3.bind();
-
-
-
-//    gl.glBegin(GL.GL_QUADS);
-//      // right wall
-//
-////      gl.glTexCoord2f(left, bottom);
-//      gl.glVertex3i(edge, -edge, -edge);
-////      gl.glTexCoord2f(right, bottom);
-//      gl.glVertex3i(edge, -edge, edge);
-////      gl.glTexCoord2f(right, top);
-//      gl.glVertex3i(edge, edge, edge);
-////      gl.glTexCoord2f(left, top);
-//      gl.glVertex3i(edge, edge, -edge);
-//    gl.glEnd();
-//texturasSkyBox0.bind();
-//    gl.glBegin(GL.GL_QUADS);
-//      // front wall
-//
-////      gl.glTexCoord2f(left, bottom);
-//      gl.glVertex3i(edge, -edge, edge);
-////      gl.glTexCoord2f(right, bottom);
-//      gl.glVertex3i(-edge, -edge, edge);
-////      gl.glTexCoord2f(right, top);
-//      gl.glVertex3i(-edge, edge, edge);
-////      gl.glTexCoord2f(left, top);
-//      gl.glVertex3i(edge, edge, edge);
-// gl.glEnd();
-// texturasSkyBox1.bind();
-//      gl.glBegin(GL.GL_QUADS);
-//      // left wall
-//
-////      gl.glTexCoord2f(left, bottom);
-//      gl.glVertex3i(-edge, -edge, edge);
-////      gl.glTexCoord2f(right, bottom);
-//      gl.glVertex3i(-edge, -edge, -edge);
-////      gl.glTexCoord2f(right, top);
-//      gl.glVertex3i(-edge, edge, -edge);
-////      gl.glTexCoord2f(left, top);
-//      gl.glVertex3i(-edge, edge, edge);
-// gl.glEnd();
-//
-//      texturasSkyBox4.bind();
-//      gl.glBegin(GL.GL_QUADS);
-//      // top wall
-////      gl.glTexCoord2f(left, bottom);
-//      gl.glVertex3i(edge, edge, edge);
-////      gl.glTexCoord2f(right, bottom);
-//      gl.glVertex3i(-edge, edge, edge);
-////      gl.glTexCoord2f(right, 2*top);
-//      gl.glVertex3i(-edge, edge, -edge);
-////      gl.glTexCoord2f(left, 2*top);
-//      gl.glVertex3i(edge, edge, -edge);
-//    gl.glEnd();
-//
-//    texturasSkyBox5.bind();
-//    gl.glBegin(GL.GL_QUADS);
-//      // bottom wall
-////      gl.glTexCoord2f(left, bottom);
-//      gl.glVertex3i(edge, -edge, edge);
-//////      gl.glTexCoord2f(right, bottom);
-//      gl.glVertex3i(-edge, -edge, edge);
-////      gl.glTexCoord2f(right, top);
-//      gl.glVertex3i(-edge, -edge, -edge);
-////      gl.glTexCoord2f(left, top);
-//      gl.glVertex3i(edge, -edge, -edge);
-//    gl.glEnd();
-
-     
-  //gl.glPopMatrix();
-
-   
+    textura.desactivarTextura(gl);
 
     }
 
@@ -309,31 +155,6 @@ public class SkyBox implements IObjetoGL{
     }
 
 
-  public void loadTextures()
-  {
-    texturaFront=getTexture("Front.bmp");
-   texturaRight=getTexture("Right.bmp");
-   texturaBack=getTexture("Back.bmp");
-   texturaLeft=getTexture("Left.bmp");
-   texturaTop=getTexture("Top.bmp");
-   texturaBottom=getTexture("bottom.bmp");
 
-
-
-  }  // end of loadTextures()
-
-  public Texture getTexture(String textureName){
-        TextureData data=null;
-
-    try {
-            InputStream stream = getClass().getResourceAsStream(textureName);
-            data = TextureIO.newTextureData(stream, false, "jpg");
-
-        }
-        catch (IOException exc) {
-            exc.printStackTrace();
-        }
-    return TextureIO.newTexture(data);
-    }
 
 }
