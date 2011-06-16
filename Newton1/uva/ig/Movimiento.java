@@ -126,7 +126,11 @@ public class Movimiento {
         }
 
         public void manejarEventoMovimiento() {
-            
+
+            Iluminacion.rotacion-=0.3*velocidad;
+            if (Iluminacion.rotacion<0)
+                Iluminacion.rotacion=360f;
+
             calcularAnguloActual();
 
             for (i=0;i<numBolasTotal;i++){
@@ -202,6 +206,10 @@ public class Movimiento {
 
         public void manejarEventoMovimiento() {
 
+            Iluminacion.rotacion-=0.3;
+            if (Iluminacion.rotacion<0)
+                Iluminacion.rotacion=360f;
+
             for (i=0;i<numBolasTotal;i++){
                 bolasInicio[i].traslacion[0]=-numBolasTotal/2.0f-bolasInicio[i].diametro/2.0f+(i+1)*bolasInicio[i].diametro;
                 bolasInicio[i].traslacion[1]=-largoHilo;
@@ -252,15 +260,9 @@ public class Movimiento {
                 bolasInicio[i].hilo[0]= Double.valueOf(Math.sin(angulo*ro)*largoHilo).floatValue();
                 bolasInicio[i].hilo[1]= Double.valueOf(Math.cos(angulo*ro)*largoHilo).floatValue();
             }
-//            Iluminacion.rotacion[1]+=1.0;
-//            if (Iluminacion.rotacion[1]>360)
-//                Iluminacion.rotacion[1]=0.0f;
-//            Iluminacion.rotacion[0]+=1.0;
-//            if (Iluminacion.rotacion[0]>360)
-//                Iluminacion.rotacion[0]=0.0f;
-//            Iluminacion.rotacion[2]+=1.0;
-//            if (Iluminacion.rotacion[2]>360)
-//                Iluminacion.rotacion[2]=0.0f;
+            Iluminacion.rotacion-=0.3*velocidad;
+            if (Iluminacion.rotacion<0)
+                Iluminacion.rotacion=360f;
         }
         /**
          * Calculamos el angulo actual teniendo en cuenta el sentido de la bola,y el angulo que tiene
@@ -337,6 +339,10 @@ public class Movimiento {
         }
 
         public void manejarEventoMovimiento() {
+
+            Iluminacion.rotacion-=0.3;
+            if (Iluminacion.rotacion<0)
+                Iluminacion.rotacion=360f;
 
             angulo=angulomax;
 

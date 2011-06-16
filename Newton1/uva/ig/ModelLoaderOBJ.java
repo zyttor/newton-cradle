@@ -1,22 +1,10 @@
 package uva.ig;
 
-//import java.net.*;
+
 import java.io.*;
-
-// import java.nio.*;
-// import java.nio.channels.*;
-// import java.util.*;
-
-
-import com.sun.opengl.util.BufferUtil;
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.awt.image.PixelGrabber;
 import java.io.IOException;
-import java.nio.ByteBuffer;
 
 import javax.media.opengl.*;
-import javax.media.opengl.glu.*;
 import com.sun.opengl.util.texture.Texture;
 import com.sun.opengl.util.texture.TextureData;
 import com.sun.opengl.util.texture.TextureIO;
@@ -36,21 +24,21 @@ public class ModelLoaderOBJ {
   protected GLModel model2;
   protected GLModel model3;
 
-    private static float ambiente1[] =  {0.8f,0.8f,0.8f,1.0f};
-    private static float difusa1[] =    {0.8f,0.8f,0.8f,1.0f};
-    private static float especular1[] = {0.8f,0.8f,0.8f,1.0f};
-    private static float brillo1 = 1000.0f;
+    private static float ambiente1[] =  {0.5f,0.5f,0.5f,1.0f};
+    private static float difusa1[] =    {0.8f,0.7f,0.7f,1.0f};
+    private static float especular1[] = {0.8f,0.7f,0.7f,1.0f};
+    private static float brillo1 = 125.0f;
     private static float mat_emiss[] = {0f, 0f, 0f, 0.0f};
 
-    private static float ambiente2[] = {0.19f,0.19f,0.19f,1.0f};
-    private static float difusa2[] = {0.51f,0.51f,0.51f,1.0f};
-    private static float especular2[] = {0.51f,0.51f,0.51f,1.0f};
+    private static float ambiente2[] = {0.65f,0.65f,0.65f,1.0f};
+    private static float difusa2[] = {0.55f,0.55f,0.65f,1.0f};
+    private static float especular2[] = {0.55f,0.55f,0.65f,1.0f};
     private static float brillo2 = 51.2f;
 
 
-    private static float ambiente3[] = {0.5f,0.5f,0.5f,1.0f};
-    private static float difusa3[] = {0.5f,0.5f,0.5f,1.0f};
-    private static float especular3[] = {0.5f,0.5f,0.5f,1.0f};
+    private static float ambiente3[] = {0.7f,0.7f,0.7f,1.0f};
+    private static float difusa3[] = {0.36f,0.36f,0.45f,1.0f};
+    private static float especular3[] = {0.39f,0.39f,0.45f,1.0f};
 
 
    private Texture TMesa;

@@ -23,12 +23,12 @@ public class Material {
     private static float especular1[] = {0.5f,0.5f,0.5f,1.0f};
     private static float brillo1 = 100.0f;
 
-    private static float ambiente2[] = {0.6f,0.6f,0.5f,1.0f};
-    private static float difusa2[] = {0.55f,0.55f,0.55f,1.0f};
-    private static float especular2[] = {0.76f,0.76f,0.75f,1.0f};
+    private static float ambiente2[] = {0.4f,0.4f,0.35f,1.0f};
+    private static float difusa2[] = {0.55f,0.52f,0.51f,1.0f};
+    private static float especular2[] = {0.65f,0.65f,0.60f,1.0f};
     private static float brillo2 = 20.0f;
 
-    private static float ambienteT[] = {1.0f,1.0f,1.0f,0.6f};
+    private static float ambienteT[] = {0.8f,0.8f,0.8f,0.6f};
     private static float difusaT[] = {0.45f,0.50f,0.50f,0.6f};
     private static float especularT[] = {0.96f,0.20f,0.60f,0.7f};
     private static float brilloT = 100.0f;
