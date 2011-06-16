@@ -295,7 +295,7 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Velocidad: "/>
+            <Property name="text" type="java.lang.String" value="Speed: "/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">

@@ -40,7 +40,7 @@ public class Sonido {
     }
 
     public void cambiarSonido(int t){
-        if ((t==SONIDO_DEFECTO) || (t==SONIDO_TOON)|| (t==SONIDO_LUCIERNAGA)|| (t==SONIDO_TRANSLUCIDO)){
+        if ((t==SONIDO_DEFECTO) || (t==SONIDO_TOON)|| (t==SONIDO_LUCIERNAGA)){
             rutaSonido="src/uva/ig/default.wav";
         }else if (t==SONIDO_METAL){
             rutaSonido="src/uva/ig/metal.wav";
@@ -48,6 +48,8 @@ public class Sonido {
             rutaSonido="src/uva/ig/cow.wav";
         }else if (t==SONIDO_SIN_SONIDO){
             rutaSonido="";
+        }else if (t==SONIDO_TRANSLUCIDO){
+            rutaSonido="src/uva/ig/Bulle2.wav";
         }
         modo=t;
     }

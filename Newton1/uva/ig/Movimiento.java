@@ -252,7 +252,15 @@ public class Movimiento {
                 bolasInicio[i].hilo[0]= Double.valueOf(Math.sin(angulo*ro)*largoHilo).floatValue();
                 bolasInicio[i].hilo[1]= Double.valueOf(Math.cos(angulo*ro)*largoHilo).floatValue();
             }
-
+//            Iluminacion.rotacion[1]+=1.0;
+//            if (Iluminacion.rotacion[1]>360)
+//                Iluminacion.rotacion[1]=0.0f;
+//            Iluminacion.rotacion[0]+=1.0;
+//            if (Iluminacion.rotacion[0]>360)
+//                Iluminacion.rotacion[0]=0.0f;
+//            Iluminacion.rotacion[2]+=1.0;
+//            if (Iluminacion.rotacion[2]>360)
+//                Iluminacion.rotacion[2]=0.0f;
         }
         /**
          * Calculamos el angulo actual teniendo en cuenta el sentido de la bola,y el angulo que tiene
@@ -288,7 +296,7 @@ public class Movimiento {
             }
             angAnt=angulo;
             if (sentidoHorario) {
-                angulo -= ang*velocidad*1.5f;
+                angulo -= ang*velocidad;
                 if (angAnt>=0 && angulo<=0){
                     if (!sonido.getRutaSonido().equals("")){
                         miThread = new HiloReproduccion(sonido.rutaSonido);
@@ -298,7 +306,7 @@ public class Movimiento {
                 }
                 
             } else {
-                angulo += ang*velocidad*1.5f;
+                angulo += ang*velocidad;
                 if (angAnt<=0 && angulo>=0){
                     if (!sonido.getRutaSonido().equals("")){
                         miThread = new HiloReproduccion(sonido.rutaSonido);

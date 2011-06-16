@@ -66,7 +66,7 @@ public class GLRenderer implements GLEventListener {
 
     public void cambiarRozamiento(boolean activado) {
         if (activado) {
-            movimiento.setRozamiento(2.0f);
+            movimiento.setRozamiento(1.5f);
         } else {
             movimiento.setRozamiento(0.0f);
         }
@@ -126,13 +126,15 @@ public class GLRenderer implements GLEventListener {
      *
      */
 
-    public void ponerArrastre(int numBolas, boolean derecha) {
+    public boolean ponerArrastre(int numBolas, boolean derecha) {
         if (modoArrastre) {
             movimiento = new Movimiento(bolasInicio, numBolas,this);
             movimiento.setSentidoHorario(derecha);
             movimiento.setMaxAngulo(0.0f);
             movimiento.setMovimiento(Movimiento.ARRASTRE);
+            return true;
         }
+        return false;
     }
 
     public void arrastrarBola(float angulo) {
@@ -236,7 +238,7 @@ public class GLRenderer implements GLEventListener {
             sonido.cambiarSonido(SIN_SONIDO);
         } else if ((movimiento.getVelocidadDef() == movimiento.getIncrementoAngulo())
                 && (sonido.getModo() == sonido.SONIDO_SIN_SONIDO)){
-            sonido.cambiarSonido(modoActual);
+            sonido.cambiarSonido(modosSonido[modoActual]);
         }
     }
 
@@ -328,10 +330,14 @@ public class GLRenderer implements GLEventListener {
         gl.glMatrixMode(GL.GL_MODELVIEW);
         gl.glLoadIdentity();
 
+       // iluminacion.moverLuz(gl);
+
         camara.setCamara(glu, gl);
         gl.glColor3d(1.0, 0.0, 0.0);
 
         gl.glDisable(GL.GL_BLEND);
+
+        
 
         gl.glPushMatrix();
         skyBox.dibujar(gl);
@@ -367,6 +373,7 @@ public class GLRenderer implements GLEventListener {
         gl.glEnable(GL.GL_BLEND);
         // Flush all drawing operations to the graphics card
         gl.glFlush();
+        
     }
 
     public void displayChanged(GLAutoDrawable drawable, boolean modeChanged, boolean deviceChanged) {
