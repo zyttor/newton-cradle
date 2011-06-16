@@ -148,6 +148,8 @@ public class Newton1 extends JFrame {
         jRadioButtonMenuItem12 = new JRadioButtonMenuItem();
         jMenuItem8 = new JMenuItem();
         jRadioButtonMenuItem13 = new JRadioButtonMenuItem();
+        jSeparator2 = new Separator();
+        jCheckBoxMenuItem2 = new JCheckBoxMenuItem();
         jMenu3 = new JMenu();
         jRadioButtonMenuItem1 = new JRadioButtonMenuItem();
         jRadioButtonMenuItem2 = new JRadioButtonMenuItem();
@@ -291,6 +293,15 @@ public class Newton1 extends JFrame {
             }
         });
         jMenu2.add(jRadioButtonMenuItem13);
+        jMenu2.add(jSeparator2);
+
+        jCheckBoxMenuItem2.setText("Moving Sun");
+        jCheckBoxMenuItem2.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jCheckBoxMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jCheckBoxMenuItem2);
 
         jMenuBar1.add(jMenu2);
 
@@ -637,6 +648,10 @@ public class Newton1 extends JFrame {
             panel.getContext().release();
         }//GEN-LAST:event_jMenuItem5ActionPerformed
 
+        private void jCheckBoxMenuItem2ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItem2ActionPerformed
+            renderer.setMovimientoSol(jCheckBoxMenuItem2.isSelected());
+        }//GEN-LAST:event_jCheckBoxMenuItem2ActionPerformed
+
     private void seleccionarRadioButonNumBolas(Object cual) {
         if (!jRadioButtonMenuItem1.equals(cual)) {
             jRadioButtonMenuItem1.setSelected(false);
@@ -731,6 +746,7 @@ public class Newton1 extends JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private JCheckBoxMenuItem jCheckBoxMenuItem1;
+    private JCheckBoxMenuItem jCheckBoxMenuItem2;
     private JLabel jLabel1;
     private JLabel jLabel2;
     private JMenu jMenu1;
@@ -761,6 +777,7 @@ public class Newton1 extends JFrame {
     private JRadioButtonMenuItem jRadioButtonMenuItem8;
     private JRadioButtonMenuItem jRadioButtonMenuItem9;
     private Separator jSeparator1;
+    private Separator jSeparator2;
     private Separator jSeparator4;
     private JToolBar jToolBar1;
     private GLJPanel panel;

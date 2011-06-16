@@ -33,6 +33,7 @@ public class GLRenderer implements GLEventListener {
     private int modoActual = 0;
     private boolean modoArrastre = true;
     private boolean rozamiento = true;
+    private boolean movimientoSol=false;
     private int modoMovimiento = 2;
     Iluminacion iluminacion;
     Camara camara;
@@ -166,6 +167,11 @@ public class GLRenderer implements GLEventListener {
         Bola.setShader(shader);
         sonido.cambiarSonido(modosSonido[modo]);
         material.setMaterial(modosMaterial[modo]);
+        if (movimientoSol){
+            Iluminacion.modoRotacion=1f;
+        }else{
+            Iluminacion.modoRotacion=0f;
+        }
         modoActual = modo;
     }
 
@@ -178,6 +184,16 @@ public class GLRenderer implements GLEventListener {
              texturaSkyBox.cambiarTextura(gl, TexturaSkyBox.SKYBOX_MARIO);
             SkyBox.setTextura(texturaSkyBox);
         }
+    }
+
+    public void setMovimientoSol(boolean movimiento){
+        movimientoSol=movimiento;
+        if (movimientoSol){
+            Iluminacion.modoRotacion=1f;
+        }else{
+            Iluminacion.modoRotacion=0f;
+        }
+        Iluminacion.rotacion=0f;
     }
 
     /*********************************************************************
@@ -280,7 +296,6 @@ public class GLRenderer implements GLEventListener {
         bolasInicio = new Bola[5];
         for (int i = 0; i < bolasInicio.length; i++) {
             bolasInicio[i] = new Bola(0.5f, 20, 20);
-            //bolasInicio[i].cambiarPosicion(i*3.0f, 0.0f, -2.0f);
         }
 
         material = new Material();
@@ -323,6 +338,9 @@ public class GLRenderer implements GLEventListener {
     public void display(GLAutoDrawable drawable) {
         gl = drawable.getGL();
         movimiento.mover();
+
+        iluminacion.moverLuz(gl);
+
         // Clear the drawing area
         gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
         // Reset the current matrix to the "identity"
@@ -330,7 +348,7 @@ public class GLRenderer implements GLEventListener {
         gl.glMatrixMode(GL.GL_MODELVIEW);
         gl.glLoadIdentity();
 
-       // iluminacion.moverLuz(gl);
+       
 
         camara.setCamara(glu, gl);
         gl.glColor3d(1.0, 0.0, 0.0);
