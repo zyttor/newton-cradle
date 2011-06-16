@@ -1,0 +1,6 @@
+
+- Las luces giran con nosotros, en lugar de girar solas
+- sonido de la burbuja
+- menus ayuda/acerca de
+- luciernaga
+- shaders

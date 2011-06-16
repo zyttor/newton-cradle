@@ -194,7 +194,7 @@ public class Newton1 extends JFrame {
 
         jToolBar1.setRollover(true);
 
-        jLabel1.setText("Velocidad: ");
+        jLabel1.setText("Speed: ");
         jToolBar1.add(jLabel1);
 
         jLabel2.setText("1.0");
@@ -448,7 +448,9 @@ public class Newton1 extends JFrame {
                         xOriginal = x;
                         sentidoHorario = false;
                         numMovimiento = bolas / 2 - i + 1;
-                        renderer.ponerArrastre(numMovimiento, sentidoHorario);
+                        if (renderer.ponerArrastre(numMovimiento, sentidoHorario)) {
+                            jLabel2.setText("1.0");
+                        }
                         return;
                     }
                     dist = Math.sqrt(Math.pow((-20 + (i * 40)) - x, 2) + Math.pow(y + 40, 2));
@@ -458,7 +460,9 @@ public class Newton1 extends JFrame {
                         xOriginal = x;
                         sentidoHorario = true;
                         numMovimiento = bolas - (bolas / 2 + i) + 1;
-                        renderer.ponerArrastre(numMovimiento, sentidoHorario);
+                        if (renderer.ponerArrastre(numMovimiento, sentidoHorario)) {
+                            jLabel2.setText("1.0");
+                        }
                         return;
                     }
                 }

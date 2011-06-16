@@ -135,7 +135,7 @@ public class TexturaSkyBox {
     gl.glDisable(gl.GL_TEXTURE_GEN_T);
 
 
-    gl.glTexEnvi(gl.GL_TEXTURE_ENV,gl.GL_TEXTURE_ENV_MODE ,gl.GL_DECAL);
+    gl.glTexEnvi(gl.GL_TEXTURE_ENV,gl.GL_TEXTURE_ENV_MODE ,gl.GL_MODULATE);
 
     gl.glTexParameteri(gl.GL_TEXTURE_2D, gl.GL_TEXTURE_WRAP_S, gl.GL_CLAMP);
     gl.glTexParameteri(gl.GL_TEXTURE_2D, gl.GL_TEXTURE_WRAP_T, gl.GL_CLAMP);
@@ -148,10 +148,10 @@ public class TexturaSkyBox {
 
         public TexturaMontanaListener (GL gl){
 
-           texturaFront=getTexture("Front.bmp");
-           texturaRight=getTexture("Right.bmp");
-           texturaBack=getTexture("Back.bmp");
-           texturaLeft=getTexture("Left.bmp");
+           texturaFront=getTexture("Left.bmp");
+           texturaRight=getTexture("Front.bmp");
+           texturaBack=getTexture("Right.bmp");
+           texturaLeft=getTexture("Back.bmp");
            texturaTop=getTexture("Top.bmp");
            texturaBottom=getTexture("Bottom.bmp");
 
@@ -172,7 +172,7 @@ public class TexturaSkyBox {
         gl.glDisable(gl.GL_TEXTURE_GEN_T);
 
 
-        gl.glTexEnvi(gl.GL_TEXTURE_ENV,gl.GL_TEXTURE_ENV_MODE ,gl.GL_DECAL);
+        gl.glTexEnvi(gl.GL_TEXTURE_ENV,gl.GL_TEXTURE_ENV_MODE ,gl.GL_MODULATE);
 
         gl.glTexParameteri(gl.GL_TEXTURE_2D, gl.GL_TEXTURE_WRAP_S, gl.GL_CLAMP);
         gl.glTexParameteri(gl.GL_TEXTURE_2D, gl.GL_TEXTURE_WRAP_T, gl.GL_CLAMP);

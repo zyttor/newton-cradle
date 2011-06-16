@@ -53,6 +53,11 @@ public class SkyBox implements IObjetoGL{
         textura=t;
     }
 
+    private static float ambienteSB[] = {0.8f,0.8f,0.7f,1.0f};
+    private static float difusaSB[] = {0.75f,0.75f,0.75f,1.0f};
+    private static float especularSB[] = {0.86f,0.86f,0.85f,1.0f};
+    private static float brilloSB = 20.0f;
+
     public void dibujar (GL gl){
 
 //     gl.glTexGeni(gl.GL_S, gl.GL_TEXTURE_GEN_MODE, gl.GL_EYE_LINEAR);
@@ -72,6 +77,13 @@ public class SkyBox implements IObjetoGL{
 //
 //    gl.glTexParameteri(gl.GL_TEXTURE_2D, gl.GL_TEXTURE_WRAP_S, gl.GL_CLAMP);
 //    gl.glTexParameteri(gl.GL_TEXTURE_2D, gl.GL_TEXTURE_WRAP_T, gl.GL_CLAMP);
+        
+            gl.glMaterialfv(gl.GL_FRONT, gl.GL_AMBIENT, ambienteSB,0);
+            gl.glMaterialfv(gl.GL_FRONT, gl.GL_DIFFUSE, difusaSB,0);
+            gl.glMaterialfv(gl.GL_FRONT, gl.GL_SPECULAR, especularSB,0);
+            gl.glMaterialf(gl.GL_FRONT, gl.GL_SHININESS, brilloSB);
+
+
 
     textura.renderTextura(gl);
 
