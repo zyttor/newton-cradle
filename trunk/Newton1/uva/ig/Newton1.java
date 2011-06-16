@@ -148,6 +148,7 @@ public class Newton1 extends JFrame {
         jRadioButtonMenuItem12 = new JRadioButtonMenuItem();
         jMenuItem8 = new JMenuItem();
         jRadioButtonMenuItem13 = new JRadioButtonMenuItem();
+        jRadioButtonMenuItem14 = new JRadioButtonMenuItem();
         jSeparator2 = new Separator();
         jCheckBoxMenuItem2 = new JCheckBoxMenuItem();
         jMenu3 = new JMenu();
@@ -162,8 +163,8 @@ public class Newton1 extends JFrame {
         jSeparator4 = new Separator();
         jCheckBoxMenuItem1 = new JCheckBoxMenuItem();
         jMenu5 = new JMenu();
-        jMenuItem4 = new JMenuItem();
-        jMenuItem5 = new JMenuItem();
+        jRadioButtonMenuItem15 = new JRadioButtonMenuItem();
+        jRadioButtonMenuItem16 = new JRadioButtonMenuItem();
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -286,13 +287,21 @@ public class Newton1 extends JFrame {
         jMenuItem8.setEnabled(false);
         jMenu2.add(jMenuItem8);
 
-        jRadioButtonMenuItem13.setText("Toon");
+        jRadioButtonMenuItem13.setText("Vibration");
         jRadioButtonMenuItem13.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 jRadioButtonMenuItem13ActionPerformed(evt);
             }
         });
         jMenu2.add(jRadioButtonMenuItem13);
+
+        jRadioButtonMenuItem14.setText("Colorize");
+        jRadioButtonMenuItem14.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jRadioButtonMenuItem14ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jRadioButtonMenuItem14);
         jMenu2.add(jSeparator2);
 
         jCheckBoxMenuItem2.setText("Moving Sun");
@@ -383,21 +392,22 @@ public class Newton1 extends JFrame {
 
         jMenu5.setText("World");
 
-        jMenuItem4.setText("Mountain");
-        jMenuItem4.addActionListener(new ActionListener() {
+        jRadioButtonMenuItem15.setSelected(true);
+        jRadioButtonMenuItem15.setText("Mountain");
+        jRadioButtonMenuItem15.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
+                jRadioButtonMenuItem15ActionPerformed(evt);
             }
         });
-        jMenu5.add(jMenuItem4);
+        jMenu5.add(jRadioButtonMenuItem15);
 
-        jMenuItem5.setText("Videogame");
-        jMenuItem5.addActionListener(new ActionListener() {
+        jRadioButtonMenuItem16.setText("Videogame");
+        jRadioButtonMenuItem16.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jMenuItem5ActionPerformed(evt);
+                jRadioButtonMenuItem16ActionPerformed(evt);
             }
         });
-        jMenu5.add(jMenuItem5);
+        jMenu5.add(jRadioButtonMenuItem16);
 
         jMenuBar1.add(jMenu5);
 
@@ -585,7 +595,7 @@ public class Newton1 extends JFrame {
         private void jRadioButtonMenuItem13ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem13ActionPerformed
             if (jRadioButtonMenuItem13.isSelected()) {
                 panel.getContext().makeCurrent();
-                renderer.cambiarModo(panel, GLRenderer.MODO_TOON);
+                renderer.cambiarModo(panel, GLRenderer.MODO_VIBRACION);
                 panel.getContext().release();
             }
             seleccionarRadioButonApariencia(evt.getSource());
@@ -636,21 +646,36 @@ public class Newton1 extends JFrame {
             seleccionarRadioButonApariencia(evt.getSource());
         }//GEN-LAST:event_jRadioButtonMenuItem10ActionPerformed
 
-        private void jMenuItem4ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-            panel.getContext().makeCurrent();
-            renderer.cambiarSkyBox(panel, TEXTURA_MONTANA);
-            panel.getContext().release();
-        }//GEN-LAST:event_jMenuItem4ActionPerformed
-
-        private void jMenuItem5ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-            panel.getContext().makeCurrent();
-            renderer.cambiarSkyBox(panel, TEXTURA_MARIO);
-            panel.getContext().release();
-        }//GEN-LAST:event_jMenuItem5ActionPerformed
-
         private void jCheckBoxMenuItem2ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItem2ActionPerformed
             renderer.setMovimientoSol(jCheckBoxMenuItem2.isSelected());
         }//GEN-LAST:event_jCheckBoxMenuItem2ActionPerformed
+
+        private void jRadioButtonMenuItem14ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem14ActionPerformed
+            if (jRadioButtonMenuItem14.isSelected()) {
+                panel.getContext().makeCurrent();
+                renderer.cambiarModo(panel, GLRenderer.MODO_COLORIZE);
+                panel.getContext().release();
+            }
+            seleccionarRadioButonApariencia(evt.getSource());
+        }//GEN-LAST:event_jRadioButtonMenuItem14ActionPerformed
+
+        private void jRadioButtonMenuItem15ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem15ActionPerformed
+            if (jRadioButtonMenuItem15.isSelected()) {
+                panel.getContext().makeCurrent();
+                renderer.cambiarSkyBox(panel, TEXTURA_MONTANA);
+                panel.getContext().release();
+            }
+            seleccionarRadioMundo(jRadioButtonMenuItem15);
+        }//GEN-LAST:event_jRadioButtonMenuItem15ActionPerformed
+
+        private void jRadioButtonMenuItem16ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem16ActionPerformed
+            if (jRadioButtonMenuItem16.isSelected()) {
+                panel.getContext().makeCurrent();
+                renderer.cambiarSkyBox(panel, TEXTURA_MARIO);
+                panel.getContext().release();
+            }
+            seleccionarRadioMundo(jRadioButtonMenuItem16);
+        }//GEN-LAST:event_jRadioButtonMenuItem16ActionPerformed
 
     private void seleccionarRadioButonNumBolas(Object cual) {
         if (!jRadioButtonMenuItem1.equals(cual)) {
@@ -681,6 +706,16 @@ public class Newton1 extends JFrame {
         }
     }
 
+    private void seleccionarRadioMundo(JRadioButtonMenuItem cual) {
+        if (cual.equals(jRadioButtonMenuItem15)) {
+            jRadioButtonMenuItem15.setSelected(true);
+            jRadioButtonMenuItem16.setSelected(false);
+        } else {
+            jRadioButtonMenuItem15.setSelected(false);
+            jRadioButtonMenuItem16.setSelected(true);
+        }
+    }
+
     private void seleccionarRadioButonApariencia(Object cual) {
         if (!jRadioButtonMenuItem8.equals(cual)) {
             jRadioButtonMenuItem8.setSelected(false);
@@ -699,6 +734,9 @@ public class Newton1 extends JFrame {
         }
         if (!jRadioButtonMenuItem13.equals(cual)) {
             jRadioButtonMenuItem13.setSelected(false);
+        }
+        if (!jRadioButtonMenuItem14.equals(cual)) {
+            jRadioButtonMenuItem14.setSelected(false);
         }
         ((JRadioButtonMenuItem) cual).setSelected(true);
     }
@@ -758,8 +796,6 @@ public class Newton1 extends JFrame {
     private JMenuItem jMenuItem1;
     private JMenuItem jMenuItem2;
     private JMenuItem jMenuItem3;
-    private JMenuItem jMenuItem4;
-    private JMenuItem jMenuItem5;
     private JMenuItem jMenuItem6;
     private JMenuItem jMenuItem7;
     private JMenuItem jMenuItem8;
@@ -768,6 +804,9 @@ public class Newton1 extends JFrame {
     private JRadioButtonMenuItem jRadioButtonMenuItem11;
     private JRadioButtonMenuItem jRadioButtonMenuItem12;
     private JRadioButtonMenuItem jRadioButtonMenuItem13;
+    private JRadioButtonMenuItem jRadioButtonMenuItem14;
+    private JRadioButtonMenuItem jRadioButtonMenuItem15;
+    private JRadioButtonMenuItem jRadioButtonMenuItem16;
     private JRadioButtonMenuItem jRadioButtonMenuItem2;
     private JRadioButtonMenuItem jRadioButtonMenuItem3;
     private JRadioButtonMenuItem jRadioButtonMenuItem4;
