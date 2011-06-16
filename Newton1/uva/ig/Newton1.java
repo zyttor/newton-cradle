@@ -25,11 +25,14 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu.Separator;
 import javax.swing.JRadioButtonMenuItem;
+import javax.swing.JToolBar;
+import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.UIManager;
 import javax.swing.WindowConstants;
 import javax.swing.plaf.basic.BasicBorders.RadioButtonBorder;
@@ -84,13 +87,13 @@ public class Newton1 extends JFrame {
                     renderer.moverCamara(2);
                 } else if (evt.getKeyCode() == KeyEvent.VK_UP) {
                     if ((evt.getModifiers() & KeyEvent.CTRL_MASK) == KeyEvent.CTRL_MASK) {
-                        renderer.subirVelocidad();
+                        jLabel2.setText(Float.toString(renderer.subirVelocidad()));
                     } else {
                         renderer.moverCamara(3);
                     }
                 } else if (evt.getKeyCode() == KeyEvent.VK_DOWN) {
                    if ((evt.getModifiers() & KeyEvent.CTRL_MASK) == KeyEvent.CTRL_MASK) {
-                        renderer.bajarVelocidad();
+                        jLabel2.setText(Float.toString(renderer.bajarVelocidad()));
                     } else {
                         renderer.moverCamara(4);
                     }
@@ -126,6 +129,9 @@ public class Newton1 extends JFrame {
     private void initComponents() {
 
         panel = new GLJPanel(createGLCapabilites());
+        jToolBar1 = new JToolBar();
+        jLabel1 = new JLabel();
+        jLabel2 = new JLabel();
         jMenuBar1 = new JMenuBar();
         jMenu1 = new JMenu();
         jMenuItem1 = new JMenuItem();
@@ -183,8 +189,16 @@ public class Newton1 extends JFrame {
         );
         panelLayout.setVerticalGroup(
             panelLayout.createParallelGroup(Alignment.LEADING)
-            .addGap(0, 473, Short.MAX_VALUE)
+            .addGap(0, 463, Short.MAX_VALUE)
         );
+
+        jToolBar1.setRollover(true);
+
+        jLabel1.setText("Velocidad: ");
+        jToolBar1.add(jLabel1);
+
+        jLabel2.setText("1.0");
+        jToolBar1.add(jLabel2);
 
         jMenu1.setText("Cradle");
 
@@ -382,11 +396,15 @@ public class Newton1 extends JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(Alignment.LEADING)
+            .addComponent(jToolBar1, GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
             .addComponent(panel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(Alignment.LEADING)
-            .addComponent(panel, GroupLayout.DEFAULT_SIZE, 473, Short.MAX_VALUE)
+            .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(panel, GroupLayout.PREFERRED_SIZE, 463, GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jToolBar1, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -709,6 +727,8 @@ public class Newton1 extends JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private JCheckBoxMenuItem jCheckBoxMenuItem1;
+    private JLabel jLabel1;
+    private JLabel jLabel2;
     private JMenu jMenu1;
     private JMenu jMenu2;
     private JMenu jMenu3;
@@ -738,6 +758,7 @@ public class Newton1 extends JFrame {
     private JRadioButtonMenuItem jRadioButtonMenuItem9;
     private Separator jSeparator1;
     private Separator jSeparator4;
+    private JToolBar jToolBar1;
     private GLJPanel panel;
     // End of variables declaration//GEN-END:variables
 }

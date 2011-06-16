@@ -66,7 +66,7 @@ public class GLRenderer implements GLEventListener {
 
     public void cambiarRozamiento(boolean activado) {
         if (activado) {
-            movimiento.setRozamiento(1.0f);
+            movimiento.setRozamiento(2.0f);
         } else {
             movimiento.setRozamiento(0.0f);
         }
@@ -214,14 +214,16 @@ public class GLRenderer implements GLEventListener {
      * Velocidad
      */
 
-    public void subirVelocidad (){
-        movimiento.cambiarIncremento(-5f);
+    public float subirVelocidad (){
+        movimiento.cambiarVelocidad(-0.2f);
         comprobarSonido();
+        return movimiento.getVelocidad();
     }
 
-    public void bajarVelocidad (){
-        movimiento.cambiarIncremento(5f);
+    public float bajarVelocidad (){
+        movimiento.cambiarVelocidad(0.2f);
         comprobarSonido();
+        return movimiento.getVelocidad();
     }
 
     /******************************************************************
@@ -229,10 +231,10 @@ public class GLRenderer implements GLEventListener {
      */
 
    public void comprobarSonido(){
-        if ((movimiento.getIncrementoAnguloDef() != movimiento.getIncrementoAngulo())
+        if ((movimiento.getVelocidadDef() != movimiento.getIncrementoAngulo())
                 && (sonido.getModo() != sonido.SONIDO_SIN_SONIDO)){
             sonido.cambiarSonido(SIN_SONIDO);
-        } else if ((movimiento.getIncrementoAnguloDef() == movimiento.getIncrementoAngulo())
+        } else if ((movimiento.getVelocidadDef() == movimiento.getIncrementoAngulo())
                 && (sonido.getModo() == sonido.SONIDO_SIN_SONIDO)){
             sonido.cambiarSonido(modoActual);
         }
