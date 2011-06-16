@@ -10,13 +10,14 @@ public class Movimiento {
     private float angulomax = 70;       //Angulo maximo
     private float rozamiento=0f;
     private float incrementoAngulo = 3.0f;  //Incremento del angulo en cada pasada.Marca velocidad.
+    private float velocidad=1.0f;
     private float angulo;  //Angulo de la bola
     private boolean sentidoHorario = false;     //para controlar el sentido en que se mueven las bolas
     public static final int QUIETO =0;
     public static final int MOVIMIENTO_LINEAL = 1;
     public static final int MOVIMIENTO_CUADRATICO = 2;
     public static final int ARRASTRE = 3;
-    private float incrementoAnguloDef = incrementoAngulo;
+    private float velocidadDef = velocidad;
     private Bola bolasInicio[];
     private int numMovimiento;
     private int modo;
@@ -69,19 +70,27 @@ public class Movimiento {
         sentidoHorario=sentido;
     }
 
-    public void cambiarIncremento (float m){
+    public void cambiarVelocidad (float m){
 
-        float incrementoTemp=incrementoAngulo;
+        velocidad-=m;
 
-        incrementoAngulo*=(100-m)/100;
-        if (incrementoAngulo >= 4 || incrementoAngulo <=0.4){
-            incrementoAngulo=incrementoTemp;
+        velocidad=(float)Math.rint(velocidad*100)/100;
+
+        if (velocidad>4.0f){
+            velocidad=4.0f;
         }
-        System.out.println(incrementoAngulo);
+
+        if (velocidad<0.2f){
+            velocidad=0.2f;
+        }
     }
 
-    public float getIncrementoAnguloDef(){
-        return incrementoAnguloDef;
+    public float getVelocidadDef(){
+        return velocidadDef;
+    }
+
+    public float getVelocidad (){
+        return velocidad;
     }
 
     public float getIncrementoAngulo(){
@@ -138,11 +147,13 @@ public class Movimiento {
          * Calculamos el angulo actual teniendo en cuenta el sentido de la bola,y el angulo que tiene
          * con respecto al angulo m�ximo.
          */
+        float angAnt=0.0f;
+
         private void calcularAnguloActual() {
             if (angulomax<=0){
                 angulo=0.0f;
                 renderer.pararMovimiento();
-                miThread.destroy();
+                //miThread.destroy();
                 return;
             }
             if (sentidoHorario && angulo <= -angulomax) {
@@ -152,23 +163,25 @@ public class Movimiento {
                 sentidoHorario = true;
                 angulomax-=rozamiento;                
             }
-
+            angAnt=angulo;
             if (sentidoHorario) {
-                if (angulo>=0 && angulo-incrementoAngulo<=0){                    
+                angulo -= incrementoAngulo*velocidad;
+                if (angAnt>=0 && angulo<=0){
                     if (!sonido.getRutaSonido().equals("")){
                         miThread = new HiloReproduccion(sonido.rutaSonido);
                         miThread.start();
                     }
                 }
-                angulo -= incrementoAngulo;
+                
             } else {
-                if (angulo<=0 && angulo+incrementoAngulo>=0){
+                angulo += incrementoAngulo*velocidad;
+                if (angAnt<=0 && angulo>=0){
                     if (!sonido.getRutaSonido().equals("")){
                         miThread = new HiloReproduccion(sonido.rutaSonido);
                         miThread.start();
                     }
                 }
-                angulo += incrementoAngulo;
+                
             }
         }
     }
@@ -209,7 +222,7 @@ public class Movimiento {
         private float ro=0.017453292519943295f;
         private float largoHilo=2.8125f;
         private int numBolasTotal;
-        private float velocidad=3.0f;
+        private float ang=3.0f;
         private int numBolasMovimiento;
         private int i;
 
@@ -245,14 +258,14 @@ public class Movimiento {
          * Calculamos el angulo actual teniendo en cuenta el sentido de la bola,y el angulo que tiene
          * con respecto al angulo m�ximo.
          */
-
+        float angAnt=0.0f;
 
         private void calcularAnguloActual() {
             //TODO:introducir un coeficiente de fricci�n para que vaya parando la bola.
             if (angulomax<=0){
                 angulo=0.0f;
                 renderer.pararMovimiento();
-                miThread.destroy();
+                //miThread.destroy();
                 return;
             }
             if (sentidoHorario && angulo <= -angulomax) {
@@ -262,35 +275,37 @@ public class Movimiento {
             }
             if (angulo>=0){
                 if (Math.abs(angulomax-angulo)>0.2){
-                    velocidad=(angulomax-angulo)/15+0.2f;
+                    ang=(angulomax-angulo)/12+0.2f;
                 }else{
-                    velocidad=0.2f;
+                    ang=0.2f;
                 }
             }else{
                 if (Math.abs(-angulomax-angulo)>0.2){
-                    velocidad=(angulomax+angulo)/15+0.2f;
+                    ang=(angulomax+angulo)/12+0.2f;
                 }else{
-                    velocidad=0.2f;
+                    ang=0.2f;
                 }
             }
+            angAnt=angulo;
             if (sentidoHorario) {
-                if (angulo>=0 && angulo-velocidad<=0){
+                angulo -= ang*velocidad*1.5f;
+                if (angAnt>=0 && angulo<=0){
                     if (!sonido.getRutaSonido().equals("")){
                         miThread = new HiloReproduccion(sonido.rutaSonido);
                         miThread.start();
                     }
                     angulomax-=rozamiento;
                 }
-                angulo -= velocidad*1.5;
+                
             } else {
-                if (angulo<=0 && angulo+velocidad>=0){
+                angulo += ang*velocidad*1.5f;
+                if (angAnt<=0 && angulo>=0){
                     if (!sonido.getRutaSonido().equals("")){
                         miThread = new HiloReproduccion(sonido.rutaSonido);
                         miThread.start();
                     }
                     angulomax-=rozamiento;
                 }
-                angulo += velocidad*1.5;
             }
         }
     }

@@ -98,23 +98,23 @@ public class TexturaSkyBox {
 
 
         private TexturaMarioListener (GL gl){
-            texturaFront=getTexture("Front.png");
-       texturaRight=getTexture("Right.png");
-       texturaBack=getTexture("Back.png");
-       texturaLeft=getTexture("Left.png");
-       texturaTop=getTexture("Top.png");
-       texturaBottom=getTexture("bottom.png");
+       texturaFront=getTexture("front.png");
+       texturaRight=getTexture("right.png");
+       texturaBack=getTexture("back.png");
+       texturaLeft=getTexture("left.png");
+       texturaTop=getTexture("top.png");
+       texturaBottom=getTexture("bottom1.png");
         }
         
         public void cargarTexturas()
       {
 
-        texturaFront=getTexture("Front.png");
-       texturaRight=getTexture("Right.png");
-       texturaBack=getTexture("Back.png");
-       texturaLeft=getTexture("Left.png");
-       texturaTop=getTexture("Top.png");
-       texturaBottom=getTexture("bottom.png");
+       texturaFront=getTexture("front.png");
+       texturaRight=getTexture("right.png");
+       texturaBack=getTexture("back.png");
+       texturaLeft=getTexture("left.png");
+       texturaTop=getTexture("top.png");
+       texturaBottom=getTexture("bottom1.png");
 
 
 
@@ -153,7 +153,7 @@ public class TexturaSkyBox {
            texturaBack=getTexture("Back.bmp");
            texturaLeft=getTexture("Left.bmp");
            texturaTop=getTexture("Top.bmp");
-           texturaBottom=getTexture("bottom.bmp");
+           texturaBottom=getTexture("Bottom.bmp");
 
         }
 
@@ -187,7 +187,7 @@ public class TexturaSkyBox {
        texturaBack=getTexture("Back.bmp");
        texturaLeft=getTexture("Left.bmp");
        texturaTop=getTexture("Top.bmp");
-       texturaBottom=getTexture("bottom.bmp");
+       texturaBottom=getTexture("Bottom.bmp");
 
 
 
