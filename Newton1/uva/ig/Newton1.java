@@ -165,6 +165,10 @@ public class Newton1 extends JFrame {
         jMenu5 = new JMenu();
         jRadioButtonMenuItem15 = new JRadioButtonMenuItem();
         jRadioButtonMenuItem16 = new JRadioButtonMenuItem();
+        jMenu6 = new JMenu();
+        jMenuItem4 = new JMenuItem();
+        jSeparator3 = new Separator();
+        jMenuItem5 = new JMenuItem();
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -198,14 +202,17 @@ public class Newton1 extends JFrame {
         jToolBar1.setRollover(true);
 
         jLabel1.setText("Speed: ");
+        jLabel1.setToolTipText("Current speed of the animation, press Ctrl+Up or Ctrl+Down to increase or decrease ");
         jToolBar1.add(jLabel1);
 
         jLabel2.setText("1.0");
+        jLabel2.setToolTipText("Current speed of the animation, press Ctrl+Up or Ctrl+Down to increase or decrease");
         jToolBar1.add(jLabel2);
 
         jMenu1.setText("Cradle");
 
         jMenuItem1.setText("Restart animation");
+        jMenuItem1.setToolTipText("Stops the current animation so that a new one can be started");
         jMenuItem1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
@@ -214,6 +221,7 @@ public class Newton1 extends JFrame {
         jMenu1.add(jMenuItem1);
 
         jMenuItem2.setText("Restart camera");
+        jMenuItem2.setToolTipText("Recovers the initial camera position");
         jMenuItem2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 jMenuItem2ActionPerformed(evt);
@@ -223,6 +231,7 @@ public class Newton1 extends JFrame {
         jMenu1.add(jSeparator1);
 
         jMenuItem3.setText("Exit");
+        jMenuItem3.setToolTipText("Exits the Newton's Cradle application");
         jMenuItem3.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 jMenuItem3ActionPerformed(evt);
@@ -233,6 +242,7 @@ public class Newton1 extends JFrame {
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Appearance");
+        jMenu2.setToolTipText("Activates a plastic looking material for the balls");
 
         jMenuItem6.setText("Material");
         jMenuItem6.setEnabled(false);
@@ -240,6 +250,7 @@ public class Newton1 extends JFrame {
 
         jRadioButtonMenuItem8.setSelected(true);
         jRadioButtonMenuItem8.setText("Plastic");
+        jRadioButtonMenuItem8.setToolTipText("Activates a plastic looking material for the balls");
         jRadioButtonMenuItem8.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 jRadioButtonMenuItem8ActionPerformed(evt);
@@ -248,6 +259,7 @@ public class Newton1 extends JFrame {
         jMenu2.add(jRadioButtonMenuItem8);
 
         jRadioButtonMenuItem9.setText("Casper");
+        jRadioButtonMenuItem9.setToolTipText("Activates a translucent material for the balls");
         jRadioButtonMenuItem9.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 jRadioButtonMenuItem9ActionPerformed(evt);
@@ -268,6 +280,7 @@ public class Newton1 extends JFrame {
         jMenu2.add(jMenuItem7);
 
         jRadioButtonMenuItem11.setText("Metal");
+        jRadioButtonMenuItem11.setToolTipText("Enables a metal looking texture for the balls");
         jRadioButtonMenuItem11.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 jRadioButtonMenuItem11ActionPerformed(evt);
@@ -276,6 +289,7 @@ public class Newton1 extends JFrame {
         jMenu2.add(jRadioButtonMenuItem11);
 
         jRadioButtonMenuItem12.setText("Cow");
+        jRadioButtonMenuItem12.setToolTipText("Enables a cow looking texture for the balls");
         jRadioButtonMenuItem12.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 jRadioButtonMenuItem12ActionPerformed(evt);
@@ -288,6 +302,7 @@ public class Newton1 extends JFrame {
         jMenu2.add(jMenuItem8);
 
         jRadioButtonMenuItem13.setText("Vibration");
+        jRadioButtonMenuItem13.setToolTipText("Activates the vibration shader for the balls");
         jRadioButtonMenuItem13.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 jRadioButtonMenuItem13ActionPerformed(evt);
@@ -296,6 +311,7 @@ public class Newton1 extends JFrame {
         jMenu2.add(jRadioButtonMenuItem13);
 
         jRadioButtonMenuItem14.setText("Colorize");
+        jRadioButtonMenuItem14.setToolTipText("Activates the colorize shader for the balls");
         jRadioButtonMenuItem14.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 jRadioButtonMenuItem14ActionPerformed(evt);
@@ -305,6 +321,7 @@ public class Newton1 extends JFrame {
         jMenu2.add(jSeparator2);
 
         jCheckBoxMenuItem2.setText("Moving Sun");
+        jCheckBoxMenuItem2.setToolTipText("Enables the light source to rotate around the scene");
         jCheckBoxMenuItem2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 jCheckBoxMenuItem2ActionPerformed(evt);
@@ -317,6 +334,7 @@ public class Newton1 extends JFrame {
         jMenu3.setText("Balls");
 
         jRadioButtonMenuItem1.setText("3");
+        jRadioButtonMenuItem1.setToolTipText("Sets the number of balls to 3");
         jRadioButtonMenuItem1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 jRadioButtonMenuItem1ActionPerformed(evt);
@@ -325,6 +343,7 @@ public class Newton1 extends JFrame {
         jMenu3.add(jRadioButtonMenuItem1);
 
         jRadioButtonMenuItem2.setText("4");
+        jRadioButtonMenuItem2.setToolTipText("Sets the number of balls to 4");
         jRadioButtonMenuItem2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 jRadioButtonMenuItem2ActionPerformed(evt);
@@ -334,6 +353,7 @@ public class Newton1 extends JFrame {
 
         jRadioButtonMenuItem3.setSelected(true);
         jRadioButtonMenuItem3.setText("5");
+        jRadioButtonMenuItem3.setToolTipText("Sets the number of balls to 5");
         jRadioButtonMenuItem3.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 jRadioButtonMenuItem3ActionPerformed(evt);
@@ -342,6 +362,7 @@ public class Newton1 extends JFrame {
         jMenu3.add(jRadioButtonMenuItem3);
 
         jRadioButtonMenuItem4.setText("6");
+        jRadioButtonMenuItem4.setToolTipText("Sets the number of balls to 6");
         jRadioButtonMenuItem4.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 jRadioButtonMenuItem4ActionPerformed(evt);
@@ -350,6 +371,7 @@ public class Newton1 extends JFrame {
         jMenu3.add(jRadioButtonMenuItem4);
 
         jRadioButtonMenuItem5.setText("7");
+        jRadioButtonMenuItem5.setToolTipText("Sets the number of balls to 7");
         jRadioButtonMenuItem5.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 jRadioButtonMenuItem5ActionPerformed(evt);
@@ -362,6 +384,7 @@ public class Newton1 extends JFrame {
         jMenu4.setText("Movement");
 
         jRadioButtonMenuItem6.setText("Linear");
+        jRadioButtonMenuItem6.setToolTipText("Changes the movement to linear");
         jRadioButtonMenuItem6.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 jRadioButtonMenuItem6ActionPerformed(evt);
@@ -371,6 +394,7 @@ public class Newton1 extends JFrame {
 
         jRadioButtonMenuItem7.setSelected(true);
         jRadioButtonMenuItem7.setText("Quadratic");
+        jRadioButtonMenuItem7.setToolTipText("Changes the movement to quadratic");
         jRadioButtonMenuItem7.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 jRadioButtonMenuItem7ActionPerformed(evt);
@@ -381,6 +405,7 @@ public class Newton1 extends JFrame {
 
         jCheckBoxMenuItem1.setSelected(true);
         jCheckBoxMenuItem1.setText("Friction");
+        jCheckBoxMenuItem1.setToolTipText("Enables friction so that the balls eventually stop");
         jCheckBoxMenuItem1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 jCheckBoxMenuItem1ActionPerformed(evt);
@@ -394,6 +419,7 @@ public class Newton1 extends JFrame {
 
         jRadioButtonMenuItem15.setSelected(true);
         jRadioButtonMenuItem15.setText("Mountain");
+        jRadioButtonMenuItem15.setToolTipText("Changes the current environment to mountains");
         jRadioButtonMenuItem15.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 jRadioButtonMenuItem15ActionPerformed(evt);
@@ -402,6 +428,7 @@ public class Newton1 extends JFrame {
         jMenu5.add(jRadioButtonMenuItem15);
 
         jRadioButtonMenuItem16.setText("Videogame");
+        jRadioButtonMenuItem16.setToolTipText("Changes the current environment to videogame");
         jRadioButtonMenuItem16.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 jRadioButtonMenuItem16ActionPerformed(evt);
@@ -410,6 +437,24 @@ public class Newton1 extends JFrame {
         jMenu5.add(jRadioButtonMenuItem16);
 
         jMenuBar1.add(jMenu5);
+
+        jMenu6.setText("Help");
+
+        jMenuItem4.setText("Help");
+        jMenuItem4.setToolTipText("Shows Newton's Cradle help");
+        jMenu6.add(jMenuItem4);
+        jMenu6.add(jSeparator3);
+
+        jMenuItem5.setText("About...");
+        jMenuItem5.setToolTipText("About this application...");
+        jMenuItem5.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jMenuItem5);
+
+        jMenuBar1.add(jMenu6);
 
         setJMenuBar(jMenuBar1);
 
@@ -677,6 +722,13 @@ public class Newton1 extends JFrame {
             seleccionarRadioMundo(jRadioButtonMenuItem16);
         }//GEN-LAST:event_jRadioButtonMenuItem16ActionPerformed
 
+        private void jMenuItem5ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+            // About...
+            About about = new About();
+                about.setLocationRelativeTo(null);
+            about.setVisible(true);
+        }//GEN-LAST:event_jMenuItem5ActionPerformed
+
     private void seleccionarRadioButonNumBolas(Object cual) {
         if (!jRadioButtonMenuItem1.equals(cual)) {
             jRadioButtonMenuItem1.setSelected(false);
@@ -792,10 +844,13 @@ public class Newton1 extends JFrame {
     private JMenu jMenu3;
     private JMenu jMenu4;
     private JMenu jMenu5;
+    private JMenu jMenu6;
     private JMenuBar jMenuBar1;
     private JMenuItem jMenuItem1;
     private JMenuItem jMenuItem2;
     private JMenuItem jMenuItem3;
+    private JMenuItem jMenuItem4;
+    private JMenuItem jMenuItem5;
     private JMenuItem jMenuItem6;
     private JMenuItem jMenuItem7;
     private JMenuItem jMenuItem8;
@@ -817,6 +872,7 @@ public class Newton1 extends JFrame {
     private JRadioButtonMenuItem jRadioButtonMenuItem9;
     private Separator jSeparator1;
     private Separator jSeparator2;
+    private Separator jSeparator3;
     private Separator jSeparator4;
     private JToolBar jToolBar1;
     private GLJPanel panel;
