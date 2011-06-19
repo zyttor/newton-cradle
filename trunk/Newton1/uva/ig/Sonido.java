@@ -15,11 +15,13 @@ public class Sonido {
 
     public static final int SONIDO_SIN_SONIDO=-1;
     public static final int SONIDO_DEFECTO=0;
-    public static final int SONIDO_METAL=1;
-    public static final int SONIDO_VACA=2;
-    public static final int SONIDO_TOON=3;
-    public static final int SONIDO_LUCIERNAGA=4;
-    public static final int SONIDO_TRANSLUCIDO=5;
+    public static final int SONIDO_VACA=1;
+    public static final int SONIDO_METAL=2;
+    public static final int SONIDO_TRANSLUCIDO=3;
+    public static final int SONIDO_VIBRACION=4;
+    public static final int SONIDO_COLORIZE=5;
+
+    //public static final int SONIDO_LUCIERNAGA=4;    
 
     private int modo;
 
@@ -40,7 +42,8 @@ public class Sonido {
     }
 
     public void cambiarSonido(int t){
-        if ((t==SONIDO_DEFECTO) || (t==SONIDO_TOON)|| (t==SONIDO_LUCIERNAGA)){
+//        if ((t==SONIDO_DEFECTO) || (t==SONIDO_LUCIERNAGA)){
+        if (t==SONIDO_DEFECTO){
             rutaSonido="src/uva/ig/default.wav";
         }else if (t==SONIDO_METAL){
             rutaSonido="src/uva/ig/metal.wav";
@@ -50,6 +53,10 @@ public class Sonido {
             rutaSonido="";
         }else if (t==SONIDO_TRANSLUCIDO){
             rutaSonido="src/uva/ig/Bulle2.wav";
+        }else if (t==SONIDO_VIBRACION){
+            rutaSonido="src/uva/ig/buzz2.wav";
+        }else if (t==SONIDO_COLORIZE){
+            rutaSonido="src/uva/ig/whistle.wav";
         }
         modo=t;
     }
