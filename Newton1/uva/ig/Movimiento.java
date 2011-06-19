@@ -93,10 +93,6 @@ public class Movimiento {
         return velocidad;
     }
 
-    public float getIncrementoAngulo(){
-        return incrementoAngulo;
-    }
-
     public void mover() {
         movimiento.manejarEventoMovimiento();
     }

@@ -24,7 +24,7 @@ public class GLRenderer implements GLEventListener {
     public static final int MODO_COLORIZE = 5;
     public static final int TEXTURA_MONTANA=1;
     public static final int TEXTURA_MARIO=2;
-    private int modosSonido[] = {Sonido.SONIDO_DEFECTO, Sonido.SONIDO_VACA, Sonido.SONIDO_METAL, Sonido.SONIDO_TRANSLUCIDO, Sonido.SONIDO_METAL,Sonido.SONIDO_DEFECTO};
+    private int modosSonido[] = {Sonido.SONIDO_DEFECTO, Sonido.SONIDO_VACA, Sonido.SONIDO_METAL, Sonido.SONIDO_TRANSLUCIDO, Sonido.SONIDO_VIBRACION, Sonido.SONIDO_COLORIZE};
     private int modosTextura[] = {TexturaBola.TEXTURA_SIN_TEXTURA, TexturaBola.TEXTURA_VACA, TexturaBola.TEXTURA_PRUEBA, TexturaBola.TEXTURA_SIN_TEXTURA, TexturaBola.TEXTURA_SIN_TEXTURA,TexturaBola.TEXTURA_SIN_TEXTURA};
     private int modosShader[] = {Shader.SIN_SHADER, Shader.SIN_SHADER, Shader.SIN_SHADER, Shader.SIN_SHADER, Shader.SHADER_VIBRACION,Shader.SHADER_COLORIZE};
     private int modosMaterial[] = {Material.VIVO, Material.VIVO, Material.VIVO,  Material.TRANSPARENTE, Material.VIVO, Material.VIVO};
@@ -250,10 +250,10 @@ public class GLRenderer implements GLEventListener {
      */
 
    public void comprobarSonido(){
-        if ((movimiento.getVelocidadDef() != movimiento.getIncrementoAngulo())
+        if ((movimiento.getVelocidadDef() != movimiento.getVelocidad())
                 && (sonido.getModo() != sonido.SONIDO_SIN_SONIDO)){
             sonido.cambiarSonido(SIN_SONIDO);
-        } else if ((movimiento.getVelocidadDef() == movimiento.getIncrementoAngulo())
+        } else if ((movimiento.getVelocidadDef() == movimiento.getVelocidad())
                 && (sonido.getModo() == sonido.SONIDO_SIN_SONIDO)){
             sonido.cambiarSonido(modosSonido[modoActual]);
         }
