@@ -7,6 +7,7 @@ import javax.media.opengl.GLEventListener;
 import javax.media.opengl.glu.GLU;
 import java.awt.Color;
 
+
 /**
  * GLRenderer.java <BR>
  * author: Brian Paul (converted to Java by Ron Cemer and Sven Goethel) <P>
@@ -22,12 +23,13 @@ public class GLRenderer implements GLEventListener {
     public static final int MODO_TRANSPARENTE = 3;
     public static final int MODO_VIBRACION = 4;
     public static final int MODO_COLORIZE = 5;
+    public static final int MODO_FIREFLY = 6;
     public static final int TEXTURA_MONTANA=1;
     public static final int TEXTURA_MARIO=2;
-    private int modosSonido[] = {Sonido.SONIDO_DEFECTO, Sonido.SONIDO_VACA, Sonido.SONIDO_METAL, Sonido.SONIDO_TRANSLUCIDO, Sonido.SONIDO_VIBRACION, Sonido.SONIDO_COLORIZE};
-    private int modosTextura[] = {TexturaBola.TEXTURA_SIN_TEXTURA, TexturaBola.TEXTURA_VACA, TexturaBola.TEXTURA_PRUEBA, TexturaBola.TEXTURA_SIN_TEXTURA, TexturaBola.TEXTURA_SIN_TEXTURA,TexturaBola.TEXTURA_SIN_TEXTURA};
-    private int modosShader[] = {Shader.SIN_SHADER, Shader.SIN_SHADER, Shader.SIN_SHADER, Shader.SIN_SHADER, Shader.SHADER_VIBRACION,Shader.SHADER_COLORIZE};
-    private int modosMaterial[] = {Material.VIVO, Material.VIVO, Material.VIVO,  Material.TRANSPARENTE, Material.VIVO, Material.VIVO};
+    private int modosSonido[] = {Sonido.SONIDO_DEFECTO, Sonido.SONIDO_VACA, Sonido.SONIDO_METAL, Sonido.SONIDO_TRANSLUCIDO, Sonido.SONIDO_VIBRACION, Sonido.SONIDO_COLORIZE, Sonido.SONIDO_DEFECTO};
+    private int modosTextura[] = {TexturaBola.TEXTURA_SIN_TEXTURA, TexturaBola.TEXTURA_VACA, TexturaBola.TEXTURA_PRUEBA, TexturaBola.TEXTURA_SIN_TEXTURA, TexturaBola.TEXTURA_SIN_TEXTURA,TexturaBola.TEXTURA_SIN_TEXTURA,TexturaBola.TEXTURA_SIN_TEXTURA};
+    private int modosShader[] = {Shader.SIN_SHADER, Shader.SIN_SHADER, Shader.SIN_SHADER, Shader.SIN_SHADER, Shader.SHADER_VIBRACION,Shader.SHADER_COLORIZE,Shader.SIN_SHADER};
+    private int modosMaterial[] = {Material.VIVO, Material.VIVO, Material.VIVO,  Material.TRANSPARENTE, Material.VIVO, Material.VIVO, Material.FIREFLY};
     GLUT glut;
     GLU glu;
     GL gl;
@@ -375,11 +377,13 @@ public class GLRenderer implements GLEventListener {
         material.ponerMaterial(gl);
         if (camara.getGiroH()>=0&&camara.getGiroH()<=180){
             for (int i = bolasInicio.length-1; i >= 0; i--) {
+                bolasInicio[i].setLuzFF(i);
                 bolasInicio[i].dibujar(gl);
             }
             
         }else{
             for (int i = 0; i < bolasInicio.length; i++) {
+                bolasInicio[i].setLuzFF(i);
                 bolasInicio[i].dibujar(gl);
             }
         }
