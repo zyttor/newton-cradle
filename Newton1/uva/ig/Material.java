@@ -35,18 +35,18 @@ public class Material {
     private static float brilloT = 100.0f;
 
     // amarillo solar
-    private static float ambienteFF[] = {0.0f,0.0f,1.0f,1.0f};
-    private static float difusaFF[] = {0.0f,0.0f,1.0f,1.0f};
-    private static float especularFF[] = {0.0f,0.0f,1.0f,1.0f};
-    private static float brilloFF = 10f;
-    private static float mat_emiss[] = {1f, 1f, 0f, 0.0f};
+//    private static float ambienteFF[] = {0.0f,0.0f,1.0f,1.0f};
+//    private static float difusaFF[] = {0.0f,0.0f,1.0f,1.0f};
+//    private static float especularFF[] = {0.0f,0.0f,1.0f,1.0f};
+//    private static float brilloFF = 10f;
+//    private static float mat_emiss[] = {1f, 1f, 0f, 0.0f};
 
      // azul celeste
-//    private static float ambienteFF[] = {1.0f,1.0f,0.0f,1.0f};
-//    private static float difusaFF[] = {1.0f,1.0f,0.0f,1.0f};
-//    private static float especularFF[] = {1.0f,1.0f,0.0f,1.0f};
-//    private static float brilloFF = 1000f;
-//    private static float mat_emiss[] = {0f, 0f, 1f, 0.0f};
+    private static float ambienteFF[] = {0.1f,0.1f,0.1f,1.0f};
+    private static float difusaFF[] = {0.1f,0.1f,0.1f,1.0f};
+    private static float especularFF[] = {0.1f,0.1f,0.1f,1.0f};
+    private static float brilloFF = 1000f;
+    private static float mat_emiss[] = {0f, 0.4f, 1f, 0.0f};
 
     IMaterialListener materialListener;
 
@@ -163,7 +163,6 @@ public class Material {
 
         public void manejarEventoMaterial(GL gl) {
 
-            // Number of lights PROBLEM!!!
             gl.glDisable(gl.GL_LIGHT0);
             gl.glDisable(gl.GL_LIGHT_MODEL_AMBIENT);
 
@@ -175,11 +174,11 @@ public class Material {
             gl.glEnable(gl.GL_LIGHT5);
             gl.glEnable(gl.GL_LIGHT6);
             gl.glEnable(gl.GL_LIGHT7);
-
-            gl.glMaterialfv(gl.GL_FRONT, gl.GL_AMBIENT, ambiente2,0);
-            gl.glMaterialfv(gl.GL_FRONT, gl.GL_DIFFUSE, difusa2,0);
-            gl.glMaterialfv(gl.GL_FRONT, gl.GL_SPECULAR, especular2,0);
-            gl.glMaterialf(gl.GL_FRONT, gl.GL_SHININESS, brillo2);
+            
+            gl.glMaterialfv(gl.GL_FRONT, gl.GL_AMBIENT, ambienteFF,0);
+            gl.glMaterialfv(gl.GL_FRONT, gl.GL_DIFFUSE, difusaFF,0);
+            gl.glMaterialfv(gl.GL_FRONT, gl.GL_SPECULAR, especularFF,0);
+            gl.glMaterialf(gl.GL_FRONT, gl.GL_SHININESS, brilloFF);
             gl.glMaterialfv( GL.GL_FRONT_AND_BACK, GL.GL_EMISSION, mat_emiss,0);
 
 
