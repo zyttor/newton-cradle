@@ -129,73 +129,73 @@ public class Newton1 extends JFrame {
     private void initComponents() {
 
         panel = new GLJPanel(createGLCapabilites());
-        jToolBar1 = new JToolBar();
-        jLabel1 = new JLabel();
-        jLabel2 = new JLabel();
-        jMenuBar1 = new JMenuBar();
-        jMenu1 = new JMenu();
-        jMenuItem1 = new JMenuItem();
-        jMenuItem2 = new JMenuItem();
-        jSeparator1 = new Separator();
-        jMenuItem3 = new JMenuItem();
-        jMenu2 = new JMenu();
-        jMenuItem6 = new JMenuItem();
-        jRadioButtonMenuItem8 = new JRadioButtonMenuItem();
-        jRadioButtonMenuItem9 = new JRadioButtonMenuItem();
-        jRadioButtonMenuItem10 = new JRadioButtonMenuItem();
-        jMenuItem7 = new JMenuItem();
-        jRadioButtonMenuItem11 = new JRadioButtonMenuItem();
-        jRadioButtonMenuItem12 = new JRadioButtonMenuItem();
-        jMenuItem8 = new JMenuItem();
-        jRadioButtonMenuItem13 = new JRadioButtonMenuItem();
-        jRadioButtonMenuItem14 = new JRadioButtonMenuItem();
-        jSeparator2 = new Separator();
-        jCheckBoxMenuItem2 = new JCheckBoxMenuItem();
-        jMenu3 = new JMenu();
-        jRadioButtonMenuItem1 = new JRadioButtonMenuItem();
-        jRadioButtonMenuItem2 = new JRadioButtonMenuItem();
-        jRadioButtonMenuItem3 = new JRadioButtonMenuItem();
-        jRadioButtonMenuItem4 = new JRadioButtonMenuItem();
-        jRadioButtonMenuItem5 = new JRadioButtonMenuItem();
-        jMenu4 = new JMenu();
-        jRadioButtonMenuItem6 = new JRadioButtonMenuItem();
-        jRadioButtonMenuItem7 = new JRadioButtonMenuItem();
-        jSeparator4 = new Separator();
-        jCheckBoxMenuItem1 = new JCheckBoxMenuItem();
-        jMenu5 = new JMenu();
-        jRadioButtonMenuItem15 = new JRadioButtonMenuItem();
-        jRadioButtonMenuItem16 = new JRadioButtonMenuItem();
-        jMenu6 = new JMenu();
-        jMenuItem4 = new JMenuItem();
-        jSeparator3 = new Separator();
-        jMenuItem5 = new JMenuItem();
+        jToolBar1 = new javax.swing.JToolBar();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuItem6 = new javax.swing.JMenuItem();
+        jRadioButtonMenuItem8 = new javax.swing.JRadioButtonMenuItem();
+        jRadioButtonMenuItem9 = new javax.swing.JRadioButtonMenuItem();
+        jRadioButtonMenuItem10 = new javax.swing.JRadioButtonMenuItem();
+        jMenuItem7 = new javax.swing.JMenuItem();
+        jRadioButtonMenuItem11 = new javax.swing.JRadioButtonMenuItem();
+        jRadioButtonMenuItem12 = new javax.swing.JRadioButtonMenuItem();
+        jMenuItem8 = new javax.swing.JMenuItem();
+        jRadioButtonMenuItem13 = new javax.swing.JRadioButtonMenuItem();
+        jRadioButtonMenuItem14 = new javax.swing.JRadioButtonMenuItem();
+        jSeparator2 = new javax.swing.JPopupMenu.Separator();
+        jCheckBoxMenuItem2 = new javax.swing.JCheckBoxMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
+        jRadioButtonMenuItem2 = new javax.swing.JRadioButtonMenuItem();
+        jRadioButtonMenuItem3 = new javax.swing.JRadioButtonMenuItem();
+        jRadioButtonMenuItem4 = new javax.swing.JRadioButtonMenuItem();
+        jRadioButtonMenuItem5 = new javax.swing.JRadioButtonMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        jRadioButtonMenuItem6 = new javax.swing.JRadioButtonMenuItem();
+        jRadioButtonMenuItem7 = new javax.swing.JRadioButtonMenuItem();
+        jSeparator4 = new javax.swing.JPopupMenu.Separator();
+        jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
+        jMenu5 = new javax.swing.JMenu();
+        jRadioButtonMenuItem15 = new javax.swing.JRadioButtonMenuItem();
+        jRadioButtonMenuItem16 = new javax.swing.JRadioButtonMenuItem();
+        jMenu6 = new javax.swing.JMenu();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jSeparator3 = new javax.swing.JPopupMenu.Separator();
+        jMenuItem5 = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
-        panel.setPreferredSize(new Dimension(600, 400));
-        panel.addMouseListener(new MouseAdapter() {
-            public void mousePressed(MouseEvent evt) {
+        panel.setPreferredSize(new java.awt.Dimension(600, 400));
+        panel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
                 panelMousePressed(evt);
             }
-            public void mouseReleased(MouseEvent evt) {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
                 panelMouseReleased(evt);
             }
         });
-        panel.addMouseMotionListener(new MouseMotionAdapter() {
-            public void mouseDragged(MouseEvent evt) {
+        panel.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
                 panelMouseDragged(evt);
             }
         });
 
-        GroupLayout panelLayout = new GroupLayout(panel);
+        javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
         panel.setLayout(panelLayout);
         panelLayout.setHorizontalGroup(
-            panelLayout.createParallelGroup(Alignment.LEADING)
+            panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 600, Short.MAX_VALUE)
         );
         panelLayout.setVerticalGroup(
-            panelLayout.createParallelGroup(Alignment.LEADING)
+            panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 463, Short.MAX_VALUE)
         );
 
@@ -213,8 +213,8 @@ public class Newton1 extends JFrame {
 
         jMenuItem1.setText("Restart animation");
         jMenuItem1.setToolTipText("Stops the current animation so that a new one can be started");
-        jMenuItem1.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
             }
         });
@@ -222,8 +222,8 @@ public class Newton1 extends JFrame {
 
         jMenuItem2.setText("Restart camera");
         jMenuItem2.setToolTipText("Recovers the initial camera position");
-        jMenuItem2.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem2ActionPerformed(evt);
             }
         });
@@ -232,8 +232,8 @@ public class Newton1 extends JFrame {
 
         jMenuItem3.setText("Exit");
         jMenuItem3.setToolTipText("Exits the Newton's Cradle application");
-        jMenuItem3.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem3ActionPerformed(evt);
             }
         });
@@ -251,8 +251,8 @@ public class Newton1 extends JFrame {
         jRadioButtonMenuItem8.setSelected(true);
         jRadioButtonMenuItem8.setText("Plastic");
         jRadioButtonMenuItem8.setToolTipText("Activates a plastic looking material for the balls");
-        jRadioButtonMenuItem8.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
+        jRadioButtonMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRadioButtonMenuItem8ActionPerformed(evt);
             }
         });
@@ -260,16 +260,17 @@ public class Newton1 extends JFrame {
 
         jRadioButtonMenuItem9.setText("Casper");
         jRadioButtonMenuItem9.setToolTipText("Activates a translucent material for the balls");
-        jRadioButtonMenuItem9.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
+        jRadioButtonMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRadioButtonMenuItem9ActionPerformed(evt);
             }
         });
         jMenu2.add(jRadioButtonMenuItem9);
 
         jRadioButtonMenuItem10.setText("Firefly");
-        jRadioButtonMenuItem10.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
+        jRadioButtonMenuItem10.setToolTipText("Activates an emitting light material with an inner light for each ball");
+        jRadioButtonMenuItem10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRadioButtonMenuItem10ActionPerformed(evt);
             }
         });
@@ -281,8 +282,8 @@ public class Newton1 extends JFrame {
 
         jRadioButtonMenuItem11.setText("Metal");
         jRadioButtonMenuItem11.setToolTipText("Enables a metal looking texture for the balls");
-        jRadioButtonMenuItem11.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
+        jRadioButtonMenuItem11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRadioButtonMenuItem11ActionPerformed(evt);
             }
         });
@@ -290,8 +291,8 @@ public class Newton1 extends JFrame {
 
         jRadioButtonMenuItem12.setText("Cow");
         jRadioButtonMenuItem12.setToolTipText("Enables a cow looking texture for the balls");
-        jRadioButtonMenuItem12.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
+        jRadioButtonMenuItem12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRadioButtonMenuItem12ActionPerformed(evt);
             }
         });
@@ -303,8 +304,8 @@ public class Newton1 extends JFrame {
 
         jRadioButtonMenuItem13.setText("Vibration");
         jRadioButtonMenuItem13.setToolTipText("Activates the vibration shader for the balls");
-        jRadioButtonMenuItem13.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
+        jRadioButtonMenuItem13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRadioButtonMenuItem13ActionPerformed(evt);
             }
         });
@@ -312,8 +313,8 @@ public class Newton1 extends JFrame {
 
         jRadioButtonMenuItem14.setText("Colorize");
         jRadioButtonMenuItem14.setToolTipText("Activates the colorize shader for the balls");
-        jRadioButtonMenuItem14.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
+        jRadioButtonMenuItem14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRadioButtonMenuItem14ActionPerformed(evt);
             }
         });
@@ -322,8 +323,8 @@ public class Newton1 extends JFrame {
 
         jCheckBoxMenuItem2.setText("Moving Sun");
         jCheckBoxMenuItem2.setToolTipText("Enables the light source to rotate around the scene");
-        jCheckBoxMenuItem2.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
+        jCheckBoxMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCheckBoxMenuItem2ActionPerformed(evt);
             }
         });
@@ -335,8 +336,8 @@ public class Newton1 extends JFrame {
 
         jRadioButtonMenuItem1.setText("3");
         jRadioButtonMenuItem1.setToolTipText("Sets the number of balls to 3");
-        jRadioButtonMenuItem1.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
+        jRadioButtonMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRadioButtonMenuItem1ActionPerformed(evt);
             }
         });
@@ -344,8 +345,8 @@ public class Newton1 extends JFrame {
 
         jRadioButtonMenuItem2.setText("4");
         jRadioButtonMenuItem2.setToolTipText("Sets the number of balls to 4");
-        jRadioButtonMenuItem2.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
+        jRadioButtonMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRadioButtonMenuItem2ActionPerformed(evt);
             }
         });
@@ -354,8 +355,8 @@ public class Newton1 extends JFrame {
         jRadioButtonMenuItem3.setSelected(true);
         jRadioButtonMenuItem3.setText("5");
         jRadioButtonMenuItem3.setToolTipText("Sets the number of balls to 5");
-        jRadioButtonMenuItem3.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
+        jRadioButtonMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRadioButtonMenuItem3ActionPerformed(evt);
             }
         });
@@ -363,8 +364,8 @@ public class Newton1 extends JFrame {
 
         jRadioButtonMenuItem4.setText("6");
         jRadioButtonMenuItem4.setToolTipText("Sets the number of balls to 6");
-        jRadioButtonMenuItem4.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
+        jRadioButtonMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRadioButtonMenuItem4ActionPerformed(evt);
             }
         });
@@ -372,8 +373,8 @@ public class Newton1 extends JFrame {
 
         jRadioButtonMenuItem5.setText("7");
         jRadioButtonMenuItem5.setToolTipText("Sets the number of balls to 7");
-        jRadioButtonMenuItem5.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
+        jRadioButtonMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRadioButtonMenuItem5ActionPerformed(evt);
             }
         });
@@ -385,8 +386,8 @@ public class Newton1 extends JFrame {
 
         jRadioButtonMenuItem6.setText("Linear");
         jRadioButtonMenuItem6.setToolTipText("Changes the movement to linear");
-        jRadioButtonMenuItem6.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
+        jRadioButtonMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRadioButtonMenuItem6ActionPerformed(evt);
             }
         });
@@ -395,8 +396,8 @@ public class Newton1 extends JFrame {
         jRadioButtonMenuItem7.setSelected(true);
         jRadioButtonMenuItem7.setText("Quadratic");
         jRadioButtonMenuItem7.setToolTipText("Changes the movement to quadratic");
-        jRadioButtonMenuItem7.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
+        jRadioButtonMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRadioButtonMenuItem7ActionPerformed(evt);
             }
         });
@@ -406,8 +407,8 @@ public class Newton1 extends JFrame {
         jCheckBoxMenuItem1.setSelected(true);
         jCheckBoxMenuItem1.setText("Friction");
         jCheckBoxMenuItem1.setToolTipText("Enables friction so that the balls eventually stop");
-        jCheckBoxMenuItem1.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
+        jCheckBoxMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCheckBoxMenuItem1ActionPerformed(evt);
             }
         });
@@ -420,8 +421,8 @@ public class Newton1 extends JFrame {
         jRadioButtonMenuItem15.setSelected(true);
         jRadioButtonMenuItem15.setText("Mountain");
         jRadioButtonMenuItem15.setToolTipText("Changes the current environment to mountains");
-        jRadioButtonMenuItem15.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
+        jRadioButtonMenuItem15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRadioButtonMenuItem15ActionPerformed(evt);
             }
         });
@@ -429,8 +430,8 @@ public class Newton1 extends JFrame {
 
         jRadioButtonMenuItem16.setText("Videogame");
         jRadioButtonMenuItem16.setToolTipText("Changes the current environment to videogame");
-        jRadioButtonMenuItem16.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
+        jRadioButtonMenuItem16.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRadioButtonMenuItem16ActionPerformed(evt);
             }
         });
@@ -442,13 +443,18 @@ public class Newton1 extends JFrame {
 
         jMenuItem4.setText("Help");
         jMenuItem4.setToolTipText("Shows Newton's Cradle help");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
         jMenu6.add(jMenuItem4);
         jMenu6.add(jSeparator3);
 
         jMenuItem5.setText("About...");
         jMenuItem5.setToolTipText("About this application...");
-        jMenuItem5.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem5ActionPerformed(evt);
             }
         });
@@ -458,19 +464,19 @@ public class Newton1 extends JFrame {
 
         setJMenuBar(jMenuBar1);
 
-        GroupLayout layout = new GroupLayout(getContentPane());
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(Alignment.LEADING)
-            .addComponent(jToolBar1, GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
-            .addComponent(panel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
+            .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(Alignment.LEADING)
-            .addGroup(Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(panel, GroupLayout.PREFERRED_SIZE, 463, GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jToolBar1, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, 463, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -729,6 +735,13 @@ public class Newton1 extends JFrame {
             about.setVisible(true);
         }//GEN-LAST:event_jMenuItem5ActionPerformed
 
+        private void jMenuItem4ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+            // Help
+            Ayuda ayuda = new Ayuda();
+            ayuda.setLocationRelativeTo(null);
+            ayuda.setVisible(true);
+        }//GEN-LAST:event_jMenuItem4ActionPerformed
+
     private void seleccionarRadioButonNumBolas(Object cual) {
         if (!jRadioButtonMenuItem1.equals(cual)) {
             jRadioButtonMenuItem1.setSelected(false);
@@ -835,46 +848,46 @@ public class Newton1 extends JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private JCheckBoxMenuItem jCheckBoxMenuItem1;
-    private JCheckBoxMenuItem jCheckBoxMenuItem2;
-    private JLabel jLabel1;
-    private JLabel jLabel2;
-    private JMenu jMenu1;
-    private JMenu jMenu2;
-    private JMenu jMenu3;
-    private JMenu jMenu4;
-    private JMenu jMenu5;
-    private JMenu jMenu6;
-    private JMenuBar jMenuBar1;
-    private JMenuItem jMenuItem1;
-    private JMenuItem jMenuItem2;
-    private JMenuItem jMenuItem3;
-    private JMenuItem jMenuItem4;
-    private JMenuItem jMenuItem5;
-    private JMenuItem jMenuItem6;
-    private JMenuItem jMenuItem7;
-    private JMenuItem jMenuItem8;
-    private JRadioButtonMenuItem jRadioButtonMenuItem1;
-    private JRadioButtonMenuItem jRadioButtonMenuItem10;
-    private JRadioButtonMenuItem jRadioButtonMenuItem11;
-    private JRadioButtonMenuItem jRadioButtonMenuItem12;
-    private JRadioButtonMenuItem jRadioButtonMenuItem13;
-    private JRadioButtonMenuItem jRadioButtonMenuItem14;
-    private JRadioButtonMenuItem jRadioButtonMenuItem15;
-    private JRadioButtonMenuItem jRadioButtonMenuItem16;
-    private JRadioButtonMenuItem jRadioButtonMenuItem2;
-    private JRadioButtonMenuItem jRadioButtonMenuItem3;
-    private JRadioButtonMenuItem jRadioButtonMenuItem4;
-    private JRadioButtonMenuItem jRadioButtonMenuItem5;
-    private JRadioButtonMenuItem jRadioButtonMenuItem6;
-    private JRadioButtonMenuItem jRadioButtonMenuItem7;
-    private JRadioButtonMenuItem jRadioButtonMenuItem8;
-    private JRadioButtonMenuItem jRadioButtonMenuItem9;
-    private Separator jSeparator1;
-    private Separator jSeparator2;
-    private Separator jSeparator3;
-    private Separator jSeparator4;
-    private JToolBar jToolBar1;
-    private GLJPanel panel;
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenu jMenu6;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem8;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem10;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem11;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem12;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem13;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem14;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem15;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem16;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem2;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem3;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem4;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem5;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem6;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem7;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem8;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem9;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JPopupMenu.Separator jSeparator2;
+    private javax.swing.JPopupMenu.Separator jSeparator3;
+    private javax.swing.JPopupMenu.Separator jSeparator4;
+    private javax.swing.JToolBar jToolBar1;
+    private javax.media.opengl.GLJPanel panel;
     // End of variables declaration//GEN-END:variables
 }

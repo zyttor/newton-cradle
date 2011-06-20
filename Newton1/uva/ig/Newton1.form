@@ -74,6 +74,7 @@
             <MenuItem class="javax.swing.JRadioButtonMenuItem" name="jRadioButtonMenuItem10">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Firefly"/>
+                <Property name="toolTipText" type="java.lang.String" value="Activates an emitting light material with an inner light for each ball"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jRadioButtonMenuItem10ActionPerformed"/>
@@ -267,6 +268,9 @@
                 <Property name="text" type="java.lang.String" value="Help"/>
                 <Property name="toolTipText" type="java.lang.String" value="Shows Newton&apos;s Cradle help"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem4ActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator3">
             </MenuItem>
