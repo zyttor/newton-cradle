@@ -599,6 +599,7 @@ public class Newton1 extends JFrame {
             if (jRadioButtonMenuItem1.isSelected()) {
                 renderer.cambiarNumeroBolas(3);
             }
+            seleccionarRadioButonNumBolas(evt.getSource());
         }//GEN-LAST:event_jRadioButtonMenuItem1ActionPerformed
 
         private void jRadioButtonMenuItem2ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem2ActionPerformed
