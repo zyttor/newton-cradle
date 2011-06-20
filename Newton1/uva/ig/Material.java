@@ -91,6 +91,7 @@ public class Material {
             gl.glDisable(gl.GL_LIGHT5);
             gl.glDisable(gl.GL_LIGHT6);
             gl.glDisable(gl.GL_LIGHT7);
+            gl.glDisable(GL.GL_ALPHA_TEST);
             gl.glMaterialfv(gl.GL_FRONT, gl.GL_AMBIENT, material.ambiente1,0);
             gl.glMaterialfv(gl.GL_FRONT, gl.GL_DIFFUSE, material.difusa1,0);
             gl.glMaterialfv(gl.GL_FRONT, gl.GL_SPECULAR, material.especular1,0);
@@ -115,6 +116,7 @@ public class Material {
             gl.glDisable(gl.GL_LIGHT5);
             gl.glDisable(gl.GL_LIGHT6);
             gl.glDisable(gl.GL_LIGHT7);
+            gl.glDisable(GL.GL_ALPHA_TEST);
             gl.glMaterialfv(gl.GL_FRONT, gl.GL_AMBIENT, material.ambiente2,0);
             gl.glMaterialfv(gl.GL_FRONT, gl.GL_DIFFUSE, material.difusa2,0);
             gl.glMaterialfv(gl.GL_FRONT, gl.GL_SPECULAR, material.especular2,0);
