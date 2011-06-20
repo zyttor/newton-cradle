@@ -30,9 +30,9 @@ public class Iluminacion {
     private static float posL1[] ={100.0f,-100f,100.0f,1.0f};
 
     //azul
-    private static float ambienteL1[] = {0f,0.0f,1f,1.0f };
-    private static float diffusaL1[] = {0f,0.0f,1f,1.0f };
-    private static float especularL1[] = {0f,0f,1f,1.0f };
+    private static float ambienteL1[] = {0.3f,0.3f,1f,1.0f };
+    private static float diffusaL1[] = {0.3f,0.3f,1f,1.0f };
+    private static float especularL1[] = {0.3f,0.3f,1f,1.0f };
 
     public Iluminacion (){
 
