@@ -685,7 +685,7 @@ public class Newton1 extends JFrame {
         private void jRadioButtonMenuItem10ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem10ActionPerformed
             if (jRadioButtonMenuItem10.isSelected()) {
                 panel.getContext().makeCurrent();
-                //renderer.cambiarModo(panel, GLRenderer.MODO_TRANSPARENTE);
+                renderer.cambiarModo(panel, GLRenderer.MODO_FIREFLY);
                 panel.getContext().release();
             }
             seleccionarRadioButonApariencia(evt.getSource());
