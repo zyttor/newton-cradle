@@ -42,11 +42,18 @@ public class Material {
 //    private static float mat_emiss[] = {1f, 1f, 0f, 0.0f};
 
      // azul celeste
+//    private static float ambienteFF[] = {0.1f,0.1f,0.1f,1.0f};
+//    private static float difusaFF[] = {0.1f,0.1f,0.1f,1.0f};
+//    private static float especularFF[] = {0.1f,0.1f,0.1f,1.0f};
+//    private static float brilloFF = 1000f;
+//    private static float mat_emiss[] = {0f, 0.4f, 1f, 0.0f};
+
+         // oro
     private static float ambienteFF[] = {0.1f,0.1f,0.1f,1.0f};
     private static float difusaFF[] = {0.1f,0.1f,0.1f,1.0f};
     private static float especularFF[] = {0.1f,0.1f,0.1f,1.0f};
-    private static float brilloFF = 1000f;
-    private static float mat_emiss[] = {0f, 0.4f, 1f, 0.0f};
+    private static float brilloFF = 0f;
+    private static float mat_emiss[] = {0.75f, 0.63f, 0.0f, 1.0f};
 
     IMaterialListener materialListener;
 
