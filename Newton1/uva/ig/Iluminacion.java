@@ -24,15 +24,15 @@ public class Iluminacion {
 
     public static float modoRotacion=0f; //Si 0 no se mueve si 1 si
 
-//    private static float ambienteL1[] = {0.7f,0.7f,0.0f,1.0f };
-//    private static float diffusaL1[] = {0.7f,0.7f,0.0f,1.0f };
-//    private static float especularL1[] = {0.7f,0.7f,0.0f,1.0f };
+    private static float ambienteL1[] = {0.7f,0.7f,0.0f,1.0f };
+    private static float diffusaL1[] = {0.7f,0.7f,0.0f,1.0f };
+    private static float especularL1[] = {0.7f,0.7f,0.0f,1.0f };
     private static float posL1[] ={100.0f,-100f,100.0f,1.0f};
 
     //azul
-    private static float ambienteL1[] = {0.3f,0.3f,1f,1.0f };
-    private static float diffusaL1[] = {0.3f,0.3f,1f,1.0f };
-    private static float especularL1[] = {0.3f,0.3f,1f,1.0f };
+//    private static float ambienteL1[] = {0.3f,0.3f,1f,1.0f };
+//    private static float diffusaL1[] = {0.3f,0.3f,1f,1.0f };
+//    private static float especularL1[] = {0.3f,0.3f,1f,1.0f };
 
     public Iluminacion (){
 
