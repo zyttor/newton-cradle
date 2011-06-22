@@ -72,29 +72,8 @@ public class Bola implements IObjetoGL{
         gl.glPushMatrix();
         gl.glTranslatef(0.0f, -radio, 0.0f);
         float posL[] ={0.0f, 0f,0.0f,1.0f};
-        switch (luzFF) {
-            case 0:
-                 gl.glLightfv(gl.GL_LIGHT1, gl.GL_POSITION, posL, 0);
-                break;
-            case 1:
-                 gl.glLightfv(gl.GL_LIGHT2, gl.GL_POSITION, posL, 0);
-                break;
-            case 2:
-                 gl.glLightfv(gl.GL_LIGHT3, gl.GL_POSITION, posL, 0);
-                break;
-            case 3:
-                 gl.glLightfv(gl.GL_LIGHT4, gl.GL_POSITION, posL, 0);
-                break;
-            case 4:
-                 gl.glLightfv(gl.GL_LIGHT5, gl.GL_POSITION, posL, 0);
-                break;
-            case 5:
-                 gl.glLightfv(gl.GL_LIGHT6, gl.GL_POSITION, posL, 0);
-                break;
-            case 6:
-                 gl.glLightfv(gl.GL_LIGHT7, gl.GL_POSITION, posL, 0);
-                break;
-        }
+        gl.glLightfv(luzFF+16385, gl.GL_POSITION, posL, 0);
+            
         textura.renderTextura(gl);
         shader.iniciarShaders(gl);
         glut.glutSolidSphere(radio,slices,stacks);
