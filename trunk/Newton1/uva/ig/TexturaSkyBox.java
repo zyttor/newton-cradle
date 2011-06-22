@@ -1,20 +1,16 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package uva.ig;
 
 import com.sun.opengl.util.texture.Texture;
 import com.sun.opengl.util.texture.TextureData;
 import com.sun.opengl.util.texture.TextureIO;
-
 import java.io.IOException;
 import java.io.InputStream;
-
 import javax.media.opengl.GL;
 
-
+/**
+ * Clase para incorporar la textura al Skybox
+ * @author Aldearaban
+ */
 public class TexturaSkyBox {
 
     public static final int SKYBOX_MONTANA=1;
@@ -94,9 +90,7 @@ public class TexturaSkyBox {
 
     private class TexturaMarioListener implements ITexturaSkyBoxListener{
 
-        
-
-
+     
         private TexturaMarioListener (GL gl){
        texturaFront=getTexture("front.png");
        texturaRight=getTexture("right.png");
@@ -115,10 +109,7 @@ public class TexturaSkyBox {
        texturaLeft=getTexture("left.png");
        texturaTop=getTexture("top.png");
        texturaBottom=getTexture("bottom1.png");
-
-
-
-      }  // end of loadTextures()
+      }
 
         public void manejarEventoTextura(GL gl) {
 
@@ -191,7 +182,7 @@ public class TexturaSkyBox {
 
 
 
-      }  // end of loadTextures()
+      }
 
     }
 
