@@ -20,6 +20,7 @@ public class Sonido {
     public static final int SONIDO_TRANSLUCIDO=3;
     public static final int SONIDO_VIBRACION=4;
     public static final int SONIDO_COLORIZE=5;
+    public static final int SONIDO_FIREFLY=6;
 
     //public static final int SONIDO_LUCIERNAGA=4;    
 
@@ -57,6 +58,8 @@ public class Sonido {
             rutaSonido="src/uva/ig/buzz2.wav";
         }else if (t==SONIDO_COLORIZE){
             rutaSonido="src/uva/ig/whistle.wav";
+        }else if (t==SONIDO_FIREFLY){
+            rutaSonido="src/uva/ig/cricket.wav";
         }
         modo=t;
     }
