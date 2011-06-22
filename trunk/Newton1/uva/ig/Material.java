@@ -49,11 +49,11 @@ public class Material {
 //    private static float mat_emiss[] = {0f, 0.4f, 1f, 0.0f};
 
          // oro
-    private static float ambienteFF[] = {0.1f,0.1f,0.1f,1.0f};
-    private static float difusaFF[] = {0.1f,0.1f,0.1f,1.0f};
-    private static float especularFF[] = {0.1f,0.1f,0.1f,1.0f};
-    private static float brilloFF = 0f;
-    private static float mat_emiss[] = {0.75f, 0.63f, 0.0f, 1.0f};
+    private static float ambienteFF[] = {0.1f,0.1f,0.1f,0.55f};
+    private static float difusaFF[] = {0.1f,0.1f,0.1f,0.65f};
+    private static float especularFF[] = {0.1f,0.1f,0.1f,0.65f};
+    private static float brilloFF = 100f;
+    private static float mat_emiss[] = {0.94f, 0.83f, 0.1f, 1.0f};
 
     IMaterialListener materialListener;
 
@@ -183,7 +183,13 @@ public class Material {
             gl.glEnable(gl.GL_LIGHT5);
             gl.glEnable(gl.GL_LIGHT6);
             gl.glEnable(gl.GL_LIGHT7);
-            
+
+            gl.glEnable (gl.GL_BLEND);
+            gl.glBlendFunc (gl.GL_SRC_ALPHA, gl.GL_ONE_MINUS_SRC_ALPHA);
+            gl.glDepthFunc(gl.GL_LESS);
+            gl.glAlphaFunc(GL.GL_GREATER, 0.5f);
+            gl.glEnable(GL.GL_ALPHA_TEST);
+
             gl.glMaterialfv(gl.GL_FRONT, gl.GL_AMBIENT, ambienteFF,0);
             gl.glMaterialfv(gl.GL_FRONT, gl.GL_DIFFUSE, difusaFF,0);
             gl.glMaterialfv(gl.GL_FRONT, gl.GL_SPECULAR, especularFF,0);
