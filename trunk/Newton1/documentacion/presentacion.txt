@@ -1,0 +1,9 @@
+-ppt
+
+Javi:6,7.
+manu:4,5.
+
+-presentacion
+manu:modo vaca,skybox,texto
+luis:transparencias,shaders
+javi:luciérnagas...
